@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ConsoleLogger } from '@nestjs/common';
+import { ErrorFilter } from './common/filter/error.filter';
 
 const APP_NAME = 'App';
 
@@ -12,7 +13,10 @@ async function bootstrap() {
     }),
   });
 
-  await app.setGlobalPrefix('api').listen(8080);
+  await app
+    .setGlobalPrefix('api')
+    .useGlobalFilters(new ErrorFilter())
+    .listen(8080);
 }
 
 bootstrap();
