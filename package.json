@@ -1,0 +1,19 @@
+{
+  "name": "quickstart-nest",
+  "version": "1.0.0",
+  "main": "index.js",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "start": "node api/dist/main"
+  },
+  "devDependencies": {
+    "turbo": "^1.10.9"
+  },
+  "workspaces": [
+    "api",
+    "web"
+  ]
+}
