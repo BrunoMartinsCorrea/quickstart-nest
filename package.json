@@ -10,7 +10,7 @@
     "start": "node api/dist/main"
   },
   "devDependencies": {
-    "turbo": "^1.10.9"
+    "turbo": "1.10.7"
   },
   "workspaces": [
     "api",
