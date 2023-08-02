@@ -15,10 +15,7 @@ export class ErrorFilter implements ExceptionFilter {
       statusCode: status,
       timestamp: new Date().toISOString(),
       errorCode: (exception as BaseError)?.errorCode ?? 'UNKNOWN',
-      message:
-        exception.message.trim().length > 0
-          ? exception.message
-          : 'Something went wrong',
+      message: exception.message.trim().length > 0 ? exception.message : 'Something went wrong',
     });
   }
 }

@@ -13,10 +13,7 @@ async function bootstrap() {
     }),
   });
 
-  await app
-    .setGlobalPrefix('api')
-    .useGlobalFilters(new ErrorFilter())
-    .listen(8080);
+  await app.setGlobalPrefix('api').useGlobalFilters(new ErrorFilter()).listen(8080);
 }
 
 bootstrap();

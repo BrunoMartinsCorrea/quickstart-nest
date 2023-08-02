@@ -1,19 +1,27 @@
 {
   "name": "quickstart-nest",
   "version": "1.0.0",
-  "main": "index.js",
   "private": true,
   "license": "MIT",
+  "packageManager": "yarn@1.22.19",
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "prestart": "npm run build",
     "start": "node api/dist/main"
   },
   "devDependencies": {
-    "turbo": "1.10.7"
+    "@turbo/gen": "^1.9.7",
+    "turbo": "1.10.7",
+    "config": "*",
+    "eslint-config-custom": "*"
   },
   "workspaces": [
     "api",
+    "config",
+    "eslint-config-custom",
     "web"
   ]
 }
