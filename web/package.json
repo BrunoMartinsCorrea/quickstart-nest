@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "inherits": ["config/package.json"],
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -14,11 +15,15 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
+    "@types/react": "^18.2.15",
     "@vitejs/plugin-react": "^4.0.3",
-    "vite": "^4.4.5",
     "config": "*",
-    "eslint-config-custom": "*"
+    "eslint-config-custom": "*",
+    "eslint-plugin-cypress": "~2.13.3",
+    "eslint-plugin-jsx-a11y": "~6.7.1",
+    "eslint-plugin-react-hooks": "~4.6.0",
+    "eslint-plugin-react": "~7.33.0",
+    "vite": "^4.4.5"
   }
 }
