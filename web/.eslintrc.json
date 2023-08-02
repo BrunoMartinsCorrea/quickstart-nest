@@ -1,0 +1,13 @@
+{
+  "root": true,
+  "extends": ["custom"],
+  "env": { "browser": true, "es2020": true },
+  "ignorePatterns": ["dist", ".eslintrc.js"],
+  "parser": "@typescript-eslint/parser",
+  "rules": {
+    "react-refresh/only-export-components": [
+      "warn",
+      { "allowConstantExport": true }
+    ]
+  }
+}
