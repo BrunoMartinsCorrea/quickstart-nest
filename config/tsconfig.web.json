@@ -1,7 +1,8 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "noEmit": true,
     "module": "ESNext",
     /* Bundler mode */
     "jsx": "react-jsx",

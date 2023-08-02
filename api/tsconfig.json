@@ -1,9 +1,10 @@
 {
   "extends": "config/tsconfig.base.json",
   "compilerOptions": {
+    "target": "es2017",
     "baseUrl": "./",
-    "moduleResolution": "node",
     "outDir": "./dist",
   },
-  "include": ["src"]
+  "exclude": ["test"]
 }
+

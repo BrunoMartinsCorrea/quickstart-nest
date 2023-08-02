@@ -1,6 +1,7 @@
 {
   "extends": "config/tsconfig.web.json",
   "compilerOptions": {
+    "baseUrl": "./",
     "allowImportingTsExtensions": true,
     "moduleResolution": "bundler",
     "outDir": "./dist",
