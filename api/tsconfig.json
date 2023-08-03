@@ -4,6 +4,7 @@
     "target": "es2017",
     "baseUrl": "./",
     "outDir": "./dist",
+    "declaration": false
   },
   "exclude": ["test"]
 }
