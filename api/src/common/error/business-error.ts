@@ -1,4 +1,4 @@
-export class BaseError extends Error {
+export class BusinessError extends Error {
   readonly errorCode: string;
 
   constructor(message: string, errorCode: string) {

@@ -3,13 +3,22 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { LoggerMiddleware } from './common/middleware/logger.middleware';
 import { AuthenticationModule } from './authentication/authentication.module';
+import { UserModule } from './user/user.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', '..', 'web', 'dist'),
     }),
+    TypeOrmModule.forRoot({
+      type: 'sqlite',
+      database: 'app',
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      synchronize: true,
+    }),
     AuthenticationModule,
+    UserModule,
   ],
   controllers: [],
   providers: [],

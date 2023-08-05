@@ -1,15 +1,65 @@
 import { Injectable } from '@nestjs/common';
-import { GenerateTokenDto } from './dto/generate-token.dto';
 import { Token } from './entities/token.entity';
 import { RefreshTokenDto } from './dto/refresh-token.dto';
+import { JwtService } from '@nestjs/jwt';
+import { v4 as uuidv4 } from 'uuid';
+import { addHours, addMinutes, getUnixTime } from 'date-fns';
+import { JwtSignOptions } from '@nestjs/jwt/dist/interfaces';
+import { UserService } from '../user/domain/service/user.service';
 
 @Injectable()
 export class AuthenticationService {
-  generateToken(generateTokenDto: GenerateTokenDto): Token {
-    return new Token(`abc.123.${generateTokenDto.username}`, `zxy.987.${generateTokenDto.username}`);
+  private readonly defaultJwtOptions = {
+    issuer: 'api',
+    audience: 'web',
+    header: {
+      typ: 'JWT',
+    },
+  } as JwtSignOptions;
+
+  constructor(
+    private readonly userService: UserService,
+    private readonly jwt: JwtService,
+  ) {}
+
+  async generateToken(username: string, password: string) {
+    let { id: userId } = await this.userService.validateByUsername(username, password);
+
+    let jti = uuidv4();
+    let now = new Date();
+    let iat = getUnixTime(now);
+    let exp = getUnixTime(addMinutes(now, 5)) - iat;
+    let expRefresh = getUnixTime(addHours(now, 1)) - iat;
+
+    let access = this.jwt.sign(
+      {
+        iat,
+      },
+      {
+        ...this.defaultJwtOptions,
+        expiresIn: exp,
+        jwtid: jti,
+        subject: userId,
+      },
+    );
+
+    let refresh = this.jwt.sign(
+      {
+        iat,
+      },
+      {
+        ...this.defaultJwtOptions,
+        notBefore: exp,
+        expiresIn: expRefresh,
+        jwtid: jti,
+        subject: userId,
+      },
+    );
+
+    return new Token(access, refresh);
   }
 
-  refreshToken(refreshTokenDto: RefreshTokenDto): Token {
+  async refreshToken(refreshTokenDto: RefreshTokenDto) {
     return new Token(refreshTokenDto.refresh, `zxy.654.poi`);
   }
 }
