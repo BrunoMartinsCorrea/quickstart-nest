@@ -1,15 +1,32 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, ParseUUIDPipe, Post, Put, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  ParseUUIDPipe,
+  Post,
+  Put,
+  Res,
+} from '@nestjs/common';
 import { Response as ExpressResponse } from 'express';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import { UserService } from '../../domain/service/user.service';
 import { User } from '../../persistence/entities/user.entity';
+import { ApiConflictResponse, ApiNotFoundResponse, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
+import { ErrorResponseDto } from '../../../common/dto/error-response.dto';
 
+@ApiTags('user')
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
+  @HttpCode(HttpStatus.CREATED)
+  @ApiConflictResponse({ type: ErrorResponseDto })
   async create(@Body() createUserDto: CreateUserDto, @Res() response: ExpressResponse) {
     let createdUser = await this.userService.create({
       username: createUserDto.username,
@@ -18,22 +35,25 @@ export class UserController {
       email: createUserDto.email,
     } as User);
 
-    return response.setHeader('Location', `${response.req.url}/${createdUser.id}`).status(HttpStatus.CREATED).send();
+    return response.setHeader('Location', `${response.req.url}/${createdUser.id}`).send();
   }
 
   @Get(':id')
+  @ApiNotFoundResponse({ type: ErrorResponseDto })
   async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
     return this.userService.findOne(id);
   }
 
   @Put(':id')
+  @ApiUnauthorizedResponse({ type: ErrorResponseDto })
   async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.userService.update({ id, ...updateUserDto } as User);
   }
 
   @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiUnauthorizedResponse({ type: ErrorResponseDto })
   async softDelete(@Param('id') id: string, @Res() response: ExpressResponse) {
-    let hasDeleted = await this.userService.softDelete(id);
-    return response.status(hasDeleted ? HttpStatus.NO_CONTENT : HttpStatus.NOT_FOUND).send();
+    await this.userService.softDelete(id);
   }
 }

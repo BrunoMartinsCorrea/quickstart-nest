@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { Token } from './entities/token.entity';
-import { RefreshTokenDto } from './dto/refresh-token.dto';
 import { JwtService } from '@nestjs/jwt';
 import { v4 as uuidv4 } from 'uuid';
 import { addHours, addMinutes, getUnixTime } from 'date-fns';
 import { JwtSignOptions } from '@nestjs/jwt/dist/interfaces';
-import { UserService } from '../user/domain/service/user.service';
+import { UserService } from '../../../user/domain/service/user.service';
+import { Token } from '../../entities/token.entity';
+import { RefreshTokenDto } from '../../http-server/dto/refresh-token.dto';
+import { UserCredential } from '../../../user/domain/model/user-credential';
 
 @Injectable()
 export class AuthenticationService {
@@ -22,8 +23,8 @@ export class AuthenticationService {
     private readonly jwt: JwtService,
   ) {}
 
-  async generateToken(username: string, password: string) {
-    let { id: userId } = await this.userService.validateByUsername(username, password);
+  async generateToken(userCredential: UserCredential) {
+    let { id: userId } = await this.userService.validateByUsername(userCredential.username, userCredential.password);
 
     let jti = uuidv4();
     let now = new Date();

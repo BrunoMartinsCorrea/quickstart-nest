@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { AuthenticationService } from './authentication.service';
-import { AuthenticationController } from './authentication.controller';
 import { UserModule } from '../user/user.module';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
+import { AuthenticationController } from './http-server/controller/authentication.controller';
+import { AuthenticationService } from './domain/service/authentication.service';
 
 @Module({
   controllers: [AuthenticationController],

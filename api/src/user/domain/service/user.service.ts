@@ -91,6 +91,11 @@ export class UserService {
   }
 
   async softDelete(id: string) {
-    return (await this.repository.softDelete({ id }))?.affected > 0;
+    let updateResult = await this.repository.softDelete({ id, deletedAt: null });
+    let hasDeleted = updateResult.affected > 0;
+
+    if (!hasDeleted) {
+      throw new EntityNotFoundError('User not found');
+    }
   }
 }
