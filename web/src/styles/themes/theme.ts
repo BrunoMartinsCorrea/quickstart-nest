@@ -23,6 +23,7 @@ export interface Theme {
   dropShadowLG: string;
 
   breakpoints: {
+    xs: string,
     sm: string,
     md: string,
     lg: string,

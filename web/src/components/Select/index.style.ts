@@ -65,12 +65,12 @@ export const StyledItem = styled(SelectPrimitive.Item)`
   padding-left: 2rem;
   border-radius: ${props => props.theme.borderRadiusMD};
   padding-right: 0.5rem;
-  outline: none;
   user-select: none;
   color: ${props => props.theme.text};
 
   &:focus {
     background-color: ${props => props.theme.mutedBackground};
+    outline: none;
   }
 
   &[data-disabled] {

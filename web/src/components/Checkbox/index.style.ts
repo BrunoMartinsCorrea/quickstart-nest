@@ -23,10 +23,16 @@ export const StyledRoot = styled(CheckboxPrimitive.Root)`
     opacity: 0.5;
   }
 
+  &:disabled ~ label {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
   &[data-state=checked] {
     background-color: ${props => props.theme.primary};
     color: ${props => props.theme.onPrimary};
   }
+
 `;
 
 export const StyledIndicator = styled(CheckboxPrimitive.Indicator)`

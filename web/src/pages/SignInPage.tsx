@@ -13,6 +13,8 @@ import * as Card from "@/components/Card";
 import * as Select from "@/components/Select";
 import { Switch } from "@/components/Switch";
 import { Checkbox } from "@/components/Checkbox";
+import { Label } from "@/components/Label";
+import { Avatar } from "@/components/Avatar/index.";
 
 export default function SignInPage() {
   const store = useStore(state => state);
@@ -24,6 +26,7 @@ export default function SignInPage() {
         <BodyText>
           aisdjjidsa
         </BodyText>
+        <Avatar src="https://github.com/gustavonogales.png" alt="@gustavonogales" fallback="GN"/>
         <Select.Root>
           <Select.Trigger className="w-[180px]">
             <Select.Value placeholder="Select a fruit" />
@@ -56,12 +59,12 @@ export default function SignInPage() {
           <Card.Content>
             <Flex direction="column" gap="1rem" align="stretch">
               <Flex direction="column" gap={"0.375rem"}>
-                <label htmlFor="email">Email</label>
+                <Label htmlFor="email">Email</Label>
                 <Input type="text" id="email" placeholder="E-mail"/>
               </Flex>
               <Flex gap="0.5rem" align="center">
                 <Switch id="airplane-mode" />
-                <label htmlFor="airplane-mode">Airplane mode</label>
+                <Label htmlFor="airplane-mode">Airplane mode</Label>
               </Flex>
               <Select.Root>
                 <Select.Trigger className="w-[180px]">
@@ -79,8 +82,8 @@ export default function SignInPage() {
                 </Select.Content>
               </Select.Root>
               <Flex align="center" gap="0.5rem">
-                <Checkbox id="terms"/>
-                <label htmlFor="terms">Accept terms and conditions</label>
+                <Checkbox id="terms" disabled/>
+                <Label htmlFor="terms">Accept terms and conditions</Label>
               </Flex>
             </Flex>
           </Card.Content>
@@ -102,7 +105,7 @@ export default function SignInPage() {
               </Card.Header>
               <Card.Content>
                 <Flex direction="column" gap={"0.375rem"}>
-                  <label htmlFor="email">Email</label>
+                  <Label htmlFor="email">Email</Label>
                   <Input type="text" id="email" placeholder="E-mail"/>
                 </Flex>
               </Card.Content>
@@ -121,11 +124,11 @@ export default function SignInPage() {
               <Card.Content>
                 <Flex direction="column" gap={"1rem"} align="stretch">
                   <Flex direction="column" gap={"0.375rem"}>
-                    <label htmlFor="email">Email</label>
+                    <Label htmlFor="email">Email</Label>
                     <Input type="text" id="email" placeholder="E-mail"/>
                   </Flex>
                   <Flex direction="column" gap={"0.375rem"}>
-                    <label htmlFor="fullname">Full me</label>
+                    <Label htmlFor="fullname">Full me</Label>
                     <Input type="text" id="fullname" placeholder="Full name"/>
                   </Flex>
                 </Flex>
@@ -155,14 +158,17 @@ export default function SignInPage() {
       <Button variant="link" as="a">
         Link
       </Button>
+      <Button variant="ghost">
+        Ghost
+      </Button>
       <br />
-      <Flex direction="column" gap={"0.375rem"}>
-        <label htmlFor="email">Email</label>
-        <Input type="text" id="email" placeholder="E-mail"/>
+      <Flex direction="column-reverse" gap={"0.375rem"}>
+        <Input type="text" id="email" placeholder="E-mail" disabled/>
+        <Label htmlFor="email">Email</Label>
       </Flex>
       <Flex direction="column" gap={"0.375rem"}>
-        <label htmlFor="avatar">Choose file</label>
-        <Input  id="avatar"type="file" placeholder="Avatar"/>
+        <Label htmlFor="avatar">Choose file</Label>
+        <Input id="avatar"type="file" placeholder="Avatar"/>
       </Flex>
       <Separator />
       <br/>

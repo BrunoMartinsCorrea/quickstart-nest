@@ -72,4 +72,15 @@ export const Container = styled.button<ContainerProps>`
       background-color: ${lighten(0.1, props.theme.mutedBackground)};
     }
   `}
+
+
+  ${({ variant, ...props }) => variant == 'ghost' && css`
+    background-color: ${props => props.theme.background};
+    color: ${props.theme.text};
+    border: 1px solid ${props => props.theme.background};
+
+    &:hover {
+      background-color: ${props.theme.mutedBackground};
+    }
+  `}
 `;

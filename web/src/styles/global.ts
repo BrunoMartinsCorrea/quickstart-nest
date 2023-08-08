@@ -23,7 +23,13 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 14px;
   }
 
-  label {
-    font-weight: 500;
+  @media (max-width: ${props => props.theme.breakpoints.xs}) {
+    html {
+      font-size: 12px;
+    }
+
+    body, input, textarea, button {
+      font-size: 12px;
+    }
   }
 `

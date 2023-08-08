@@ -13,6 +13,10 @@ export const Container = styled.input`
     opacity: 0.5;
   }
 
+  &:disabled + label {
+    opacity: 0.5;
+  }
+
   &[type=file] {
     background: transparent;
     cursor: pointer;

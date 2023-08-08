@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export type AlignOptions = 'baseline' | 'center' | 'start' | 'end' | 'flex-start' | 'flex-end' | 'stretch' | 'self-start' | 'self-end';
 export type JustifyOptions = AlignOptions | 'space-around' | 'space-evenly' | 'space-between';
-export type DirectionOptions = 'column' | 'row';
+export type DirectionOptions = 'column' | 'row' | 'column-reverse' | 'row-reverse';
 
 interface ContainerProps {
   direction: DirectionOptions;

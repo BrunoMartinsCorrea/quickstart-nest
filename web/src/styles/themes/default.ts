@@ -26,6 +26,7 @@ export const defaultTheme: Theme = {
   dropShadowLG: 'drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1))',
 
   breakpoints: {
+    xs: '330px',
     sm: '640px',
     md: '768px',
     lg: '1024px',
