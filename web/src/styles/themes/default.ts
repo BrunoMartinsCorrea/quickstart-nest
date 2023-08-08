@@ -35,4 +35,5 @@ export const defaultTheme: Theme = {
   },
 
   containerSize: '1536px',
+  fontSize: '14px',
 }

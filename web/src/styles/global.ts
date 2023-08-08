@@ -6,6 +6,8 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
   }
 
   :focus {
@@ -20,12 +22,12 @@ export const GlobalStyle = createGlobalStyle`
   body, input, textarea, button {
     font-family: 'Inter', sans-serif;
     font-weight: 400;
-    font-size: 14px;
+    font-size: ${props => props.theme.fontSize};
   }
 
   @media (max-width: ${props => props.theme.breakpoints.xs}) {
     html {
-      font-size: 12px;
+      font-size: calc(${props => props.theme.fontSize} -2px);
     }
 
     body, input, textarea, button {

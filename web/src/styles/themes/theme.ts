@@ -32,4 +32,5 @@ export interface Theme {
   }
 
   containerSize: string;
+  fontSize: string;
 }

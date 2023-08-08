@@ -15,6 +15,7 @@ import { Switch } from "@/components/Switch";
 import { Checkbox } from "@/components/Checkbox";
 import { Label } from "@/components/Label";
 import { Avatar } from "@/components/Avatar/index.";
+import { Badge } from "@/components/Badge";
 
 export default function SignInPage() {
   const store = useStore(state => state);
@@ -28,6 +29,11 @@ export default function SignInPage() {
             <BodyText>
               aisdjjidsa
             </BodyText>
+            <Flex gap={0.5}>
+              <Badge>Primary</Badge>
+              <Badge variant="secondary">Secondary</Badge>
+              <Badge variant="outline">Outline</Badge>
+            </Flex>
           </Flex>
           <Flex direction="column" gap="1rem">
             <Avatar src="https://github.com/gustavonogales.png" alt="@gustavonogales" fallback="GN"/>
