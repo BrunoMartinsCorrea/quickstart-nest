@@ -2,8 +2,8 @@ import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
 import { ErrorResponseDto } from '../../../common/dto/error-response.dto';
 import { AuthenticationService } from '../../domain/service/authentication.service';
-import { TokenRequestDto } from '../dto/token-request.dto';
-import { TokenResponseDto } from '../dto/token-response.dto';
+import { CredentialsDto } from '../dto/credentials.dto';
+import { TokenDto } from '../dto/token.dto';
 import { RefreshTokenDto } from '../dto/refresh-token.dto';
 
 @ApiTags('authentication')
@@ -14,13 +14,15 @@ export class AuthenticationController {
   @Post('token')
   @HttpCode(HttpStatus.OK)
   @ApiUnauthorizedResponse({ type: ErrorResponseDto })
-  async generateToken(@Body() generateTokenDto: TokenRequestDto) {
-    return TokenResponseDto.toDto(await this.authenticationService.generateToken({ ...generateTokenDto }));
+  async generateToken(@Body() generateTokenDto: CredentialsDto) {
+    let token = await this.authenticationService.generateToken({ ...generateTokenDto });
+    return { ...token } as TokenDto;
   }
 
   @Post('refresh')
   @HttpCode(HttpStatus.OK)
   async refreshToken(@Body() refreshTokenDto: RefreshTokenDto) {
-    return this.authenticationService.refreshToken(refreshTokenDto);
+    let token = await this.authenticationService.refreshToken(refreshTokenDto);
+    return { ...token } as TokenDto;
   }
 }

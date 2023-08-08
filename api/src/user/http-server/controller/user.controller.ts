@@ -15,9 +15,10 @@ import { Response as ExpressResponse } from 'express';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import { UserService } from '../../domain/service/user.service';
-import { User } from '../../persistence/entities/user.entity';
 import { ApiConflictResponse, ApiNotFoundResponse, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
 import { ErrorResponseDto } from '../../../common/dto/error-response.dto';
+import { User } from '../../domain/model/user';
+import { UserDto } from '../dto/user.dto';
 
 @ApiTags('user')
 @Controller('user')
@@ -41,19 +42,21 @@ export class UserController {
   @Get(':id')
   @ApiNotFoundResponse({ type: ErrorResponseDto })
   async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    return this.userService.findOne(id);
+    let foundUser = await this.userService.findOne(id);
+    return { ...foundUser } as UserDto;
   }
 
   @Put(':id')
   @ApiUnauthorizedResponse({ type: ErrorResponseDto })
   async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update({ id, ...updateUserDto } as User);
+    let updatedUser = await this.userService.update({ id, ...updateUserDto } as User);
+    return { ...updatedUser } as UserDto;
   }
 
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiUnauthorizedResponse({ type: ErrorResponseDto })
-  async softDelete(@Param('id') id: string, @Res() response: ExpressResponse) {
-    await this.userService.softDelete(id);
+  async softDelete(@Param('id') id: string) {
+    return await this.userService.softDelete(id);
   }
 }

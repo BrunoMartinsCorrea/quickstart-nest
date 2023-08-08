@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Token } from '../../entities/token.entity';
 
-export class TokenResponseDto {
+export class TokenDto {
   @ApiProperty()
   access: string;
 
@@ -11,9 +10,5 @@ export class TokenResponseDto {
   constructor(access: string, refresh: string) {
     this.access = access;
     this.refresh = refresh;
-  }
-
-  static toDto(token: Token): TokenResponseDto {
-    return token as TokenResponseDto;
   }
 }

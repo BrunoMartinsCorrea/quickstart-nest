@@ -1,28 +1,22 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import { User } from '../../persistence/entities/user.entity';
 import { EntityNotFoundError } from '../../../common/error/entity-not-found-error';
 import { InvalidCredentialsError } from '../error/invalid-credentials-error';
-import { EntityConflictError } from '../../../common/error/entity-conflict-error';
+import { UserRepository } from '../../persistence/repository/user-repository';
+import { User } from '../model/user';
 
 @Injectable()
 export class UserService {
-  constructor(@InjectRepository(User) private repository: Repository<User>) {}
+  constructor(private repository: UserRepository) {}
 
   async create(user: User) {
-    try {
-      user.salt = await bcrypt.genSalt();
-      user.password = await bcrypt.hash(user.password, user.salt);
-      let createdUser = await this.repository.save(user);
+    let encryptedUser = await this.encrypt(user);
+    Logger.log(`encryptedUser => username:${encryptedUser.username} email:${encryptedUser.email}`);
+    let createdUser = await this.repository.create(encryptedUser);
 
-      Logger.log(`User created { "id": "${createdUser.id}" }`);
+    Logger.log(`User created { "id": "${createdUser.id}" }`);
 
-      return createdUser;
-    } catch (e) {
-      throw new EntityConflictError('User could not be created');
-    }
+    return createdUser;
   }
 
   async validate(user: User, password: string) {
@@ -60,9 +54,7 @@ export class UserService {
   }
 
   async findOne(id: string) {
-    let user = await this.repository.findOne({ where: { id: id } });
-
-    Logger.debug(`id => ${id}, User => ${user}`);
+    let user = await this.repository.findOne(id);
 
     if (!user) {
       throw new EntityNotFoundError('User not found');
@@ -72,7 +64,7 @@ export class UserService {
   }
 
   async findOneByUsername(username: string) {
-    let user = await this.repository.findOneBy({ username });
+    let user = await this.repository.findOneByUsername(username);
 
     if (!user) {
       throw new EntityNotFoundError('User not found');
@@ -83,19 +75,35 @@ export class UserService {
 
   async update(user: User) {
     let currentUser = await this.validateById(user.id, user.password);
-
+    let encryptedUser = await this.encryptWithSalt(user, currentUser.salt);
     user.password = await bcrypt.hash(user.password, currentUser.salt);
-    await this.repository.update({ id: user.id }, user);
 
-    return currentUser;
+    await this.repository.update(encryptedUser);
+    Logger.log(`User updated { "id": "${user.id}" }`);
+
+    return encryptedUser;
   }
 
   async softDelete(id: string) {
-    let updateResult = await this.repository.softDelete({ id, deletedAt: null });
-    let hasDeleted = updateResult.affected > 0;
+    let hasDeleted = await this.repository.softDelete(id);
 
-    if (!hasDeleted) {
+    if (hasDeleted) {
+      Logger.log(`User deleted { "id": "${id}" }`);
+    } else {
       throw new EntityNotFoundError('User not found');
     }
+  }
+
+  private async encrypt(user: User) {
+    let salt = await bcrypt.genSalt();
+    return await this.encryptWithSalt(user, salt);
+  }
+
+  private async encryptWithSalt(user: User, salt: string) {
+    return {
+      ...user,
+      salt,
+      password: await bcrypt.hash(user.password, salt),
+    } as User;
   }
 }

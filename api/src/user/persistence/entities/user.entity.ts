@@ -1,8 +1,8 @@
 import { Column, Entity, Index } from 'typeorm';
-import { Auditing } from '../../../common/entities/auditing.entity';
+import { AuditingEntity } from '../../../common/entities/auditing.entity';
 
-@Entity()
-export class User extends Auditing {
+@Entity('user')
+export class UserEntity extends AuditingEntity {
   @Index('ix_user_username')
   @Index('uq_user_username', { unique: true })
   @Column('varchar', { length: 255, nullable: false })
