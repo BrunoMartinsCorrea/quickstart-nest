@@ -16,6 +16,7 @@ import { Checkbox } from "@/components/Checkbox";
 import { Label } from "@/components/Label";
 import { Avatar } from "@/components/Avatar/index.";
 import { Badge } from "@/components/Badge";
+import { Textarea } from "@/components/Textarea";
 
 export default function SignInPage() {
   const store = useStore(state => state);
@@ -104,7 +105,7 @@ export default function SignInPage() {
             <Button variant="link">Forgot password</Button>
           </Card.Footer>
         </Card.Root>
-        <Tabs.Root defaultValue="signIn" width="1200px">
+        <Tabs.Root defaultValue="signIn" width="460px">
           <Tabs.List>
             <Tabs.Trigger value="signIn">Sign In</Tabs.Trigger>
             <Tabs.Trigger value="signUp">Sign Up</Tabs.Trigger>
@@ -116,9 +117,15 @@ export default function SignInPage() {
                 <BodyText>Welcome back. You've been missed!</BodyText>
               </Card.Header>
               <Card.Content>
-                <Flex direction="column" gap={"0.375rem"}>
-                  <Label htmlFor="email">Email</Label>
-                  <Input type="text" id="email" placeholder="E-mail"/>
+                <Flex direction="column" gap={1} align="stretch">
+                  <Flex direction="column" gap={"0.375rem"} flex={1}>
+                    <Label htmlFor="email">Email</Label>
+                    <Input type="text" id="email" placeholder="E-mail"/>
+                  </Flex>
+                  <Flex direction="column-reverse" gap={"0.375rem"}>
+                    <Textarea id="comment" placeholder="Comment"/>
+                    <Label htmlFor="comment">Comment</Label>
+                </Flex>
                 </Flex>
               </Card.Content>
               <Card.Footer>
