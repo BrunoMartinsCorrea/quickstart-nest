@@ -15,6 +15,7 @@ export const Container = styled.input`
 
   &:disabled + label {
     opacity: 0.5;
+    cursor: not-allowed;
   }
 
   &[type=file] {
