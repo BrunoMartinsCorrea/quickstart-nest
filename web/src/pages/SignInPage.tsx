@@ -21,12 +21,18 @@ export default function SignInPage() {
 
   return (
     <Container>
-      <Flex direction="column" gap="1rem">
-        <Heading>Password</Heading>
-        <BodyText>
-          aisdjjidsa
-        </BodyText>
-        <Avatar src="https://github.com/gustavonogales.png" alt="@gustavonogales" fallback="GN"/>
+        <Flex direction="column" gap={1}>
+        <Flex direction="row" gap="1rem" width="100%">
+          <Flex direction="column" gap={1} flex={1}>
+            <Heading>Password</Heading>
+            <BodyText>
+              aisdjjidsa
+            </BodyText>
+          </Flex>
+          <Flex direction="column" gap="1rem">
+            <Avatar src="https://github.com/gustavonogales.png" alt="@gustavonogales" fallback="GN"/>
+          </Flex>
+        </Flex>
         <Select.Root>
           <Select.Trigger className="w-[180px]">
             <Select.Value placeholder="Select a fruit" />

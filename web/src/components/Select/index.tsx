@@ -42,7 +42,7 @@ Trigger.displayName = SelectPrimitive.Trigger.displayName
 //   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>
 // >(({ className, children, position = "popper", ...props }, ref) => (
 //   <SelectPrimitive.Portal>
-//     <StyledContent
+//     <SelectPrimitive.Content
 //       ref={ref}
 //       position={position}
 //       // className={cn(
@@ -53,7 +53,7 @@ Trigger.displayName = SelectPrimitive.Trigger.displayName
 //       // )}
 //       {...props}
 //     >
-//       <SelectPrimitive.Viewport
+//       <StyledViewport
 //         // className={cn(
 //         //   "p-1",
 //         //   position === "popper" &&
@@ -61,8 +61,8 @@ Trigger.displayName = SelectPrimitive.Trigger.displayName
 //         // )}
 //       >
 //         {children}
-//       </SelectPrimitive.Viewport>
-//     </StyledContent>
+//       </StyledViewport>
+//     </SelectPrimitive.Content>
 //   </SelectPrimitive.Portal>
 // ))
 // Content.displayName = SelectPrimitive.Content.displayName
@@ -75,6 +75,7 @@ function Content({children, position = 'popper', ...props}: ContentProps) {
     <SelectPrimitive.Portal>
       <StyledContent
         position={position}
+        align="center"
         {...props}
       >
         <StyledViewport>

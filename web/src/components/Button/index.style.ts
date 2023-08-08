@@ -4,7 +4,7 @@ import { lighten } from 'polished';
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'outline' | 'destructive' | 'link';
 
 interface ContainerProps {
-  variant: ButtonVariant;
+  $variant: ButtonVariant;
   disabled: boolean;
 }
 
@@ -26,7 +26,7 @@ export const Container = styled.button<ContainerProps>`
     opacity: 0.5;
   }
 
-  ${({ variant, ...props }) => variant == 'primary' && css`
+  ${({ $variant, ...props }) => $variant == 'primary' && css`
     background-color: ${props.theme.primary};
     color: ${props.theme.onPrimary};
 
@@ -35,7 +35,7 @@ export const Container = styled.button<ContainerProps>`
     }
   `}
 
-  ${({ variant, ...props }) => variant == 'destructive' && css`
+  ${({ $variant, ...props }) => $variant == 'destructive' && css`
     background-color: ${props.theme.destructive};
     color: ${props.theme.onDestructive};
 
@@ -44,7 +44,7 @@ export const Container = styled.button<ContainerProps>`
     }
   `}
 
-  ${({ variant, ...props }) => variant == 'outline' && css`
+  ${({ $variant, ...props }) => $variant == 'outline' && css`
     background-color: transparent;
     color: ${props.theme.primary};
     border: 1px solid ${lighten(0.80, props.theme.primary)};
@@ -54,7 +54,7 @@ export const Container = styled.button<ContainerProps>`
     }
   `}
 
-  ${({variant, ...props}) => variant == 'link' && css`
+  ${({$variant, ...props}) => $variant == 'link' && css`
     background-color: transparent;
     color: ${props.theme.primary};
 
@@ -63,7 +63,7 @@ export const Container = styled.button<ContainerProps>`
     }
   `}
 
-  ${({ variant, ...props }) => variant == 'secondary' && css`
+  ${({ $variant, ...props }) => $variant == 'secondary' && css`
     background-color: ${props.theme.mutedBackground};
     color: ${props.theme.text};
     border: 1px solid ${lighten(0.80, props.theme.mutedBackground)};
@@ -74,7 +74,7 @@ export const Container = styled.button<ContainerProps>`
   `}
 
 
-  ${({ variant, ...props }) => variant == 'ghost' && css`
+  ${({ $variant, ...props }) => $variant == 'ghost' && css`
     background-color: ${props => props.theme.background};
     color: ${props.theme.text};
     border: 1px solid ${props => props.theme.background};
