@@ -32,5 +32,7 @@ export const defaultTheme: Theme = {
     lg: '1024px',
     xl: '1280px',
     xxl: '1536px',
-  }
+  },
+
+  containerSize: '1536px',
 }

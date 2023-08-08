@@ -30,4 +30,6 @@ export interface Theme {
     xl: string,
     xxl: string,
   }
+
+  containerSize: string;
 }
