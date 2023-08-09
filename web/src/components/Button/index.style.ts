@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { lighten } from 'polished';
+import { darken, lighten } from 'polished';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'outline' | 'destructive' | 'link';
 
@@ -21,6 +21,15 @@ export const Container = styled.button<ContainerProps>`
   justify-content: center;
   gap: 0.5rem;
   box-sizing: border-box;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 1px solid ${props => darken(0.3, props.theme.border)};
+    outline-offset: 0.15rem;
+  }
 
   &:disabled {
     cursor: not-allowed;
