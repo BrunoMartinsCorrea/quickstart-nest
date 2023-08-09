@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { MainModule } from './main.module';
 import { ConsoleLogger } from '@nestjs/common';
 import { DocumentBuilder, SwaggerDocumentOptions, SwaggerModule } from '@nestjs/swagger';
 
@@ -7,7 +7,7 @@ const APP_NAME = 'API';
 
 async function bootstrap() {
   const app = (
-    await NestFactory.create(AppModule, {
+    await NestFactory.create(MainModule, {
       logger: new ConsoleLogger(APP_NAME, {
         timestamp: true,
         logLevels: ['verbose', 'debug', 'log', 'warn', 'error'],
