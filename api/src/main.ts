@@ -1,7 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ConsoleLogger } from '@nestjs/common';
-import { ErrorFilter } from './common/filter/error.filter';
 import { DocumentBuilder, SwaggerDocumentOptions, SwaggerModule } from '@nestjs/swagger';
 
 const APP_NAME = 'API';
@@ -14,9 +13,7 @@ async function bootstrap() {
         logLevels: ['verbose', 'debug', 'log', 'warn', 'error'],
       }),
     })
-  )
-    .setGlobalPrefix('api')
-    .useGlobalFilters(new ErrorFilter());
+  ).setGlobalPrefix('api');
 
   const documentBuilder = new DocumentBuilder()
     .setTitle('API')

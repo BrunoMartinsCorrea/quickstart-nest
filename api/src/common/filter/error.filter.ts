@@ -1,4 +1,4 @@
-import { ArgumentsHost, Catch, ExceptionFilter, HttpStatus, Logger } from '@nestjs/common';
+import { ArgumentsHost, Catch, ExceptionFilter, ForbiddenException, HttpStatus, Logger } from '@nestjs/common';
 import { Response } from 'express';
 import { BusinessError } from '../error/business-error';
 import { EntityNotFoundError } from '../error/entity-not-found-error';
@@ -24,6 +24,10 @@ export class ErrorFilter implements ExceptionFilter {
       case AuthorizationError:
       case InvalidCredentialsError:
         statusCode = HttpStatus.UNAUTHORIZED;
+        errorCode = HttpStatus[statusCode];
+        break;
+      case ForbiddenException:
+        statusCode = HttpStatus.FORBIDDEN;
         errorCode = HttpStatus[statusCode];
         break;
       case EntityNotFoundError:

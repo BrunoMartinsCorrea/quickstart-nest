@@ -8,6 +8,7 @@ import { AuthenticationService } from './domain/service/authentication.service';
 @Module({
   controllers: [AuthenticationController],
   providers: [AuthenticationService],
+  exports: [AuthenticationService],
   imports: [
     JwtModule.register({
       secret: 'dummy',

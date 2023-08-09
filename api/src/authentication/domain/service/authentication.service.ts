@@ -32,13 +32,19 @@ export class AuthenticationService {
   }
 
   async refreshToken(refreshToken: RefreshToken) {
+    let jwt = await this.verifyToken(refreshToken.refresh);
+
+    return this.generateTokenToSubject(jwt.payload.sub);
+  }
+
+  async verifyToken(token: string) {
     try {
-      this.jwt.verify(refreshToken.refresh, this.defaultJwtOptions);
-      let jwtDecoded = this.jwt.decode(refreshToken.refresh, { json: true, complete: true });
-      let jwt = { ...(jwtDecoded as object) } as Jwt;
-      return this.generateTokenToSubject(jwt.payload.sub);
+      this.jwt.verify(token, this.defaultJwtOptions);
+      let jwtDecoded = this.jwt.decode(token, { json: true, complete: true });
+
+      return { ...(jwtDecoded as object) } as Jwt;
     } catch (e) {
-      Logger.error(e);
+      Logger.warn(e);
       throw new AuthorizationError('Invalid token');
     }
   }
