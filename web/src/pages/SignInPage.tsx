@@ -17,6 +17,7 @@ import { Label } from "@/components/Label";
 import { Avatar } from "@/components/Avatar/index.";
 import { Badge } from "@/components/Badge";
 import { Textarea } from "@/components/Textarea";
+import * as Dialog from '@/components/Dialog';
 
 export default function SignInPage() {
   const store = useStore(state => state);
@@ -174,6 +175,35 @@ export default function SignInPage() {
         <CopyIcon />
         Outline
       </Button>
+      <Dialog.Root>
+        <Dialog.Trigger asChild>
+          <Button>
+            Open Dialog
+          </Button>
+        </Dialog.Trigger>
+        <Dialog.Content>
+          <Dialog.Header>
+            <Dialog.Title>Edit Profile</Dialog.Title>
+            <Dialog.Description>
+              Make changes to your profile here. Click save when you're done.
+            </Dialog.Description>
+          </Dialog.Header>
+          <Flex direction="column" gap={1}>
+            <Flex direction="column" gap={"0.375rem"} width="100%">
+              <Label htmlFor="fullname">Full name</Label>
+              <Input type="text" id="fullname" placeholder="Full name"/>
+            </Flex>
+            <Flex direction="column" gap={"0.375rem"}  width="100%">
+              <Label htmlFor="fullname">Full name</Label>
+              <Input type="text" id="fullname" placeholder="Full name"/>
+            </Flex>
+          </Flex>
+          <Dialog.Footer>
+            <Button variant="secondary">Cancel</Button>
+            <Button>Save changes</Button>
+          </Dialog.Footer>
+        </Dialog.Content>
+      </Dialog.Root>
       <Button variant="link" as="a">
         Link
       </Button>

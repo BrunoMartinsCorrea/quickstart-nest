@@ -1,5 +1,5 @@
-import { darken, lighten } from 'polished'
-import { createGlobalStyle } from 'styled-components'
+import { darken } from 'polished'
+import { createGlobalStyle, keyframes } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -35,3 +35,22 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
 `
+export const fadeInAnimation = keyframes`
+  from { opacity: 0 }
+  to { opacity:  1 }
+`;
+
+export const fadeOutAnimation = keyframes`
+  from { opacity: 1 }
+  to { opacity: 0 }
+`;
+
+export const scaleInAnimation = keyframes`
+  from { transform: scale(0.7) }
+  to { transform: scale(1) }
+`;
+
+export const scaleOutAnimation = keyframes`
+  from { transform: scale(1) }
+  to { transform: scale(0.7) }
+`;

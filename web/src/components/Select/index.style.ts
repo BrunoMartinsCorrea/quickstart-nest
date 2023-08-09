@@ -1,5 +1,6 @@
-import styled, { keyframes, css } from "styled-components";
+import styled, { css } from "styled-components";
 import * as SelectPrimitive from "@radix-ui/react-select"
+import { fadeInAnimation, fadeOutAnimation, scaleInAnimation, scaleOutAnimation } from "@/styles/global";
 
 export const StyledTrigger = styled(SelectPrimitive.Trigger)`
   display: flex;
@@ -28,28 +29,6 @@ export const StyledTrigger = styled(SelectPrimitive.Trigger)`
   }
 `;
 
-const enter = keyframes`
-  from {
-    opacity: 0;
-    transform: scale(0.7);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-`;
-
-const exit = keyframes`
-  from {
-    opacity: 1;
-    transform: scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: scale(0.7);
-  }
-`;
-
 export const StyledContent = styled(SelectPrimitive.Content)`
   position: relative;
   z-index: 50;
@@ -63,10 +42,17 @@ export const StyledContent = styled(SelectPrimitive.Content)`
   transition: all ${props => props.theme.transitionSpeed};
 
   &[data-state=open] {
-    animation: ${enter} ${props => props.theme.transitionSpeed} ease-in-out forwards;
+    animation-name: ${fadeInAnimation}, ${scaleInAnimation};
+    animation-duration: ${props => props.theme.transitionSpeed};
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
   }
+
   &[data-state=close] {
-    animation: ${exit} ${props => props.theme.transitionSpeed} ease-in-out forwards;
+    animation-name: ${fadeOutAnimation}, ${scaleOutAnimation};
+    animation-duration: ${props => props.theme.transitionSpeed};
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
   }
 
   ${props => props.position === 'popper' && css`

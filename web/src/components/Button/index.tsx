@@ -1,20 +1,23 @@
-import { HtmlHTMLAttributes, ReactNode } from "react";
 import { ButtonVariant, Container } from "./index.style";
+import React from "react";
 
-interface ButtonProps extends HtmlHTMLAttributes<HTMLButtonElement>  {
-  children: ReactNode;
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>  {
+  children: React.ReactNode;
   variant?: ButtonVariant;
   disabled?: boolean;
   as?: string;
+  asChild?: boolean;
 }
 
-export function Button({
-  variant = 'primary',
-  disabled = false,
-  children,
-  ...props
-}: ButtonProps) {
-  return <Container $variant={variant} {...props} disabled={disabled}>
-    {children}
-  </Container>;
-}
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ variant = "primary", disabled = false, ...props }, ref) => {
+    return (
+      <Container
+        $variant={variant}
+        disabled={disabled}
+        ref={ref}
+        {...props}
+      />
+    )
+  }
+)

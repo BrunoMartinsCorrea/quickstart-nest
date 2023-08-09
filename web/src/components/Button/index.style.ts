@@ -18,6 +18,7 @@ export const Container = styled.button<ContainerProps>`
   transition: background-color ${props => props.theme.transitionSpeed};
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   box-sizing: border-box;
 

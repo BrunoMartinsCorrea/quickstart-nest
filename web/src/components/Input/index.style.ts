@@ -1,12 +1,16 @@
-import { lighten } from "polished";
 import styled from "styled-components";
 
 export const Container = styled.input`
   height: 2.5rem;
   border-radius: ${props => props.theme.borderRadiusMD};
-  border: 1px solid ${props => lighten(0.80, props.theme.primary)};
+  border: 1px solid ${props => props.theme.border};
+  background-color: ${props => props.theme.background};
   padding: 0.5rem 0.75rem;
   width: 100%;
+
+  &::placeholder {
+    color: ${props => props.theme.mutedText};
+  }
 
   &:disabled {
     cursor: not-allowed;
