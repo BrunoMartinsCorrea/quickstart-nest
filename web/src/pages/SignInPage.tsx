@@ -1,24 +1,16 @@
 import { useStore } from "@/stores/useStore"
 import {  Button } from '@/components/Button';
 import { CopyIcon, TrashIcon } from "@radix-ui/react-icons";
-import { Container } from "@/components/Container";
-import { Input } from "@/components/Input";
-import { Flex } from "@/components/Flex";
-import { Separator } from "@/components/Separator";
 import { Spinner } from "@/components/Spinner";
 import { BodyText } from "@/components/Typography/BodyText";
 import { Heading } from "@/components/Typography/Heading";
 import * as Tabs from '@/components/Tabs';
 import * as Card from "@/components/Card";
-import * as Select from "@/components/Select";
-import { Switch } from "@/components/Switch";
-import { Checkbox } from "@/components/Checkbox";
-import { Label } from "@/components/Label";
 import { Avatar } from "@/components/Avatar/index.";
 import { Badge } from "@/components/Badge";
-import { Textarea } from "@/components/Textarea";
 import * as Dialog from '@/components/Dialog';
-import * as Radio from '@/components/Radio';
+import { Container, Flex, Separator } from "@/components/layout";
+import { Checkbox, Input, Label, Radio, Select, Switch, Textarea } from "@/components/Form";
 
 export default function SignInPage() {
   const store = useStore(state => state);

@@ -14,6 +14,7 @@ export const StyledRadioItem = styled(RadioGroupPrimitive.Item)`
   border: 1px solid ${props => props.theme.primary};
   background-color: ${props => props.theme.background};
   color: ${props => props.theme.primary};
+  cursor: pointer;
 
 
   &:disabled {
