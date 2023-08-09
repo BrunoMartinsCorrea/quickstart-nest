@@ -12,8 +12,15 @@ import * as Dialog from '@/components/Dialog';
 import { Container, Flex, Separator } from "@/components/layout";
 import { Checkbox, Input, Label, Radio, Select, Switch, Textarea } from "@/components/Form";
 
+import * as Dropdown from '@/components/Dropdown'
+import React from "react";
+
 export default function SignInPage() {
   const store = useStore(state => state);
+  const [showStatusBar, setShowStatusBar] = React.useState<boolean>(true)
+  const [showActivityBar, setShowActivityBar] = React.useState<boolean>(false)
+  const [showPanel, setShowPanel] = React.useState<boolean>(false)
+  const [position, setPosition] = React.useState("bottom")
 
   return (
     <Container>
@@ -173,6 +180,105 @@ export default function SignInPage() {
           </Dialog.Footer>
         </Dialog.Content>
       </Dialog.Root>
+      <Flex gap={1}>
+        <Dropdown.Root>
+          <Dropdown.Trigger asChild>
+            <Button variant="outline">Dropdown</Button>
+          </Dropdown.Trigger>
+          <Dropdown.Content w="250px">
+            <Dropdown.Label>My Account</Dropdown.Label>
+            <Dropdown.Separator />
+            <Dropdown.Group>
+              <Dropdown.Item>
+                Profile
+                <Dropdown.Shortcut>⇧⌘P</Dropdown.Shortcut>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                Billing
+                <Dropdown.Shortcut>⌘B</Dropdown.Shortcut>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                Settings
+                <Dropdown.Shortcut>⌘S</Dropdown.Shortcut>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                Keyboard shortcuts
+                <Dropdown.Shortcut>⌘K</Dropdown.Shortcut>
+              </Dropdown.Item>
+            </Dropdown.Group>
+            <Dropdown.Separator />
+            <Dropdown.Group>
+              <Dropdown.Item>Team</Dropdown.Item>
+              <Dropdown.Sub>
+                <Dropdown.SubTrigger>Invite users</Dropdown.SubTrigger>
+                <Dropdown.Portal>
+                  <Dropdown.SubContent>
+                    <Dropdown.Item>Email</Dropdown.Item>
+                    <Dropdown.Item>Message</Dropdown.Item>
+                    <Dropdown.Separator />
+                    <Dropdown.Item>More...</Dropdown.Item>
+                  </Dropdown.SubContent>
+                </Dropdown.Portal>
+              </Dropdown.Sub>
+              <Dropdown.Item>
+                New Team
+                <Dropdown.Shortcut>⌘+T</Dropdown.Shortcut>
+              </Dropdown.Item>
+            </Dropdown.Group>
+            <Dropdown.Separator />
+            <Dropdown.Item>GitHub</Dropdown.Item>
+            <Dropdown.Item>Support</Dropdown.Item>
+            <Dropdown.Item disabled>API</Dropdown.Item>
+            <Dropdown.Separator />
+            <Dropdown.Item>
+              Log out
+              <Dropdown.Shortcut>⇧⌘Q</Dropdown.Shortcut>
+            </Dropdown.Item>
+          </Dropdown.Content>
+        </Dropdown.Root>
+        <Dropdown.Root>
+          <Dropdown.Trigger asChild>
+            <Button variant="outline">Dropdown Checkbox</Button>
+          </Dropdown.Trigger>
+          <Dropdown.Content className="w-56">
+            <Dropdown.Label>Appearance</Dropdown.Label>
+            <Dropdown.Separator />
+            <Dropdown.CheckboxItem
+              checked={showStatusBar}
+              onCheckedChange={setShowStatusBar}
+            >
+              Status Bar
+            </Dropdown.CheckboxItem>
+            <Dropdown.CheckboxItem
+              checked={showActivityBar}
+              onCheckedChange={setShowActivityBar}
+              disabled
+            >
+              Activity Bar
+            </Dropdown.CheckboxItem>
+            <Dropdown.CheckboxItem
+              checked={showPanel}
+              onCheckedChange={setShowPanel}
+            >
+              Panel
+            </Dropdown.CheckboxItem>
+          </Dropdown.Content>
+        </Dropdown.Root>
+        <Dropdown.Root>
+          <Dropdown.Trigger asChild>
+            <Button variant="outline">Dropdown Radio</Button>
+          </Dropdown.Trigger>
+          <Dropdown.Content className="w-56">
+            <Dropdown.Label>Panel Position</Dropdown.Label>
+            <Dropdown.Separator />
+            <Dropdown.RadioGroup value={position} onValueChange={setPosition}>
+              <Dropdown.RadioItem value="top">Top</Dropdown.RadioItem>
+              <Dropdown.RadioItem value="bottom">Bottom</Dropdown.RadioItem>
+              <Dropdown.RadioItem value="right">Right</Dropdown.RadioItem>
+            </Dropdown.RadioGroup>
+          </Dropdown.Content>
+        </Dropdown.Root>
+      </Flex>
       <Button variant="link" as="a">
         Link
       </Button>
