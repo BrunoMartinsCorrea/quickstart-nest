@@ -18,6 +18,7 @@ import { Avatar } from "@/components/Avatar/index.";
 import { Badge } from "@/components/Badge";
 import { Textarea } from "@/components/Textarea";
 import * as Dialog from '@/components/Dialog';
+import * as Radio from '@/components/Radio';
 
 export default function SignInPage() {
   const store = useStore(state => state);
@@ -41,30 +42,6 @@ export default function SignInPage() {
             <Avatar src="https://github.com/gustavonogales.png" alt="@gustavonogales" fallback="GN"/>
           </Flex>
         </Flex>
-        <Select.Root>
-          <Select.Trigger className="w-[180px]">
-            <Select.Value placeholder="Select a fruit" />
-          </Select.Trigger>
-          <Select.Content>
-            <Select.Group>
-              <Select.Label>Fruits</Select.Label>
-              <Select.Item value="apple">Apple</Select.Item>
-              <Select.Item value="banana">Banana</Select.Item>
-              <Select.Item value="blueberry">Blueberry</Select.Item>
-              <Select.Item value="grapes">Grapes</Select.Item>
-              <Select.Item value="pineapple">Pineapple</Select.Item>
-            </Select.Group>
-            <Select.Separator />
-            <Select.Group>
-              <Select.Label>Fruits</Select.Label>
-              <Select.Item value="apple">Apple</Select.Item>
-              <Select.Item value="banana">Banana</Select.Item>
-              <Select.Item value="blueberry">Blueberry</Select.Item>
-              <Select.Item value="grapes">Grapes</Select.Item>
-              <Select.Item value="pineapple">Pineapple</Select.Item>
-            </Select.Group>
-          </Select.Content>
-        </Select.Root>
         <Card.Root width="350px">
           <Card.Header>
             <Heading as="h3">Sign In</Heading>
@@ -210,6 +187,24 @@ export default function SignInPage() {
       <Button variant="ghost">
         Ghost
       </Button>
+      <Radio.Group defaultValue="item2">
+        <Flex align="center" gap={0.5}>
+          <Radio.Item value="item1" id="item1"/>
+          <Label htmlFor="item1">Item 1</Label>
+        </Flex>
+        <Flex align="center" gap={0.5}>
+          <Radio.Item value="item2" id="item2"/>
+          <Label htmlFor="item2">Item 2</Label>
+        </Flex>
+        <Flex align="center" gap={0.5}>
+          <Radio.Item value="item3" id="item3"/>
+          <Label htmlFor="item3">Item 3</Label>
+        </Flex>
+        <Flex align="center" gap={0.5}>
+          <Radio.Item value="item4" id="item4"/>
+          <Label htmlFor="item4">Item 4</Label>
+        </Flex>
+      </Radio.Group>
       <br />
       <Flex direction="column-reverse" gap={"0.375rem"}>
         <Input type="text" id="email" placeholder="E-mail" disabled/>
