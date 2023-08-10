@@ -3,12 +3,12 @@ import { JwtService } from '@nestjs/jwt';
 import { v4 as uuidv4 } from 'uuid';
 import { addHours, addMinutes, getUnixTime } from 'date-fns';
 import { JwtSignOptions } from '@nestjs/jwt/dist/interfaces';
-import { UserService } from '../../../user/domain/service/user.service';
-import { UserCredential } from '../../../user/domain/model/user-credential';
+import { UserService } from '@/user/domain/service/user.service';
+import { UserCredential } from '@/user/domain/model/user-credential';
 import { RefreshToken } from '../model/refresh-token';
-import { Token } from '../model/token';
-import { AuthorizationError } from '../../../common/error/authorization-error';
 import { Jwt } from '../model/jwt';
+import { AuthorizationError } from '@/common/error/authorization-error';
+import { Token } from '@/authentication/domain/model/token';
 
 @Injectable()
 export class AuthenticationService {
@@ -26,13 +26,13 @@ export class AuthenticationService {
   ) {}
 
   async generateToken(userCredential: UserCredential) {
-    let { id: userId } = await this.userService.validateByUsername(userCredential.username, userCredential.password);
+    const { id: userId } = await this.userService.validateByUsername(userCredential.username, userCredential.password);
 
     return this.generateTokenToSubject(userId);
   }
 
   async refreshToken(refreshToken: RefreshToken) {
-    let jwt = await this.verifyToken(refreshToken.refresh);
+    const jwt = await this.verifyToken(refreshToken.refresh);
 
     return this.generateTokenToSubject(jwt.payload.sub);
   }
@@ -40,7 +40,7 @@ export class AuthenticationService {
   async verifyToken(token: string) {
     try {
       this.jwt.verify(token, this.defaultJwtOptions);
-      let jwtDecoded = this.jwt.decode(token, { json: true, complete: true });
+      const jwtDecoded = this.jwt.decode(token, { json: true, complete: true });
 
       return { ...(jwtDecoded as object) } as Jwt;
     } catch (e) {
@@ -50,13 +50,16 @@ export class AuthenticationService {
   }
 
   private async generateTokenToSubject(subject: string) {
-    let jti = uuidv4();
-    let now = new Date();
-    let iat = getUnixTime(now);
-    let exp = getUnixTime(addMinutes(now, 5)) - iat;
-    let expRefresh = getUnixTime(addHours(now, 1)) - iat;
+    const ACCESS_TOKEN_DURATION_IN_MINUTES = 5;
+    const REFRESH_TOKEN_DURATION_IN_HOURS = 1;
 
-    let access = this.jwt.sign(
+    const jti = uuidv4();
+    const now = new Date();
+    const iat = getUnixTime(now);
+    const exp = getUnixTime(addMinutes(now, ACCESS_TOKEN_DURATION_IN_MINUTES)) - iat;
+    const expRefresh = getUnixTime(addHours(now, REFRESH_TOKEN_DURATION_IN_HOURS)) - iat;
+
+    const access = this.jwt.sign(
       {
         iat,
       },
@@ -68,7 +71,7 @@ export class AuthenticationService {
       },
     );
 
-    let refresh = this.jwt.sign(
+    const refresh = this.jwt.sign(
       {
         iat,
       },

@@ -1,4 +1,4 @@
-import { StyledFallback, StyledImage, StyledRoot } from "./index.style"
+import { StyledFallback, StyledImage, StyledRoot } from './index.style';
 
 interface AvatarProps {
   fallback: string;
@@ -6,11 +6,11 @@ interface AvatarProps {
   alt: string;
 }
 
-export function Avatar({fallback, src, alt}: AvatarProps) {
+export function Avatar({ fallback, src, alt }: AvatarProps) {
   return (
     <StyledRoot>
-      <StyledImage src={src} alt={alt}/>
+      <StyledImage src={src} alt={alt} />
       <StyledFallback>{fallback}</StyledFallback>
     </StyledRoot>
-  )
+  );
 }

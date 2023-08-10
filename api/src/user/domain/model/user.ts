@@ -1,4 +1,4 @@
-import { Auditing } from '../../../common/model/auditing';
+import { Auditing } from '@/common/model/auditing';
 
 export class User implements Auditing {
   constructor(

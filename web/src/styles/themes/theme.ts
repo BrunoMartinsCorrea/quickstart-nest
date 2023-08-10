@@ -9,9 +9,9 @@ export interface Theme {
   onDestructive: string;
 
   border: string;
-  borderRadius: string,
-  borderRadiusMD: string,
-  borderRadiusLG: string,
+  borderRadius: string;
+  borderRadiusMD: string;
+  borderRadiusLG: string;
 
   text: string;
   mutedText: string;
@@ -23,13 +23,13 @@ export interface Theme {
   dropShadowLG: string;
 
   breakpoints: {
-    xs: string,
-    sm: string,
-    md: string,
-    lg: string,
-    xl: string,
-    xxl: string,
-  }
+    xs: string;
+    sm: string;
+    md: string;
+    lg: string;
+    xl: string;
+    xxl: string;
+  };
 
   containerSize: string;
   fontSize: string;

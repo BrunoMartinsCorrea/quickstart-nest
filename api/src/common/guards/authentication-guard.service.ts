@@ -1,6 +1,6 @@
+import { AuthenticationService } from '@/authentication/domain/service/authentication.service';
 import { CanActivate, ExecutionContext, Injectable, Logger } from '@nestjs/common';
 import { Request } from 'express';
-import { AuthenticationService } from '../../authentication/domain/service/authentication.service';
 
 @Injectable()
 export class AuthenticationGuard implements CanActivate {

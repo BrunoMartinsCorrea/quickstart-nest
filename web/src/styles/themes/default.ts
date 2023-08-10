@@ -73,4 +73,4 @@ export const defaultTheme: Theme = {
     80: '20rem',
     96: '24rem',
   }
-}
+};

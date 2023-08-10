@@ -17,6 +17,7 @@
         "!.next/cache/**"
       ]
     },
-    "lint": {}
+    "lint": {},
+    "format": {}
   }
 }

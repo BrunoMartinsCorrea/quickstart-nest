@@ -1,16 +1,17 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserEntity } from '../entities/user.entity';
 import { Repository } from 'typeorm';
-import { EntityConflictError } from '../../../common/error/entity-conflict-error';
-import { User } from '../../domain/model/user';
 import { Logger } from '@nestjs/common';
+import empty from 'is-empty';
+import { UserEntity } from '../entities/user.entity';
+import { User } from '@/user/domain/model/user';
+import { EntityConflictError } from '@/common/error/entity-conflict-error';
 
 export class UserRepository {
   constructor(@InjectRepository(UserEntity) private repository: Repository<UserEntity>) {}
 
   async create(user: User) {
     try {
-      let savedUser = await this.repository.save({ ...user } as UserEntity);
+      const savedUser = await this.repository.save({ ...user } as UserEntity);
       return { ...savedUser } as User;
     } catch (e) {
       Logger.error(e);
@@ -19,14 +20,14 @@ export class UserRepository {
   }
 
   async findOne(id: string) {
-    let user = await this.repository.findOne({ where: { id } });
+    const user = await this.repository.findOne({ where: { id } });
     if (user) {
       return { ...user } as User;
     }
   }
 
   async findOneByUsername(username: string) {
-    let user = await this.repository.findOneBy({ username });
+    const user = await this.repository.findOneBy({ username });
     return { ...user } as User;
   }
 
@@ -40,8 +41,8 @@ export class UserRepository {
   }
 
   async softDelete(id: string) {
-    let updateResult = await this.repository.softDelete({ id, deletedAt: null });
+    const updateResult = await this.repository.softDelete({ id, deletedAt: null });
 
-    return updateResult?.affected > 0;
+    return empty(updateResult?.affected);
   }
 }

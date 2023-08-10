@@ -1,19 +1,21 @@
-import styled, { css } from "styled-components";
+import { styled, css } from 'styled-components';
 
 type ContainerProps = {
   width?: string;
-}
+};
 
 export const Container = styled.div<ContainerProps>`
-  border-radius: ${props => props.theme.borderRadiusLG};
-  border: 1px solid ${props => props.theme.border};
-  filter: ${props => props.theme.dropShadowSM};
-  background-color: ${props => props.theme.background};
+  border-radius: ${(props) => props.theme.borderRadiusLG};
+  border: 1px solid ${(props) => props.theme.border};
+  filter: ${(props) => props.theme.dropShadowSM};
+  background-color: ${(props) => props.theme.background};
   width: 100%;
 
-  ${props => props.width && css`
-    max-width: ${props.width};
-  `}
+  ${(props) =>
+    props.width &&
+    css`
+      max-width: ${props.width};
+    `}
 `;
 
 export const ContainerHeader = styled.div`

@@ -1,11 +1,12 @@
 import { ArgumentsHost, Catch, ExceptionFilter, ForbiddenException, HttpStatus, Logger } from '@nestjs/common';
 import { Response } from 'express';
-import { BusinessError } from '../error/business-error';
-import { EntityNotFoundError } from '../error/entity-not-found-error';
-import { ErrorResponseDto } from '../dto/error-response.dto';
+import empty from 'is-empty';
 import { AuthorizationError } from '../error/authorization-error';
-import { InvalidCredentialsError } from '../../user/domain/error/invalid-credentials-error';
+import { InvalidCredentialsError } from '@/user/domain/error/invalid-credentials-error';
+import { EntityNotFoundError } from '../error/entity-not-found-error';
 import { EntityConflictError } from '../error/entity-conflict-error';
+import { BusinessError } from '../error/business-error';
+import { ErrorResponseDto } from '../dto/error-response.dto';
 
 @Catch(Error)
 export class ErrorFilter implements ExceptionFilter {
@@ -52,7 +53,7 @@ export class ErrorFilter implements ExceptionFilter {
       statusCode,
       timestamp: new Date().toISOString(),
       errorCode,
-      message: exception.message.trim().length > 0 ? exception.message : 'Something went wrong',
+      message: empty(exception.message.trim()) ? exception.message : 'Something went wrong',
     } as ErrorResponseDto;
   }
 }

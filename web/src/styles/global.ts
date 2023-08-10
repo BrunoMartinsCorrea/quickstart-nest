@@ -1,5 +1,5 @@
-import { darken } from 'polished'
-import { createGlobalStyle, keyframes } from 'styled-components'
+import { darken } from 'polished';
+import { createGlobalStyle, keyframes } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -11,7 +11,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   :focus {
-    outline: 1px solid ${props => darken(0.3, props.theme.border)};
+    outline: 1px solid ${(props) => darken(0.3, props.theme.border)};
     outline-offset: 0.15rem;
   }
 
@@ -22,19 +22,19 @@ export const GlobalStyle = createGlobalStyle`
   body, input, textarea, button {
     font-family: 'Inter', sans-serif;
     font-weight: 400;
-    font-size: ${props => props.theme.fontSize};
+    font-size: ${(props) => props.theme.fontSize};
   }
 
-  @media (max-width: ${props => props.theme.breakpoints.xs}) {
+  @media (max-width: ${(props) => props.theme.breakpoints.xs}) {
     html {
-      font-size: calc(${props => props.theme.fontSize} -2px);
+      font-size: calc(${(props) => props.theme.fontSize} -2px);
     }
 
     body, input, textarea, button {
       font-size: calc(${props => props.theme.fontSize} -2px);
     }
   }
-`
+`;
 export const fadeInAnimation = keyframes`
   from { opacity: 0 }
   to { opacity:  1 }

@@ -1,13 +1,19 @@
 {
   "extends": "config/tsconfig.web.json",
   "compilerOptions": {
-    "allowImportingTsExtensions": true,
-    "moduleResolution": "bundler",
     "outDir": "./dist",
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"]
     }
   },
-  "include": ["src", "vite.config.ts"],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "public"
+  ]
 }

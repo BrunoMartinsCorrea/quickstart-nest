@@ -1,15 +1,15 @@
-import styled from "styled-components";
+import { styled } from 'styled-components';
 
 export const Container = styled.input`
   height: 2.5rem;
-  border-radius: ${props => props.theme.borderRadiusMD};
-  border: 1px solid ${props => props.theme.border};
-  background-color: ${props => props.theme.background};
+  border-radius: ${(props) => props.theme.borderRadiusMD};
+  border: 1px solid ${(props) => props.theme.border};
+  background-color: ${(props) => props.theme.background};
   padding: 0.5rem 0.75rem;
   width: 100%;
 
   &::placeholder {
-    color: ${props => props.theme.mutedText};
+    color: ${(props) => props.theme.mutedText};
   }
 
   &:disabled {
@@ -22,7 +22,7 @@ export const Container = styled.input`
     cursor: not-allowed;
   }
 
-  &[type=file] {
+  &[type='file'] {
     background: transparent;
     cursor: pointer;
 

@@ -1,7 +1,5 @@
 import { styled } from 'styled-components';
-import * as AvatarPrimitive from "@radix-ui/react-avatar"
-
-// "relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full",
+import * as AvatarPrimitive from '@radix-ui/react-avatar';
 
 export const StyledRoot = styled(AvatarPrimitive.Root)`
   position: relative;
@@ -19,7 +17,6 @@ export const StyledImage = styled(AvatarPrimitive.Image)`
   width: 100%;
 `;
 
-
 export const StyledFallback = styled(AvatarPrimitive.AvatarFallback)`
   display: flex;
   width: 100%;
@@ -27,5 +24,5 @@ export const StyledFallback = styled(AvatarPrimitive.AvatarFallback)`
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
-  background-color: ${props => props.theme.mutedBackground};
+  background-color: ${(props) => props.theme.mutedBackground};
 `;

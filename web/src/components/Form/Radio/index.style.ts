@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import * as RadioGroupPrimitive from "@radix-ui/react-radio-group"
+import { styled } from 'styled-components';
+import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 
 export const StyledRadioGroup = styled(RadioGroupPrimitive.Root)`
   display: grid;
@@ -11,11 +11,10 @@ export const StyledRadioItem = styled(RadioGroupPrimitive.Item)`
   height: 1rem;
   width: 1rem;
   border-radius: 9999px;
-  border: 1px solid ${props => props.theme.primary};
-  background-color: ${props => props.theme.background};
-  color: ${props => props.theme.primary};
+  border: 1px solid ${(props) => props.theme.primary};
+  background-color: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.primary};
   cursor: pointer;
-
 
   &:disabled {
     cursor: not-allowed;
@@ -31,7 +30,7 @@ export const StyledRadioIndicator = styled(RadioGroupPrimitive.Indicator)`
   & > div {
     height: 0.625rem;
     width: 0.625rem;
-    background-color: ${props => props.theme.primary};
+    background-color: ${(props) => props.theme.primary};
     border-radius: 9999px;
   }
 `;

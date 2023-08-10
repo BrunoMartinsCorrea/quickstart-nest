@@ -12,13 +12,13 @@ import {
   Res,
 } from '@nestjs/common';
 import { Response as ExpressResponse } from 'express';
-import { CreateUserDto } from '../dto/create-user.dto';
-import { UpdateUserDto } from '../dto/update-user.dto';
-import { UserService } from '../../domain/service/user.service';
 import { ApiConflictResponse, ApiNotFoundResponse, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
-import { ErrorResponseDto } from '../../../common/dto/error-response.dto';
-import { User } from '../../domain/model/user';
-import { UserDto } from '../dto/user.dto';
+import { UserService } from '@/user/domain/service/user.service';
+import { ErrorResponseDto } from '@/common/dto/error-response.dto';
+import { User } from '@/user/domain/model/user';
+import { UpdateUserDto } from '../dto/update-user.dto';
+import { UserDto } from '@/user/http-server/dto/user.dto';
+import { CreateUserDto } from '@/user/http-server/dto/create-user.dto';
 
 @ApiTags('user')
 @Controller('user')
@@ -29,7 +29,7 @@ export class UserController {
   @HttpCode(HttpStatus.CREATED)
   @ApiConflictResponse({ type: ErrorResponseDto })
   async create(@Body() createUserDto: CreateUserDto, @Res() response: ExpressResponse) {
-    let createdUser = await this.userService.create({
+    const createdUser = await this.userService.create({
       username: createUserDto.username,
       password: createUserDto.password,
       fullName: createUserDto.fullName,
@@ -42,14 +42,14 @@ export class UserController {
   @Get(':id')
   @ApiNotFoundResponse({ type: ErrorResponseDto })
   async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    let foundUser = await this.userService.findOne(id);
+    const foundUser = await this.userService.findOne(id);
     return { ...foundUser } as UserDto;
   }
 
   @Put(':id')
   @ApiUnauthorizedResponse({ type: ErrorResponseDto })
   async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    let updatedUser = await this.userService.update({ id, ...updateUserDto } as User);
+    const updatedUser = await this.userService.update({ id, ...updateUserDto } as User);
     return { ...updatedUser } as UserDto;
   }
 
@@ -57,6 +57,6 @@ export class UserController {
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiUnauthorizedResponse({ type: ErrorResponseDto })
   async softDelete(@Param('id') id: string) {
-    return await this.userService.softDelete(id);
+    return this.userService.softDelete(id);
   }
 }

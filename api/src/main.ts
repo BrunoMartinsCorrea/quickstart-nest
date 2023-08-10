@@ -1,9 +1,10 @@
 import { NestFactory } from '@nestjs/core';
-import { MainModule } from './main.module';
+import { MainModule } from '@/main.module';
 import { ConsoleLogger } from '@nestjs/common';
 import { DocumentBuilder, SwaggerDocumentOptions, SwaggerModule } from '@nestjs/swagger';
 
 const APP_NAME = 'API';
+const HTTP_PORT = 8080;
 
 async function bootstrap() {
   const app = (
@@ -27,7 +28,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, documentBuilder, documentOptions);
   SwaggerModule.setup('api/docs', app, document);
 
-  await app.listen(8080);
+  await app.listen(HTTP_PORT);
 }
 
 bootstrap();

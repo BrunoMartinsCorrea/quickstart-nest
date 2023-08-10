@@ -1,5 +1,5 @@
 import { Column, Entity, Index } from 'typeorm';
-import { AuditingEntity } from '../../../common/entities/auditing.entity';
+import { AuditingEntity } from '@/common/entities/auditing.entity';
 
 @Entity('user')
 export class UserEntity extends AuditingEntity {

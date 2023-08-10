@@ -1,5 +1,5 @@
-import { JwtHeader } from './jwt-header';
-import { JwtPayload } from './jwt-payload';
+import { JwtHeader } from '@/authentication/domain/model/jwt-header';
+import { JwtPayload } from '@/authentication/domain/model/jwt-payload';
 
 export class Jwt {
   constructor(

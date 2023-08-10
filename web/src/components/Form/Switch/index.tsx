@@ -1,6 +1,6 @@
-import * as React from "react"
-import * as SwitchPrimitives from "@radix-ui/react-switch"
-import { StyledRoot, StyledThumb } from "./index.style"
+import * as React from 'react';
+import * as SwitchPrimitives from '@radix-ui/react-switch';
+import { StyledRoot, StyledThumb } from './index.style';
 
 const Switch = React.forwardRef<
   React.ElementRef<typeof SwitchPrimitives.Root>,
@@ -9,7 +9,7 @@ const Switch = React.forwardRef<
   <StyledRoot {...props} ref={ref}>
     <StyledThumb />
   </StyledRoot>
-))
-Switch.displayName = SwitchPrimitives.Root.displayName
+));
+Switch.displayName = SwitchPrimitives.Root.displayName;
 
-export { Switch }
+export { Switch };

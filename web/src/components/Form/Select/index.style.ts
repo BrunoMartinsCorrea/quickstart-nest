@@ -1,6 +1,6 @@
-import styled, { css } from "styled-components";
-import * as SelectPrimitive from "@radix-ui/react-select"
-import { fadeInAnimation, fadeOutAnimation, scaleInAnimation, scaleOutAnimation } from "@/styles/global";
+import { styled, css } from 'styled-components';
+import * as SelectPrimitive from '@radix-ui/react-select';
+import { fadeInAnimation, fadeOutAnimation, scaleInAnimation, scaleOutAnimation } from '@/styles/global';
 
 export const StyledTrigger = styled(SelectPrimitive.Trigger)`
   display: flex;
@@ -8,13 +8,13 @@ export const StyledTrigger = styled(SelectPrimitive.Trigger)`
   width: 100%;
   align-items: center;
   justify-content: space-between;
-  border-radius: ${props => props.theme.borderRadiusMD};
-  border: 1px solid ${props => props.theme.border};
-  background-color: ${props => props.theme.background};
+  border-radius: ${(props) => props.theme.borderRadiusMD};
+  border: 1px solid ${(props) => props.theme.border};
+  background-color: ${(props) => props.theme.background};
   padding: 0.5rem 0.75rem;
 
   &:placeholder {
-    color: ${props => props.theme.mutedText};
+    color: ${(props) => props.theme.mutedText};
   }
 
   &:disabled {
@@ -35,43 +35,45 @@ export const StyledContent = styled(SelectPrimitive.Content)`
   min-width: 16rem;
   width: 100%;
   overflow: hidden;
-  border-radius: ${props => props.theme.borderRadiusMD};
-  border: 1px solid ${props => props.theme.border};
-  background-color: ${props => props.theme.background};
-  filter: ${props => props.theme.dropShadowMD};
-  transition: all ${props => props.theme.transitionSpeed};
+  border-radius: ${(props) => props.theme.borderRadiusMD};
+  border: 1px solid ${(props) => props.theme.border};
+  background-color: ${(props) => props.theme.background};
+  filter: ${(props) => props.theme.dropShadowMD};
+  transition: all ${(props) => props.theme.transitionSpeed};
 
-  &[data-state=open] {
+  &[data-state='open'] {
     animation-name: ${fadeInAnimation}, ${scaleInAnimation};
-    animation-duration: ${props => props.theme.transitionSpeed};
+    animation-duration: ${(props) => props.theme.transitionSpeed};
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
   }
 
-  &[data-state=close] {
+  &[data-state='close'] {
     animation-name: ${fadeOutAnimation}, ${scaleOutAnimation};
-    animation-duration: ${props => props.theme.transitionSpeed};
+    animation-duration: ${(props) => props.theme.transitionSpeed};
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
   }
 
-  ${props => props.position === 'popper' && css`
-    &[data-side=bottom] {
-      transform: translateY(0.25rem);
-    }
+  ${(props) =>
+    props.position === 'popper' &&
+    css`
+      &[data-side='bottom'] {
+        transform: translateY(0.25rem);
+      }
 
-    &[data-side=left] {
-      transform: -translateX(0.25rem);
-    }
+      &[data-side='left'] {
+        transform: -translateX(0.25rem);
+      }
 
-    &[data-side=right] {
-      transform: translateX(0.25rem);
-    }
+      &[data-side='right'] {
+        transform: translateX(0.25rem);
+      }
 
-    &[data-side=top] {
-      transform: -translateY(0.25rem);
-    }
-  `}
+      &[data-side='top'] {
+        transform: -translateY(0.25rem);
+      }
+    `}
 `;
 
 export const StyledViewport = styled(SelectPrimitive.Viewport)`
@@ -93,13 +95,13 @@ export const StyledItem = styled(SelectPrimitive.Item)`
   cursor: default;
   padding: 0.5rem 0;
   padding-left: 2rem;
-  border-radius: ${props => props.theme.borderRadiusMD};
+  border-radius: ${(props) => props.theme.borderRadiusMD};
   padding-right: 0.5rem;
   user-select: none;
-  color: ${props => props.theme.text};
+  color: ${(props) => props.theme.text};
 
   &:focus {
-    background-color: ${props => props.theme.mutedBackground};
+    background-color: ${(props) => props.theme.mutedBackground};
     outline: none;
   }
 
@@ -122,7 +124,5 @@ export const StyledItem = styled(SelectPrimitive.Item)`
 export const StyledSeparator = styled(SelectPrimitive.Separator)`
   margin: 0.25rem;
   height: 1px;
-  background-color: ${props => props.theme.mutedBackground};
+  background-color: ${(props) => props.theme.mutedBackground};
 `;
-
-
