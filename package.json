@@ -14,8 +14,6 @@
   },
   "devDependencies": {
     "@turbo/gen": "^1.9.7",
-    "config": "*",
-    "eslint-config-custom": "*",
     "eslint-config-turbo": "^1.9.3",
     "turbo": "1.10.7"
   },
