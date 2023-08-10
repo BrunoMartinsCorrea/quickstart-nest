@@ -1,24 +1,25 @@
 import * as React from 'react';
-import { Container, ContainerContent, ContainerFooter, ContainerHeader } from './index.style';
+import { Container, ContainerContent, ContainerFooter, ContainerHeader, ContainerProps } from './index.style';
 
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {}
-interface RootProps extends CardProps {
-  width?: string;
-}
 
-function Root({ children, ...props }: RootProps) {
+function Root({ children, ...props }: ContainerProps & React.HTMLAttributes<HTMLDivElement>) {
   return <Container {...props}>{children}</Container>;
 }
 
-function Header({ children, ...props }: CardProps) {
-  return <ContainerHeader {...props}>{children}</ContainerHeader>;
+function Header({children}) {
+  return (
+    <ContainerHeader>
+      {children}
+    </ContainerHeader>
+  );
 }
 
 function Content({ children }: CardProps) {
   return <ContainerContent>{children}</ContainerContent>;
 }
 
-function Footer({ children }: CardProps) {
+function Footer({ children }) {
   return <ContainerFooter>{children}</ContainerFooter>;
 }
 

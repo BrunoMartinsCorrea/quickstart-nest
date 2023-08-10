@@ -1,7 +1,7 @@
 import { styled, css } from 'styled-components';
 
-type ContainerProps = {
-  width?: string;
+export type ContainerProps = {
+  $maxW?: string;
 };
 
 export const Container = styled.div<ContainerProps>`
@@ -12,13 +12,13 @@ export const Container = styled.div<ContainerProps>`
   width: 100%;
 
   ${(props) =>
-    props.width &&
+    props.$maxW &&
     css`
-      max-width: ${props.width};
+      max-width: ${props.$maxW};
     `}
 `;
 
-export const ContainerHeader = styled.div`
+export const ContainerHeader = styled.header`
   display: flex;
   flex-direction: column;
   gap: 0.375rem;
@@ -33,7 +33,7 @@ export const ContainerFooter = styled.div`
   padding-top: 0;
 `;
 
-export const ContainerContent = styled.div`
+export const ContainerContent = styled.footer`
   padding: 1.5rem;
   padding-top: 0;
 `;

@@ -5,7 +5,6 @@ export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'outline' | 'des
 
 interface ContainerProps {
   $variant: ButtonVariant;
-  disabled: boolean;
 }
 
 export const Container = styled.button<ContainerProps>`

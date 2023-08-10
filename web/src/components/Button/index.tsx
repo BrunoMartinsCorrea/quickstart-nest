@@ -1,16 +1,15 @@
 import { ButtonVariant, Container } from './index.style';
-import React from 'react';
+import React, { ForwardRefExoticComponent, PropsWithoutRef, RefAttributes } from 'react';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   variant?: ButtonVariant;
-  disabled?: boolean;
   as?: string;
   asChild?: boolean;
 }
 
-export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant = 'primary', disabled = false, ...props }, ref) => {
-    return <Container $variant={variant} disabled={disabled} ref={ref} {...props} />;
+export const Button: ForwardRefExoticComponent<PropsWithoutRef<ButtonProps> & RefAttributes<HTMLButtonElement>> = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ variant = 'primary',  ...props }, ref) => {
+    return <Container $variant={variant} ref={ref} {...props} />;
   },
-);
+)

@@ -22,10 +22,11 @@ export const StyledTrigger = styled(SelectPrimitive.Trigger)`
     opacity: 0.5;
   }
 
-  & > span > svg {
+  & > svg {
     width: 1rem;
     height: 1rem;
     opacity: 0.5;
+    margin-left: 0.5rem;
   }
 `;
 

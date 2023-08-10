@@ -6,7 +6,7 @@ import { BodyText } from '@/components/Typography/BodyText';
 import { Heading } from '@/components/Typography/Heading';
 import * as Tabs from '@/components/Tabs';
 import * as Card from '@/components/Card';
-import { Avatar } from '@/components/Avatar/index.';
+import { Avatar } from '@/components/Avatar';
 import { Badge } from '@/components/Badge';
 import * as Dialog from '@/components/Dialog';
 import * as Popover from '@/components/Popover';
@@ -40,7 +40,7 @@ export default function SignInPage() {
             <Avatar src="https://github.com/gustavonogales.png" alt="@gustavonogales" fallback="GN" />
           </Flex>
         </Flex>
-        <Card.Root width="350px">
+        <Card.Root $maxW="350px">
           <Card.Header>
             <Heading as="h3">Sign In</Heading>
             <BodyText>Welcome back. You've been missed!</BodyText>

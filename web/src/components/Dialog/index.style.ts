@@ -1,5 +1,5 @@
 import * as DialogPrimitive from '@radix-ui/react-dialog';
-import { styled, keyframes } from 'styled-components';
+import { styled, keyframes, css } from 'styled-components';
 import { fadeInAnimation, fadeOutAnimation } from '@/styles/global';
 
 export const overlayFadeInAnimation = keyframes`
@@ -19,8 +19,8 @@ export const StyledOverlay = styled(DialogPrimitive.Overlay)`
   }
 `;
 
-interface StyledContentProps {
-  $maxWidth: string;
+export interface StyledContentProps {
+  $maxW?: string;
 }
 
 export const StyledContent = styled(DialogPrimitive.Content)<StyledContentProps>`
@@ -39,7 +39,10 @@ export const StyledContent = styled(DialogPrimitive.Content)<StyledContentProps>
   padding: 1.5rem;
   filter: ${(props) => props.theme.dropShadowLG};
   transition-duration: 200ms;
-  max-width: ${(props) => props.$maxWidth};
+
+  ${props => props.$maxW && css`
+    max-width: ${props.$maxW}
+  `};
 
   &[data-state='open'] {
     animation: ${fadeInAnimation} ${(props) => props.theme.transitionSpeed} ease-in-out forwards;

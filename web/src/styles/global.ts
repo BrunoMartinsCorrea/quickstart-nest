@@ -23,6 +23,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: ${(props) => props.theme.fontSize};
+    /* line-height: 1.4; */
   }
 
   @media (max-width: ${(props) => props.theme.breakpoints.xs}) {

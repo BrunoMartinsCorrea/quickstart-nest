@@ -3,6 +3,7 @@ import * as DialogPrimitive from '@radix-ui/react-dialog';
 import {
   StyledClose,
   StyledContent,
+  StyledContentProps,
   StyledDescription,
   StyledFooter,
   StyledHeader,
@@ -14,15 +15,13 @@ import { Cross1Icon } from '@radix-ui/react-icons';
 const Root = DialogPrimitive.Root;
 const Trigger = DialogPrimitive.Trigger;
 
-interface ContentProps extends DialogPrimitive.DialogContentProps {
-  maxWidth?: string;
-}
+interface ContentProps extends DialogPrimitive.DialogContentProps, StyledContentProps {}
 
-function Content({ children, maxWidth = '450px', ...props }: ContentProps) {
+function Content({ children, $maxW = '450px', ...props }: ContentProps) {
   return (
     <DialogPrimitive.Portal>
       <StyledOverlay />
-      <StyledContent $maxWidth={maxWidth} {...props}>
+      <StyledContent {...props}>
         {children}
         <StyledClose>
           <Cross1Icon width="1rem" height="1rem" />

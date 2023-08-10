@@ -12,7 +12,7 @@ export const StyledPrimitiveList = styled(TabsPrimitive.List)`
   align-items: center;
   justify-content: center;
   padding: 0.25rem;
-  border-radius: ${(props) => props.theme.borderRadius};
+  border-radius: ${(props) => props.theme.borderRadiusMD};
   background-color: ${(props) => props.theme.mutedBackground};
 `;
 
