@@ -31,7 +31,7 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     body, input, textarea, button {
-      font-size: 12px;
+      font-size: calc(${props => props.theme.fontSize} -2px);
     }
   }
 `
