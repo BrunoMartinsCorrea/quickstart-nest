@@ -1,4 +1,4 @@
-import { Theme } from './theme'
+import { Theme } from './theme';
 
 export const defaultTheme: Theme = {
   primary: '#18181B',
@@ -72,5 +72,5 @@ export const defaultTheme: Theme = {
     72: '18rem',
     80: '20rem',
     96: '24rem',
-  }
+  },
 };

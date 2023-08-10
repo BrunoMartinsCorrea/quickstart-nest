@@ -1,12 +1,12 @@
-import styled from "styled-components";
-import * as PopoverPrimitive from "@radix-ui/react-popover"
-import { fadeInAnimation, fadeOutAnimation, scaleInAnimation, scaleOutAnimation } from "@/styles/global";
+import styled from 'styled-components';
+import * as PopoverPrimitive from '@radix-ui/react-popover';
+import { fadeInAnimation, fadeOutAnimation, scaleInAnimation, scaleOutAnimation } from '@/styles/global';
 
 interface StyledContentProps {
   $w: string | number;
 }
 
-export const StyledContent = styled(PopoverPrimitive.Content)<StyledContentProps>(props => ({
+export const StyledContent = styled(PopoverPrimitive.Content)<StyledContentProps>((props) => ({
   zIndex: 50,
   padding: '0.25rem',
   width: props.$w ?? '72px',
@@ -22,6 +22,6 @@ export const StyledContent = styled(PopoverPrimitive.Content)<StyledContentProps
     animationName: `${fadeInAnimation.getName()}, ${scaleInAnimation.getName()}`,
   },
   '&[data-state=close]': {
-    animationName:  `${fadeOutAnimation.getName()}, ${scaleOutAnimation.getName()}`,
-  }
-}))
+    animationName: `${fadeOutAnimation.getName()}, ${scaleOutAnimation.getName()}`,
+  },
+}));

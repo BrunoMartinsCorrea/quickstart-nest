@@ -267,55 +267,37 @@ export default function SignInPage() {
         </Button>
         <Button variant="ghost">Ghost</Button>
         <Popover.Root>
-        <Popover.Trigger asChild>
-          <Button variant="outline">Open popover</Button>
-        </Popover.Trigger>
-        <Popover.Content w="380px">
-          <Flex $dir="column" $gap={1} $p={1} >
-            <div className="space-y-2">
-              <Heading as="h4">Dimensions</Heading>
-              <BodyText>
-                Set the dimensions for the layer.
-              </BodyText>
-            </div>
-            <Flex $dir="column" $gap={0.5}>
-              <Flex $gap={1} $align="center" $justify="space-between">
-                <Label htmlFor="width">Width</Label>
-                <Input
-                  id="width"
-                  defaultValue="100%"
-                  className="col-span-2 h-8"
-                />
-              </Flex>
-              <Flex $gap={1}>
-                <Label htmlFor="maxWidth">Max. width</Label>
-                <Input
-                  id="maxWidth"
-                  defaultValue="300px"
-                  className="col-span-2 h-8"
-                />
-              </Flex>
-              <div className="grid grid-cols-3 items-center $gap-4">
-                <Label htmlFor="height">Height</Label>
-                <Input
-                  id="height"
-                  defaultValue="25px"
-                  className="col-span-2 h-8"
-                />
+          <Popover.Trigger asChild>
+            <Button variant="outline">Open popover</Button>
+          </Popover.Trigger>
+          <Popover.Content w="380px">
+            <Flex $dir="column" $gap={1} $p={1}>
+              <div className="space-y-2">
+                <Heading as="h4">Dimensions</Heading>
+                <BodyText>Set the dimensions for the layer.</BodyText>
               </div>
-              <div className="grid grid-cols-3 items-center $gap-4">
-                <Label htmlFor="maxHeight">Max. height</Label>
-                <Input
-                  id="maxHeight"
-                  defaultValue="none"
-                  className="col-span-2 h-8"
-                />
-              </div>
+              <Flex $dir="column" $gap={0.5}>
+                <Flex $gap={1} $align="center" $justify="space-between">
+                  <Label htmlFor="width">Width</Label>
+                  <Input id="width" defaultValue="100%" className="col-span-2 h-8" />
+                </Flex>
+                <Flex $gap={1}>
+                  <Label htmlFor="maxWidth">Max. width</Label>
+                  <Input id="maxWidth" defaultValue="300px" className="col-span-2 h-8" />
+                </Flex>
+                <div className="grid grid-cols-3 items-center $gap-4">
+                  <Label htmlFor="height">Height</Label>
+                  <Input id="height" defaultValue="25px" className="col-span-2 h-8" />
+                </div>
+                <div className="grid grid-cols-3 items-center $gap-4">
+                  <Label htmlFor="maxHeight">Max. height</Label>
+                  <Input id="maxHeight" defaultValue="none" className="col-span-2 h-8" />
+                </div>
+              </Flex>
             </Flex>
-          </Flex>
-        </Popover.Content>
-      </Popover.Root>
-      <Radio.Group defaultValue="item2">
+          </Popover.Content>
+        </Popover.Root>
+        <Radio.Group defaultValue="item2">
           <Flex $align="center" $gap={0.5}>
             <Radio.Item value="item1" id="item1" />
             <Label htmlFor="item1">Item 1</Label>

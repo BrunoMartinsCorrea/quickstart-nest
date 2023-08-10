@@ -1,4 +1,4 @@
-import { Theme } from "./themes/theme";
+import { Theme } from './themes/theme';
 
 interface CommonLayoutProps {
   $w?: string | number;
@@ -39,18 +39,17 @@ function addLayoutProps(props: CommonLayoutProps & { theme: Theme }) {
     ...(props.$ml && { marginLeft: props.theme.spacing[props.$ml] }),
     ...(props.$mr && { marginRight: props.theme.spacing[props.$mr] }),
     ...(props.$mb && { marginBottom: props.theme.spacing[props.$mb] }),
-  }
+  };
 }
 
-function addLetterProps(props: CommonLetterProps & { theme: Theme}) {
+function addLetterProps(props: CommonLetterProps & { theme: Theme }) {
   return {
     ...(props.$color && { color: props.$color }),
     ...(props.$fs && { fontSize: props.$fs }),
     ...(props.$fw && { fontWeight: props.$fw }),
     ...(props.$textTransform && { textTransformation: props.$textTransform }),
-  }
+  };
 }
 
-
-export type { CommonLayoutProps, CommonLetterProps }
-export { addLayoutProps, addLetterProps }
+export type { CommonLayoutProps, CommonLetterProps };
+export { addLayoutProps, addLetterProps };
