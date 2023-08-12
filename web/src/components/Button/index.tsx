@@ -8,8 +8,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   asChild?: boolean;
 }
 
-export const Button: ForwardRefExoticComponent<PropsWithoutRef<ButtonProps> & RefAttributes<HTMLButtonElement>> = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant = 'primary',  ...props }, ref) => {
+export const Button: ForwardRefExoticComponent<PropsWithoutRef<ButtonProps> & RefAttributes<HTMLButtonElement>> =
+  React.forwardRef<HTMLButtonElement, ButtonProps>(({ variant = 'primary', ...props }, ref) => {
     return <Container $variant={variant} ref={ref} {...props} />;
-  },
-)
+  });

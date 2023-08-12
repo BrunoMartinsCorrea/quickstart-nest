@@ -13,7 +13,7 @@ export const Container = styled.button<ContainerProps>`
   border-radius: ${(props) => props.theme.borderRadiusMD};
   cursor: pointer;
   font-weight: bold;
-  line-height: 1.4;
+  line-height: 1.72;
   transition: background-color ${(props) => props.theme.transitionSpeed};
   display: flex;
   align-items: center;
@@ -41,7 +41,7 @@ export const Container = styled.button<ContainerProps>`
       background-color: ${props.theme.primary};
       color: ${props.theme.onPrimary};
 
-      &:hover {
+      &:not(:disabled):hover {
         background-color: ${lighten(0.05, props.theme.primary)};
       }
     `}
@@ -52,7 +52,7 @@ export const Container = styled.button<ContainerProps>`
       background-color: ${props.theme.destructive};
       color: ${props.theme.onDestructive};
 
-      &:hover {
+      &:not(:disabled):hover {
         background-color: ${lighten(0.05, props.theme.destructive)};
       }
     `}
@@ -64,7 +64,7 @@ export const Container = styled.button<ContainerProps>`
       color: ${props.theme.primary};
       border: 1px solid ${lighten(0.8, props.theme.primary)};
 
-      &:hover {
+      &:not(:disabled):hover {
         background-color: ${lighten(0.875, props.theme.primary)};
       }
     `}
@@ -75,7 +75,7 @@ export const Container = styled.button<ContainerProps>`
       background-color: transparent;
       color: ${props.theme.primary};
 
-      &:hover {
+      &:not(:disabled):hover {
         text-decoration: underline;
       }
     `}
@@ -87,7 +87,7 @@ export const Container = styled.button<ContainerProps>`
       color: ${props.theme.text};
       border: 1px solid ${lighten(0.8, props.theme.mutedBackground)};
 
-      &:hover {
+      &:not(:disabled):hover {
         background-color: ${lighten(0.1, props.theme.mutedBackground)};
       }
     `}
@@ -100,7 +100,7 @@ export const Container = styled.button<ContainerProps>`
       color: ${props.theme.text};
       border: 1px solid ${(props) => props.theme.background};
 
-      &:hover {
+      &:not(:disabled):hover {
         background-color: ${props.theme.mutedBackground};
       }
     `}
