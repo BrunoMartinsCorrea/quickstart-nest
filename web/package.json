@@ -9,7 +9,7 @@
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
     "lint": "eslint src --ext .ts,.tsx --fix",
     "preview": "vite preview",
-    "storybook": "storybook dev -p 6006",
+    "storybook": "storybook dev -p 8082",
     "build-storybook": "storybook build"
   },
   "dependencies": {
