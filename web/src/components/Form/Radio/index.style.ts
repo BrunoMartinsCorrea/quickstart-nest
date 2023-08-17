@@ -11,9 +11,9 @@ export const StyledRadioItem = styled(RadioGroupPrimitive.Item)`
   height: 1rem;
   width: 1rem;
   border-radius: 9999px;
-  border: 1px solid ${(props) => props.theme.primary};
-  background-color: ${(props) => props.theme.background};
-  color: ${(props) => props.theme.primary};
+  border: 1px solid ${(props) => props.theme.accent};
+  background-color: ${(props) => props.theme.surface};
+  color: ${(props) => props.theme.accent};
   cursor: pointer;
 
   &:disabled {
@@ -30,7 +30,7 @@ export const StyledRadioIndicator = styled(RadioGroupPrimitive.Indicator)`
   & > div {
     height: 0.625rem;
     width: 0.625rem;
-    background-color: ${(props) => props.theme.primary};
+    background-color: ${(props) => props.theme.accent};
     border-radius: 9999px;
   }
 `;

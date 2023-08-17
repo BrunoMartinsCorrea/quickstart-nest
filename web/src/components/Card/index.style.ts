@@ -1,31 +1,27 @@
-import { styled, css } from 'styled-components';
+import { styled } from 'styled-components';
 
-export type ContainerProps = {
+export type CardContainerProps = {
   $maxW?: string;
 };
 
-export const Container = styled.div<ContainerProps>`
-  border-radius: ${(props) => props.theme.borderRadiusLG};
-  border: 1px solid ${(props) => props.theme.border};
-  filter: ${(props) => props.theme.dropShadowSM};
-  background-color: ${(props) => props.theme.background};
-  width: 100%;
+export const CardContainer = styled.div<CardContainerProps>((props) => ({
+  borderRadius: props.theme.borderRadiusLG,
+  border: `1px solid ${props.theme.outline}`,
+  filter: props.theme.dropShadowSM,
+  backgroundColor: props.theme.card,
+  color: props.theme.onCard,
+  width: '100%',
+  maxWidth: props.$maxW,
+}));
 
-  ${(props) =>
-    props.$maxW &&
-    css`
-      max-width: ${props.$maxW};
-    `}
-`;
-
-export const ContainerHeader = styled.header`
+export const CardContainerHeader = styled.header`
   display: flex;
   flex-direction: column;
   gap: 0.375rem;
   padding: 1.5rem;
 `;
 
-export const ContainerFooter = styled.div`
+export const CardContainerFooter = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -33,7 +29,7 @@ export const ContainerFooter = styled.div`
   padding-top: 0;
 `;
 
-export const ContainerContent = styled.footer`
+export const CardContainerContent = styled.footer`
   padding: 1.5rem;
   padding-top: 0;
 `;

@@ -9,7 +9,7 @@ const spin = keyframes`
   }
 `;
 
-export const Container = styled.div`
+export const SpinnerContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;

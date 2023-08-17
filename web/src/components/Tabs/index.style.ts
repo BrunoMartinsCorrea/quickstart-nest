@@ -13,7 +13,7 @@ export const StyledPrimitiveList = styled(TabsPrimitive.List)`
   justify-content: center;
   padding: 0.25rem;
   border-radius: ${(props) => props.theme.borderRadiusMD};
-  background-color: ${(props) => props.theme.mutedBackground};
+  background-color: ${(props) => props.theme.surfaceDim};
 `;
 
 export const StyledPrimitiveTrigger = styled(TabsPrimitive.Trigger)`
@@ -36,7 +36,7 @@ export const StyledPrimitiveTrigger = styled(TabsPrimitive.Trigger)`
   }
 
   &[data-state='active'] {
-    background-color: ${(props) => props.theme.background};
+    background-color: ${(props) => props.theme.surface};
     filter: ${(props) => props.theme.dropShadowSM};
   }
 `;

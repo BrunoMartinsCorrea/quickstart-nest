@@ -1,20 +1,24 @@
 export interface Theme {
-  primary: string;
-  onPrimary: string;
+  accent: string;
+  onAccent: string;
 
-  background: string;
-  mutedBackground: string;
+  surface: string;
+  surfaceDim: string;
+  surfaceFocus: string;
+
+  card: string;
+  onCard: string;
 
   destructive: string;
   onDestructive: string;
 
-  border: string;
+  outline: string;
   borderRadius: string;
   borderRadiusMD: string;
   borderRadiusLG: string;
 
   text: string;
-  mutedText: string;
+  caption: string;
 
   transitionSpeed: string;
 

@@ -17,7 +17,7 @@ export const StyledSubTrigger = styled(DropdownMenuPrimitive.SubTrigger)<StyledS
 
   &:hover {
     outline: none;
-    background-color: ${(props) => props.theme.mutedBackground};
+    background-color: ${(props) => props.theme.surfaceDim};
   }
 
   ${(props) =>
@@ -37,8 +37,8 @@ export const StyledSubContent = styled(DropdownMenuPrimitive.SubContent)`
   padding: 0.25rem;
   overflow: hidden;
   border-radius: ${(props) => props.theme.borderRadiusMD};
-  border: 1px solid ${(props) => props.theme.border};
-  background-color: ${(props) => props.theme.background};
+  border: 1px solid ${(props) => props.theme.outline};
+  background-color: ${(props) => props.theme.surface};
   filter: ${(props) => props.theme.dropShadowLG};
 
   &[data-state='open'] {
@@ -66,8 +66,8 @@ export const StyledContent = styled(DropdownMenuPrimitive.Content)<StyledContent
   padding: 0.25rem;
   overflow: hidden;
   border-radius: ${(props) => props.theme.borderRadiusMD};
-  border: 1px solid ${(props) => props.theme.border};
-  background-color: ${(props) => props.theme.background};
+  border: 1px solid ${(props) => props.theme.outline};
+  background-color: ${(props) => props.theme.surface};
   filter: ${(props) => props.theme.dropShadowMD};
   width: ${(props) => (typeof props.$w === 'string' ? props.$w : `${props.$w}px`)};
 
@@ -104,11 +104,11 @@ export const StyledItem = styled(DropdownMenuPrimitive.Item)<StyledItemProps>`
 
   &:hover {
     outline: none;
-    background-color: ${(props) => props.theme.mutedBackground};
+    background-color: ${(props) => props.theme.surfaceDim};
   }
 
   &:focus {
-    background-color: ${(props) => props.theme.mutedBackground};
+    background-color: ${(props) => props.theme.surfaceDim};
   }
 
   &[data-disabled] {
@@ -137,7 +137,7 @@ export const StyledCheckboxItem = styled(DropdownMenuPrimitive.CheckboxItem)`
   transition: all ${(props) => props.theme.transitionSpeed};
 
   &:focus {
-    background-color: ${(props) => props.theme.mutedBackground};
+    background-color: ${(props) => props.theme.surfaceDim};
   }
 
   &:hover {
@@ -181,7 +181,7 @@ export const StyledRadioItem = styled(DropdownMenuPrimitive.RadioItem)`
   transition: all ${(props) => props.theme.transitionSpeed};
 
   &:focus {
-    background-color: ${(props) => props.theme.mutedBackground};
+    background-color: ${(props) => props.theme.surfaceDim};
   }
 
   &:hover {
@@ -213,7 +213,7 @@ export const StyledLabel = styled(DropdownMenuPrimitive.Label)`
 export const StyledSeparator = styled(DropdownMenuPrimitive.Separator)`
   margin: 0.25rem -0.25rem;
   height: 1px;
-  background-color: ${(props) => props.theme.mutedBackground};
+  background-color: ${(props) => props.theme.surfaceDim};
 `;
 
 export const StyledShortcut = styled.span`

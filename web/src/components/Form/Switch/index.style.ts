@@ -15,11 +15,11 @@ export const StyledRoot = styled(SwitchPrimitives.Root)`
   transition-duration: ${(props) => props.theme.transitionSpeed};
 
   &[data-state='checked'] {
-    background-color: ${(props) => props.theme.primary};
+    background-color: ${(props) => props.theme.accent};
   }
 
   &[data-state='unchecked'] {
-    background-color: ${(props) => props.theme.mutedBackground};
+    background-color: ${(props) => props.theme.surfaceDim};
   }
 
   &:disabled {
@@ -40,7 +40,7 @@ export const StyledThumb = styled(SwitchPrimitives.Thumb)`
   height: 1rem;
   width: 1rem;
   border-radius: 9999px;
-  background-color: ${(props) => props.theme.background};
+  background-color: ${(props) => props.theme.surface};
   filter: ${(props) => props.theme.dropShadowLG};
   transition-property: transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);

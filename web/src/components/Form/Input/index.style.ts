@@ -1,15 +1,15 @@
 import { styled } from 'styled-components';
 
-export const Container = styled.input`
+export const StyledInput = styled.input`
   height: 2.5rem;
   border-radius: ${(props) => props.theme.borderRadiusMD};
-  border: 1px solid ${(props) => props.theme.border};
-  background-color: ${(props) => props.theme.background};
+  border: 1px solid ${(props) => props.theme.outline};
+  background-color: ${(props) => props.theme.surface};
   padding: 0.5rem 0.75rem;
   width: 100%;
 
   &::placeholder {
-    color: ${(props) => props.theme.mutedText};
+    color: ${(props) => props.theme.caption};
   }
 
   &:disabled {

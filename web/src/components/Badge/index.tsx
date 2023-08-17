@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Container } from './index.style';
+import { BadgeContainer } from './index.style';
 
 interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: 'primary' | 'secondary' | 'outline';
@@ -7,8 +7,8 @@ interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export function Badge({ variant = 'primary', children, ...props }: BadgeProps) {
   return (
-    <Container $variant={variant} {...props}>
+    <BadgeContainer $variant={variant} {...props}>
       {children}
-    </Container>
+    </BadgeContainer>
   );
 }

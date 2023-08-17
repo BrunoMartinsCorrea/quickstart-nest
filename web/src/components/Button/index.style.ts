@@ -1,14 +1,10 @@
-import { styled, css } from 'styled-components';
+import { styled } from 'styled-components';
 import { darken, lighten } from 'polished';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'outline' | 'destructive' | 'link';
 
-interface ContainerProps {
-  $variant: ButtonVariant;
-}
-
-export const Container = styled.button<ContainerProps>`
-  border: 0;
+const ButtonContainer = styled.button`
+  border: 1px solid transparent;
   padding: 0.5rem 1rem;
   border-radius: ${(props) => props.theme.borderRadiusMD};
   cursor: pointer;
@@ -26,7 +22,7 @@ export const Container = styled.button<ContainerProps>`
   }
 
   &:focus-visible {
-    outline: 1px solid ${(props) => darken(0.3, props.theme.border)};
+    outline: 1px solid ${(props) => darken(0.3, props.theme.outline)};
     outline-offset: 0.15rem;
   }
 
@@ -34,74 +30,54 @@ export const Container = styled.button<ContainerProps>`
     cursor: not-allowed;
     opacity: 0.5;
   }
-
-  ${({ $variant, ...props }) =>
-    $variant === 'primary' &&
-    css`
-      background-color: ${props.theme.primary};
-      color: ${props.theme.onPrimary};
-
-      &:not(:disabled):hover {
-        background-color: ${lighten(0.05, props.theme.primary)};
-      }
-    `}
-
-  ${({ $variant, ...props }) =>
-    $variant === 'destructive' &&
-    css`
-      background-color: ${props.theme.destructive};
-      color: ${props.theme.onDestructive};
-
-      &:not(:disabled):hover {
-        background-color: ${lighten(0.05, props.theme.destructive)};
-      }
-    `}
-
-  ${({ $variant, ...props }) =>
-    $variant === 'outline' &&
-    css`
-      background-color: transparent;
-      color: ${props.theme.primary};
-      border: 1px solid ${lighten(0.8, props.theme.primary)};
-
-      &:not(:disabled):hover {
-        background-color: ${lighten(0.875, props.theme.primary)};
-      }
-    `}
-
-  ${({ $variant, ...props }) =>
-    $variant === 'link' &&
-    css`
-      background-color: transparent;
-      color: ${props.theme.primary};
-
-      &:not(:disabled):hover {
-        text-decoration: underline;
-      }
-    `}
-
-  ${({ $variant, ...props }) =>
-    $variant === 'secondary' &&
-    css`
-      background-color: ${props.theme.mutedBackground};
-      color: ${props.theme.text};
-      border: 1px solid ${lighten(0.8, props.theme.mutedBackground)};
-
-      &:not(:disabled):hover {
-        background-color: ${lighten(0.1, props.theme.mutedBackground)};
-      }
-    `}
-
-
-  ${({ $variant, ...props }) =>
-    $variant === 'ghost' &&
-    css`
-      background-color: ${(props) => props.theme.background};
-      color: ${props.theme.text};
-      border: 1px solid ${(props) => props.theme.background};
-
-      &:not(:disabled):hover {
-        background-color: ${props.theme.mutedBackground};
-      }
-    `}
 `;
+
+export const ButtonPrimary = styled(ButtonContainer)((props) => ({
+  backgroundColor: props.theme.accent,
+  color: props.theme.onAccent,
+  '&:not(:disabled):hover': {
+    backgroundColor: lighten(0.05, props.theme.accent),
+  },
+}));
+
+export const ButtonSecondary = styled(ButtonContainer)((props) => ({
+  backgroundColor: props.theme.surfaceDim,
+  color: props.theme.text,
+  '&:not(:disabled):hover': {
+    backgroundColor: lighten(0.015, props.theme.surfaceDim),
+  },
+}));
+
+export const ButtonOutline = styled(ButtonContainer)((props) => ({
+  backgroundColor: 'transparent',
+  color: props.theme.accent,
+  borderColor: lighten(0.8, props.theme.accent),
+  '&:not(:disabled):hover': {
+    backgroundColor: lighten(0.875, props.theme.accent),
+  },
+}));
+
+export const ButtonGhost = styled(ButtonContainer)((props) => ({
+  backgroundColor: 'transparent',
+  borderColor: 'transparent',
+  color: props.theme.text,
+  '&:not(:disabled):hover': {
+    backgroundColor: props.theme.surfaceDim,
+  },
+}));
+
+export const ButtonDestructive = styled(ButtonContainer)((props) => ({
+  backgroundColor: props.theme.destructive,
+  color: props.theme.onDestructive,
+  '&:not(:disabled):hover': {
+    backgroundColor: lighten(0.05, props.theme.destructive),
+  },
+}));
+
+export const ButtonLink = styled(ButtonContainer)((props) => ({
+  backgroundColor: 'transparent',
+  color: props.theme.accent,
+  '&:not(:disabled):hover': {
+    textDecoration: 'underline',
+  },
+}));

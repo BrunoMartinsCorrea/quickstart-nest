@@ -1,26 +1,28 @@
 import * as React from 'react';
-import { Container, ContainerContent, ContainerFooter, ContainerHeader, ContainerProps } from './index.style';
+import {
+  CardContainer,
+  CardContainerContent,
+  CardContainerFooter,
+  CardContainerHeader,
+  CardContainerProps,
+} from './index.style';
 
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-function Root({ children, ...props }: ContainerProps & React.HTMLAttributes<HTMLDivElement>) {
-  return <Container {...props}>{children}</Container>;
+function Root({ children, ...props }: CardContainerProps & React.HTMLAttributes<HTMLDivElement>) {
+  return <CardContainer {...props}>{children}</CardContainer>;
 }
 
-function Header({children}) {
-  return (
-    <ContainerHeader>
-      {children}
-    </ContainerHeader>
-  );
+function Header({ children }) {
+  return <CardContainerHeader>{children}</CardContainerHeader>;
 }
 
 function Content({ children }: CardProps) {
-  return <ContainerContent>{children}</ContainerContent>;
+  return <CardContainerContent>{children}</CardContainerContent>;
 }
 
 function Footer({ children }) {
-  return <ContainerFooter>{children}</ContainerFooter>;
+  return <CardContainerFooter>{children}</CardContainerFooter>;
 }
 
 export { Root, Header, Content, Footer };

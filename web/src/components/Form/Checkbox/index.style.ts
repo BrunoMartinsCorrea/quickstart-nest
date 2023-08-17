@@ -6,7 +6,7 @@ export const StyledRoot = styled(CheckboxPrimitive.Root)`
   height: 1rem;
   width: 1rem;
   flex-shrink: 0;
-  border: 1px solid ${(props) => props.theme.border};
+  border: 1px solid ${(props) => props.theme.outline};
 
   &:disabled {
     cursor: not-allowed;
@@ -19,8 +19,8 @@ export const StyledRoot = styled(CheckboxPrimitive.Root)`
   }
 
   &[data-state='checked'] {
-    background-color: ${(props) => props.theme.primary};
-    color: ${(props) => props.theme.onPrimary};
+    background-color: ${(props) => props.theme.accent};
+    color: ${(props) => props.theme.onAccent};
   }
 `;
 

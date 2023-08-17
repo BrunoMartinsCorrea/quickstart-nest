@@ -1,19 +1,23 @@
 import { Theme } from './theme';
 
 export const defaultTheme: Theme = {
-  primary: '#18181B',
-  onPrimary: '#FFFFFF',
+  accent: '#18181B',
+  onAccent: '#FFFFFF',
 
-  background: '#FFFFFF',
-  mutedBackground: '#F4F4F5',
+  surface: '#FFFFFF',
+  surfaceDim: '#F4F4F5',
+  surfaceFocus: '#F9F9FA',
+
+  card: '#FFFFFF',
+  onCard: 'purple',
 
   destructive: '#DC2626',
   onDestructive: '#FFFFFF',
 
-  border: '#E4E4E7',
+  outline: '#E4E4E7',
 
   text: '#09090B',
-  mutedText: '#71717A',
+  caption: '#71717A',
 
   transitionSpeed: '150ms',
 

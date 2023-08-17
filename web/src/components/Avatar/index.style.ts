@@ -24,5 +24,5 @@ export const StyledFallback = styled(AvatarPrimitive.AvatarFallback)`
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
-  background-color: ${(props) => props.theme.mutedBackground};
+  background-color: ${(props) => props.theme.surfaceDim};
 `;

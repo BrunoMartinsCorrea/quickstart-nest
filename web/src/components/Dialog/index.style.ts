@@ -11,7 +11,7 @@ export const StyledOverlay = styled(DialogPrimitive.Overlay)`
   position: fixed;
   inset: 0px;
   z-index: 50px;
-  background-color: ${(props) => props.theme.background};
+  background-color: ${(props) => props.theme.surface};
   backdrop-filter: blur(4px);
 
   &[data-state='open'] {
@@ -33,16 +33,18 @@ export const StyledContent = styled(DialogPrimitive.Content)<StyledContentProps>
   max-width: 32rem;
   transform: translateX(-50%) translateY(-50%);
   gap: 1rem;
-  border: 1px solid ${(props) => props.theme.border};
+  border: 1px solid ${(props) => props.theme.outline};
   border-radius: ${(props) => props.theme.borderRadiusMD};
-  background-color: ${(props) => props.theme.background};
+  background-color: ${(props) => props.theme.surface};
   padding: 1.5rem;
   filter: ${(props) => props.theme.dropShadowLG};
   transition-duration: 200ms;
 
-  ${props => props.$maxW && css`
-    max-width: ${props.$maxW}
-  `};
+  ${(props) =>
+    props.$maxW &&
+    css`
+      max-width: ${props.$maxW};
+    `};
 
   &[data-state='open'] {
     animation: ${fadeInAnimation} ${(props) => props.theme.transitionSpeed} ease-in-out forwards;
@@ -70,7 +72,7 @@ export const StyledClose = styled(DialogPrimitive.Close)`
   }
 
   &[data-state='open'] {
-    color: ${(props) => props.theme.mutedText};
+    color: ${(props) => props.theme.caption};
   }
 
   & > span {
@@ -115,7 +117,7 @@ export const StyledTitle = styled(DialogPrimitive.Title)`
 `;
 
 export const StyledDescription = styled(DialogPrimitive.Description)`
-  color: ${(props) => props.theme.mutedText};
+  color: ${(props) => props.theme.caption};
   margin-top: 0.375rem;
   line-height: 1.25rem;
 `;

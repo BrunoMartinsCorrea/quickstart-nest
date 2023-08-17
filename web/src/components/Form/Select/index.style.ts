@@ -9,12 +9,12 @@ export const StyledTrigger = styled(SelectPrimitive.Trigger)`
   align-items: center;
   justify-content: space-between;
   border-radius: ${(props) => props.theme.borderRadiusMD};
-  border: 1px solid ${(props) => props.theme.border};
-  background-color: ${(props) => props.theme.background};
+  border: 1px solid ${(props) => props.theme.outline};
+  background-color: ${(props) => props.theme.surface};
   padding: 0.5rem 0.75rem;
 
   &:placeholder {
-    color: ${(props) => props.theme.mutedText};
+    color: ${(props) => props.theme.caption};
   }
 
   &:disabled {
@@ -37,8 +37,8 @@ export const StyledContent = styled(SelectPrimitive.Content)`
   width: 100%;
   overflow: hidden;
   border-radius: ${(props) => props.theme.borderRadiusMD};
-  border: 1px solid ${(props) => props.theme.border};
-  background-color: ${(props) => props.theme.background};
+  border: 1px solid ${(props) => props.theme.outline};
+  background-color: ${(props) => props.theme.surface};
   filter: ${(props) => props.theme.dropShadowMD};
   transition: all ${(props) => props.theme.transitionSpeed};
 
@@ -102,7 +102,7 @@ export const StyledItem = styled(SelectPrimitive.Item)`
   color: ${(props) => props.theme.text};
 
   &:focus {
-    background-color: ${(props) => props.theme.mutedBackground};
+    background-color: ${(props) => props.theme.surfaceDim};
     outline: none;
   }
 
@@ -125,5 +125,5 @@ export const StyledItem = styled(SelectPrimitive.Item)`
 export const StyledSeparator = styled(SelectPrimitive.Separator)`
   margin: 0.25rem;
   height: 1px;
-  background-color: ${(props) => props.theme.mutedBackground};
+  background-color: ${(props) => props.theme.surfaceDim};
 `;

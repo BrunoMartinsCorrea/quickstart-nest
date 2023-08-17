@@ -11,12 +11,12 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   :focus {
-    outline: 1px solid ${(props) => darken(0.3, props.theme.border)};
+    outline: 1px solid ${(props) => darken(0.3, props.theme.outline)};
     outline-offset: 0.15rem;
   }
 
   body {
-    background: ${(props) => props.theme.background};
+    background: ${(props) => props.theme.surface};
   }
 
   body, input, textarea, button {

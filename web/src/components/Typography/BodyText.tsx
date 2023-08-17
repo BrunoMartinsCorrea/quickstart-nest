@@ -4,8 +4,8 @@ interface BodyTextProps {
   textAlign?: 'left' | 'right' | 'center';
 }
 
-export const BodyText = styled.p<BodyTextProps>`
-  line-height: 1.25rem;
-  text-align: ${(props) => props.textAlign ?? 'left'};
-  color: ${(props) => props.theme.mutedText};
-`;
+export const BodyText = styled.p<BodyTextProps>((props) => ({
+  lineHeight: '1.25rem',
+  textAlign: props.textAlign ?? 'left',
+  color: props.theme.caption,
+}));
