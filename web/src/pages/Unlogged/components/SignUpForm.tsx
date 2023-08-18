@@ -5,17 +5,18 @@ import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
 import { Card, Flex, Text, TextField, IconButton, Button } from '@radix-ui/themes';
 import { useId, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import * as z from 'zod';
 
 const signUpFormSchema = z
   .object({
-    email: z.string().nonempty('Email is required').email('Email not valid'),
-    fullName: z.string().nonempty('Name is required'),
-    password: z.string().min(6, 'Password must have at least 6 characters'),
+    email: z.string().nonempty('fields.email.required').email('fields.email.invalid'),
+    fullName: z.string().nonempty('fields.fullName.required'),
+    password: z.string().min(6, 'fields.password.min'),
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: 'Passwords does not match',
+    message: 'fields.confirmPassword.notMatch',
     path: ['confirmPassword'],
   });
 
@@ -23,6 +24,7 @@ type SignUpFormData = z.infer<typeof signUpFormSchema>;
 
 export function SignUpForm() {
   const [visiblePassword, setVisiblePassword] = useState(false);
+  const { t } = useTranslation();
   const signUp = useStore((state) => state.signUp);
   const passwordId = useId();
   const confirmPasswordId = useId();
@@ -49,24 +51,28 @@ export function SignUpForm() {
     <Card>
       <Flex direction="column" gap="4" justify="center" p="1" asChild>
         <form onSubmit={handleSubmit(handleSignUp)}>
-          <Text size="2">Welcome. Sign up and discover a great amount of new features to scale your business</Text>
+          <Text size="2">{t('unlogged.signUp.welcome')}</Text>
           <TextFieldWithLabel
-            label="Email"
-            placeholder="Email"
-            errorText={errors.email?.message}
+            label={t('fields.email.label')}
+            placeholder={t('fields.email.label')}
+            errorText={t(errors.email?.message ?? '')}
             {...register('email')}
           />
           <TextFieldWithLabel
-            label="Full name"
-            placeholder="Full name"
-            errorText={errors.fullName?.message}
+            label={t('fields.fullName.label')}
+            placeholder={t('fields.fullName.label')}
+            errorText={t(errors.fullName?.message ?? '')}
             {...register('fullName')}
           />
-          <TextFieldWithLabel label="Password" htmlFor={passwordId} errorText={errors.password?.message}>
+          <TextFieldWithLabel
+            label={t('fields.password.label')}
+            htmlFor={passwordId}
+            errorText={t(errors.password?.message ?? '', { length: 6 })}
+          >
             <TextField.Root>
               <TextField.Input
                 id={passwordId}
-                placeholder="Password"
+                placeholder={t('fields.password.label')}
                 type={visiblePassword ? 'text' : 'password'}
                 {...register('password')}
               />
@@ -77,11 +83,15 @@ export function SignUpForm() {
               </TextField.Slot>
             </TextField.Root>
           </TextFieldWithLabel>
-          <TextFieldWithLabel label="Password" htmlFor={confirmPasswordId} errorText={errors.confirmPassword?.message}>
+          <TextFieldWithLabel
+            label={t('fields.confirmPassword.label')}
+            htmlFor={confirmPasswordId}
+            errorText={t(errors.confirmPassword?.message ?? '')}
+          >
             <TextField.Root>
               <TextField.Input
                 id={confirmPasswordId}
-                placeholder="Confirm password"
+                placeholder={t('fields.confirmPassword.label')}
                 type={visiblePassword ? 'text' : 'password'}
                 {...register('confirmPassword')}
               />
@@ -94,7 +104,7 @@ export function SignUpForm() {
           </TextFieldWithLabel>
           <Flex>
             <Button type="submit" disabled={isLoading}>
-              Sign Up
+              {t('unlogged.signUp.signUp')}
             </Button>
           </Flex>
         </form>
