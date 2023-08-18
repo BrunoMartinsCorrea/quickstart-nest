@@ -1,19 +1,18 @@
 import { AuthenticationService } from '@/authentication/domain/service/authentication.service';
 import { CanActivate, ExecutionContext, Injectable, Logger } from '@nestjs/common';
+import { Reflector } from '@nestjs/core';
 import { Request } from 'express';
 
 @Injectable()
 export class AuthenticationGuard implements CanActivate {
-  private readonly allowList: string[] = ['/api/authentication/token', '/api/authentication/refresh'];
 
-  constructor(private readonly authenticationService: AuthenticationService) {}
+  constructor(private readonly authenticationService: AuthenticationService, private readonly reflector: Reflector) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const request = context.switchToHttp().getRequest<Request>();
-    const url = request.url;
-    const isAllowed = this.allowList.includes(url);
+    const isPublic = this.reflector.get<boolean>('isPublic', context.getHandler())
 
-    if (!isAllowed) {
+    if (!isPublic) {
+      const request = context.switchToHttp().getRequest<Request>();
       const authorizationHeader = request.headers.authorization?.replace('Bearer ', '');
       const jwt = await this.authenticationService.verifyToken(authorizationHeader);
       Logger.debug(`Request authenticated for user ${jwt.payload.sub}`);

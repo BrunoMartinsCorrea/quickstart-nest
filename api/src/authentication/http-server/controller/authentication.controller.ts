@@ -5,6 +5,7 @@ import { CredentialsDto } from '../dto/credentials.dto';
 import { TokenDto } from '@/authentication/http-server/dto/token.dto';
 import { RefreshTokenDto } from '@/authentication/http-server/dto/refresh-token.dto';
 import { ErrorResponseDto } from '@/common/dto/error-response.dto';
+import { Public } from '@/common/decorators/public.decorator';
 
 @ApiTags('authentication')
 @Controller('authentication')
@@ -12,6 +13,7 @@ export class AuthenticationController {
   constructor(private readonly authenticationService: AuthenticationService) {}
 
   @Post('token')
+  @Public()
   @HttpCode(HttpStatus.OK)
   @ApiUnauthorizedResponse({ type: ErrorResponseDto })
   async generateToken(@Body() generateTokenDto: CredentialsDto) {
@@ -20,6 +22,7 @@ export class AuthenticationController {
   }
 
   @Post('refresh')
+  @Public()
   @HttpCode(HttpStatus.OK)
   async refreshToken(@Body() refreshTokenDto: RefreshTokenDto) {
     const token = await this.authenticationService.refreshToken(refreshTokenDto);
