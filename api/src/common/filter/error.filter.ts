@@ -1,6 +1,5 @@
 import { ArgumentsHost, Catch, ExceptionFilter, ForbiddenException, HttpStatus, Logger } from '@nestjs/common';
 import { Response } from 'express';
-import empty from 'is-empty';
 import { AuthorizationError } from '../error/authorization-error';
 import { InvalidCredentialsError } from '@/user/domain/error/invalid-credentials-error';
 import { EntityNotFoundError } from '../error/entity-not-found-error';
@@ -53,7 +52,7 @@ export class ErrorFilter implements ExceptionFilter {
       statusCode,
       timestamp: new Date().toISOString(),
       errorCode,
-      message: empty(exception.message.trim()) ? exception.message : 'Something went wrong',
+      message: exception.message.trim() ? exception.message : 'Something went wrong',
     } as ErrorResponseDto;
   }
 }

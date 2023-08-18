@@ -1,7 +1,6 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Logger } from '@nestjs/common';
-import empty from 'is-empty';
 import { UserEntity } from '../entities/user.entity';
 import { User } from '@/user/domain/model/user';
 import { EntityConflictError } from '@/common/error/entity-conflict-error';
@@ -26,9 +25,9 @@ export class UserRepository {
     }
   }
 
-  async findOneByUsername(username: string) {
+  async findOneByUsername(username: string): Promise<User | null> {
     const user = await this.repository.findOneBy({ username });
-    return { ...user } as User;
+    return user;
   }
 
   async update(user: User) {
@@ -43,6 +42,6 @@ export class UserRepository {
   async softDelete(id: string) {
     const updateResult = await this.repository.softDelete({ id, deletedAt: null });
 
-    return empty(updateResult?.affected);
+    return !!updateResult.affected;
   }
 }
