@@ -1,7 +1,9 @@
 import { darken } from 'polished';
 import { createGlobalStyle, keyframes } from 'styled-components';
 
-export const GlobalStyle = createGlobalStyle`
+interface GlobalStyleProps {}
+
+export const GlobalStyle = createGlobalStyle<GlobalStyleProps>`
   * {
     margin: 0;
     padding: 0;
@@ -16,7 +18,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background: ${(props) => props.theme.surface};
+    /* background: ${(props) => props.theme.surface}; */
   }
 
   body, input, textarea, button {

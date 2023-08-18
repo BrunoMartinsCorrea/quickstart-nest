@@ -1,19 +1,15 @@
 {
   "extends": "config/tsconfig.web.json",
   "compilerOptions": {
+    "strictNullChecks": true,
+    "module": "ESNext",
     "outDir": "./dist",
+    "moduleResolution": "bundler",
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"]
     }
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "public"
-  ]
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", "dist", "public"]
 }

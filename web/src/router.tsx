@@ -1,9 +1,21 @@
 import { createBrowserRouter } from 'react-router-dom';
-import SignInPage from '@/pages/SignInPage';
+import { Unlogged } from '@/pages/Unlogged';
+import { AuthenticationWrapper } from './pages/AuthenticationWrapper';
+import { Home } from './pages/Home';
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <SignInPage />,
+    element: <AuthenticationWrapper />,
+    children: [
+      {
+        path: '/',
+        element: <Unlogged />,
+      },
+      {
+        path: '/home',
+        element: <Home />,
+      },
+    ],
   },
 ]);

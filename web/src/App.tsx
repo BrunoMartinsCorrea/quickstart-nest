@@ -1,18 +1,12 @@
 import { RouterProvider } from 'react-router-dom';
-import { StyleSheetManager, ThemeProvider } from 'styled-components';
-import { defaultTheme } from '@/styles/themes/default';
-import { GlobalStyle } from '@/styles/global';
 import { router } from '@/router';
+import { Theme, ThemePanel } from '@radix-ui/themes';
 
-function App() {
+export function App() {
   return (
-    <StyleSheetManager>
-      <ThemeProvider theme={defaultTheme}>
-        <RouterProvider router={router} />
-        <GlobalStyle />
-      </ThemeProvider>
-    </StyleSheetManager>
+    <Theme appearance="dark" accentColor="bronze" grayColor="mauve" panelBackground="solid">
+      {import.meta.env.DEV && <ThemePanel />}
+      <RouterProvider router={router} />
+    </Theme>
   );
 }
-
-export default App;
