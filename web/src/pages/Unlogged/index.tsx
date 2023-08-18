@@ -27,7 +27,9 @@ export function Unlogged() {
         <DropdownMenu.Content>
           <DropdownMenu.RadioGroup value={i18n.language} onValueChange={handleLangChange}>
             {languages.map((lang) => (
-              <DropdownMenu.RadioItem value={lang.value}>{lang.language}</DropdownMenu.RadioItem>
+              <DropdownMenu.RadioItem key={lang.value} value={lang.value}>
+                {lang.language}
+              </DropdownMenu.RadioItem>
             ))}
           </DropdownMenu.RadioGroup>
         </DropdownMenu.Content>
