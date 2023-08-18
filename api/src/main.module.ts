@@ -4,20 +4,21 @@ import { join } from 'path';
 import { LoggerMiddleware } from '@/common/middleware/logger.middleware';
 import { AuthenticationModule } from '@/authentication/authentication.module';
 import { UserModule } from '@/user/user.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { CommonModule } from '@/common/common.module';
+import ormConnection from './config/orm.connection';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [ormConnection],
+    }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', '..', 'web', 'dist'),
     }),
-    TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: 'app',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true,
-    }),
+    TypeOrmModule.forRoot(ormConnection() as TypeOrmModuleOptions),
     CommonModule,
     AuthenticationModule,
     UserModule,

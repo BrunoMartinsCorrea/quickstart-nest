@@ -1,7 +1,7 @@
 {
   "extends": "config/tsconfig.base.json",
   "compilerOptions": {
-//    "target": "es2017",
+    //    "target": "es2017",
     "baseUrl": "./",
     "outDir": "./dist",
     "declaration": false,
@@ -9,8 +9,6 @@
       "@/*": ["src/*"]
     }
   },
-  "include": [
-    "**/*.ts"
-  ],
-  "exclude": [ "node_modules", "test"]
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "test"]
 }

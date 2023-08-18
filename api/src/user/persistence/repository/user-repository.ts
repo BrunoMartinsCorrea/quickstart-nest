@@ -1,7 +1,7 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Logger } from '@nestjs/common';
-import { UserEntity } from '../entities/user.entity';
+import { UserEntity } from '../entity/user.entity';
 import { User } from '@/user/domain/model/user';
 import { EntityConflictError } from '@/common/error/entity-conflict-error';
 
@@ -26,8 +26,7 @@ export class UserRepository {
   }
 
   async findOneByUsername(username: string): Promise<User | null> {
-    const user = await this.repository.findOneBy({ username });
-    return user;
+    return this.repository.findOneBy({ username });
   }
 
   async update(user: User) {

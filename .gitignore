@@ -3,7 +3,8 @@
 dist/
 storybook-static/
 node_modules/
-app
+main/
+
 
 # Logs
 logs
