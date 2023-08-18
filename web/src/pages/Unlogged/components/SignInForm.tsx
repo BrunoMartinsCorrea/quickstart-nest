@@ -1,7 +1,7 @@
 import { TextFieldWithLabel } from '@/components/TextFieldWithLabel';
 import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
 import { Card, Flex, Text, TextField, IconButton, Button, Link } from '@radix-ui/themes';
-import { FormEvent, useId, useState } from 'react';
+import { useId, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
