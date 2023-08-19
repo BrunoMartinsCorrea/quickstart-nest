@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Flex, PropsWithoutRefOrColor, TextField, Text } from '@radix-ui/themes';
 import { Label } from '../Label';
 import { useId } from 'react';

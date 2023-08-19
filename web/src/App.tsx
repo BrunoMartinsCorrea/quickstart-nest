@@ -1,15 +1,19 @@
+import { Suspense } from 'react';
 import { RouterProvider } from 'react-router-dom';
 import { router } from '@/router';
 import { Theme, ThemePanel } from '@radix-ui/themes';
-import { Suspense } from 'react';
-import { GlobalStyle } from './styles/GlobalStyle';
+import { GlobalStyle } from '@/styles/GlobalStyle';
+import { ToastProvider } from '@/components/Toast/ToastProvider';
+// import { Toast } from './components/Toast';
 
 export function App() {
   return (
     <Suspense fallback="loading">
       <Theme appearance="dark" accentColor="bronze" grayColor="mauve" panelBackground="solid">
-        <ThemePanel />
-        <RouterProvider router={router} />
+        <ToastProvider>
+          {/* <ThemePanel /> */}
+          <RouterProvider router={router} />
+        </ToastProvider>
       </Theme>
       <GlobalStyle />
     </Suspense>
