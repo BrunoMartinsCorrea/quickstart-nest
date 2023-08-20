@@ -17,9 +17,9 @@
     "start": "node api/dist/main"
   },
   "devDependencies": {
-    "@turbo/gen": "~1.9.7",
-    "eslint-config-turbo": "~1.9.3",
-    "turbo": "~1.10.7"
+    "@turbo/gen": "~1.10.12",
+    "eslint-config-turbo": "~1.10.12",
+    "turbo": "~1.10.12"
   },
   "workspaces": [
     "api",
