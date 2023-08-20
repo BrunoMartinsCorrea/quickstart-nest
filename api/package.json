@@ -6,7 +6,7 @@
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "prestart": "yarn build",
-    "start": "node -r ./tsconfig-paths-bootstrap.js dist/main.js",
+    "start": "nest start",
     "dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
