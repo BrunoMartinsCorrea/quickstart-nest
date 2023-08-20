@@ -13,8 +13,8 @@
     "start": "node api/dist/main"
   },
   "devDependencies": {
-    "@turbo/gen": "^1.9.7",
-    "eslint-config-turbo": "^1.9.3",
+    "@turbo/gen": "~1.9.7",
+    "eslint-config-turbo": "~1.9.3",
     "turbo": "1.10.7"
   },
   "workspaces": [
