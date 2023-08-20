@@ -7,6 +7,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useStore } from '@/stores/useStore';
 import { useTranslation } from 'react-i18next';
+import { useToast } from '@/hooks/useToast';
+import { ResponseError } from '@/models/ResponseError';
 
 const signInSchema = z.object({
   username: z.string().nonempty('fields.email.required'),
@@ -24,15 +26,29 @@ export function SignInForm() {
     resolver: zodResolver(signInSchema),
   });
   const { errors, isLoading } = formState;
+  const { toast } = useToast();
 
   function togglePasswordVisibility() {
     setVisiblePassword((state) => !state);
   }
 
+  async function handleSignIn(data: SignInFormData) {
+    try {
+      await signIn(data);
+    } catch (e) {
+      if (e instanceof ResponseError && e.statusCode === 401) {
+        toast({
+          title: t('errors.signIn.title'),
+          description: t('errors.signIn.description'),
+        });
+      }
+    }
+  }
+
   return (
     <Card>
       <Flex direction="column" gap="4" justify="center" p="1" asChild>
-        <form onSubmit={handleSubmit(signIn)}>
+        <form onSubmit={handleSubmit(handleSignIn)}>
           <Text size="2">{t('unlogged.signIn.welcome')}</Text>
           <TextFieldWithLabel
             label={t('fields.email.label')}

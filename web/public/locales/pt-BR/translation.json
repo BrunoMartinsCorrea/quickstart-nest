@@ -1,4 +1,18 @@
 {
+  "errors": {
+    "generic": {
+      "title": "Oops! Ocorreu algum erro",
+      "description": "Tente novamente, por favor"
+    },
+    "network": {
+      "title": "Sem acesso à internet",
+      "description": "Por favor, verifique sua conexão com a internet"
+    },
+    "signIn": {
+      "title": "Oops! Ocorreu algum erro",
+      "description": "Usuário ou senha inválidos"
+    }
+  },
   "fields": {
     "email": {
       "label": "Email",

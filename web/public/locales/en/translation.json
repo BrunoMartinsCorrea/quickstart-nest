@@ -1,4 +1,18 @@
 {
+  "errors": {
+    "generic": {
+      "title": "Oops! something went wrong",
+      "description": "Try again, please"
+    },
+    "network": {
+      "title": "No internet access",
+      "description": "Please, verify your internet connection"
+    },
+    "signIn": {
+      "title": "Oops! something went wrong",
+      "description": "Username or password invalid"
+    }
+  },
   "fields": {
     "email": {
       "label": "Email",

@@ -1,21 +1,27 @@
 import * as PrimitiveToast from '@radix-ui/react-toast';
 import styles from './styles.module.css';
 import { Button, Grid, Heading, Text } from '@radix-ui/themes';
-
-interface ToastProps {
-  open: boolean;
-  onOpenChange: (value: boolean) => void;
+import { Cross2Icon } from '@radix-ui/react-icons';
+import React from 'react';
+export interface ToastProps {
   variant?: 'default' | 'destructive';
   title?: string;
   description?: string;
+  action?: {
+    onClick: () => void;
+    label: string;
+  };
 }
 
-export function Toast({ open, onOpenChange, variant = 'default', title, description }: ToastProps) {
+export const Toast = React.forwardRef<
+  React.ElementRef<typeof PrimitiveToast.Root>,
+  React.ComponentPropsWithoutRef<typeof PrimitiveToast.Root> & ToastProps
+>(({ variant = 'default', title, description, action, ...props }, ref) => {
   return (
     <PrimitiveToast.Root
+      ref={ref}
+      {...props}
       className={`${styles.root} ${variant === 'destructive' ? styles.rootDestructive : styles.rootDefault}`}
-      open={open}
-      onOpenChange={onOpenChange}
     >
       <Grid>
         <PrimitiveToast.Title asChild>
@@ -33,11 +39,16 @@ export function Toast({ open, onOpenChange, variant = 'default', title, descript
           )}
         </PrimitiveToast.Description>
       </Grid>
-      <PrimitiveToast.Action className={styles.action} altText="try again" asChild>
-        <Button size="1" variant={variant === 'destructive' ? 'ghost' : 'outline'}>
-          Try again
-        </Button>
-      </PrimitiveToast.Action>
+      {action && (
+        <PrimitiveToast.Action className={styles.action} altText="try again" asChild>
+          <Button size="1" variant={variant === 'destructive' ? 'ghost' : 'outline'} onClick={action.onClick}>
+            {action.label}
+          </Button>
+        </PrimitiveToast.Action>
+      )}
+      <PrimitiveToast.Close className={styles.close}>
+        <Cross2Icon width={12} />
+      </PrimitiveToast.Close>
     </PrimitiveToast.Root>
   );
-}
+});

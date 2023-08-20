@@ -1,16 +1,22 @@
-import * as Toast from '@radix-ui/react-toast';
+import * as PrimitiveToast from '@radix-ui/react-toast';
 import styles from './styles.module.css';
 import { ReactNode } from 'react';
+import { useToast } from '@/hooks/useToast';
+import { Toast } from '.';
 
-interface ToastProviderProps {
+interface ToasterProps {
   children: ReactNode;
 }
 
-export function ToastProvider({ children }: ToastProviderProps) {
+export function ToastProvider({ children }: ToasterProps) {
+  const { toasts } = useToast();
   return (
-    <Toast.Provider>
+    <PrimitiveToast.Provider>
       {children}
-      <Toast.Viewport className={styles.viewport} />
-    </Toast.Provider>
+      {toasts.map((props) => (
+        <Toast key={props.id} {...props} />
+      ))}
+      <PrimitiveToast.Viewport className={styles.viewport} />
+    </PrimitiveToast.Provider>
   );
 }

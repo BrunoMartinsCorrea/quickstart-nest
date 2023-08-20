@@ -1,10 +1,8 @@
-import { Box, Tabs, Container, DropdownMenu, IconButton, Button } from '@radix-ui/themes';
+import { Box, Tabs, Container, DropdownMenu, IconButton } from '@radix-ui/themes';
 import { SignInForm } from './components/SignInForm';
 import { SignUpForm } from './components/SignUpForm';
 import { useTranslation } from 'react-i18next';
 import { GlobeIcon } from '@radix-ui/react-icons';
-import { Toast } from '@/components/Toast';
-import { useState } from 'react';
 
 const languages = [
   { language: 'Potuguês Brasileiro', value: 'pt-BR' },
@@ -18,13 +16,8 @@ export function Unlogged() {
     i18n.changeLanguage(value);
   }
 
-  const [open, setOpen] = useState(false);
-
   return (
     <Container mt="9" size="1">
-      <Button variant="outline" onClick={() => setOpen((value) => !value)}>
-        Toast!
-      </Button>
       <DropdownMenu.Root>
         <DropdownMenu.Trigger>
           <IconButton variant="ghost">
@@ -55,13 +48,6 @@ export function Unlogged() {
           </Tabs.Content>
         </Box>
       </Tabs.Root>
-      <Toast
-        open={open}
-        onOpenChange={setOpen}
-        title="Ops! Something went wrong"
-        description="An error occured with the request, try again"
-        variant="destructive"
-      />
     </Container>
   );
 }
