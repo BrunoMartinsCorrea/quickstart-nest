@@ -3,7 +3,7 @@
 dist/
 storybook-static/
 node_modules/
-main/
+main
 
 
 # Logs
