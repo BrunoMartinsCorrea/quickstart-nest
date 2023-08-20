@@ -1,11 +1,11 @@
 export class User {
   constructor(
-    private id: string,
-    private username: string,
-    private fullName: string,
-    private email: string,
-    private createdAt: Date,
-    private updatedAt: Date,
-    private deletedAt: Date
+    id: string,
+    username: string,
+    fullName: string,
+    email: string,
+    createdAt: Date,
+    updatedAt: Date,
+    deletedAt: Date,
   ) {}
 }

@@ -1,14 +1,12 @@
 {
   "extends": "config/tsconfig.base.json",
   "compilerOptions": {
-    //    "target": "es2017",
-    "baseUrl": "./",
-    "outDir": "./dist",
-    "declaration": false,
+    "baseUrl": "src",
+    "outDir": "dist",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["*"]
     }
   },
   "include": ["**/*.ts"],
-  "exclude": ["node_modules", "test"]
+  "exclude": [".turbo", "dist", "node_modules", "test"]
 }

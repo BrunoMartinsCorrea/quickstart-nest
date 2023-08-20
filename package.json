@@ -5,17 +5,21 @@
   "license": "MIT",
   "packageManager": "yarn@1.22.19",
   "scripts": {
-    "dev": "turbo run dev",
     "build": "turbo run build",
-    "lint": "turbo run lint",
+    "clean": "rm -rf node_modules && yarn cache clean && yarn clean:api && yarn clean:lib && yarn clean:web",
+    "clean:api": "rm -rf api/node_modules api/.turbo api/dist",
+    "clean:lib": "rm -rf config/node_modules eslint-config-custom/node_modules",
+    "clean:web": "rm -rf web/node_modules web/.turbo web/dist web/storybook-static",
+    "dev": "turbo run dev",
     "format": "turbo run format",
-    "prestart": "npm run build",
+    "lint": "turbo run lint",
+    "prestart": "yarn run build",
     "start": "node api/dist/main"
   },
   "devDependencies": {
     "@turbo/gen": "~1.9.7",
     "eslint-config-turbo": "~1.9.3",
-    "turbo": "1.10.7"
+    "turbo": "~1.10.7"
   },
   "workspaces": [
     "api",

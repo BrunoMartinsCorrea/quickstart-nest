@@ -6,7 +6,7 @@ import { AuthenticationModule } from '@/authentication/authentication.module';
 import { UserModule } from '@/user/user.module';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { CommonModule } from '@/common/common.module';
-import ormConnection from './config/orm.connection';
+import ormConnection from '@/config/orm.connection';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({

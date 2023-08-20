@@ -5,11 +5,13 @@ import { Request } from 'express';
 
 @Injectable()
 export class AuthenticationGuard implements CanActivate {
-
-  constructor(private readonly authenticationService: AuthenticationService, private readonly reflector: Reflector) {}
+  constructor(
+    private readonly authenticationService: AuthenticationService,
+    private readonly reflector: Reflector,
+  ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const isPublic = this.reflector.get<boolean>('isPublic', context.getHandler())
+    const isPublic = this.reflector.get<boolean>('isPublic', context.getHandler());
 
     if (!isPublic) {
       const request = context.switchToHttp().getRequest<Request>();

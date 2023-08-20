@@ -12,7 +12,7 @@ export class UsersSeeder implements Seeder {
 
   constructor(
     private readonly userService: UserService,
-    @InjectRepository(UserEntity) private repository: Repository<UserEntity>
+    @InjectRepository(UserEntity) private repository: Repository<UserEntity>,
   ) {}
 
   async seed(): Promise<void> {

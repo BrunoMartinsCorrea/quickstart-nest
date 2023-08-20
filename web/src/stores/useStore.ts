@@ -14,8 +14,8 @@ export const useStore = create<StoreState>()(
         name: '@quickstart:auth',
         version: 0,
         partialize: ({ access, refresh }) => ({ access, refresh }),
-      }
+      },
     ),
-    { enabled: true }
-  )
+    { enabled: true },
+  ),
 );

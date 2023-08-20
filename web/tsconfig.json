@@ -2,12 +2,12 @@
   "extends": "config/tsconfig.web.json",
   "compilerOptions": {
     "strictNullChecks": true,
-    "outDir": "./dist",
-    "baseUrl": "./",
+    "baseUrl": "src",
+    "outDir": "dist",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", "dist", "public"]
+  "exclude": [".turbo", "dist", "node_modules", "public"]
 }

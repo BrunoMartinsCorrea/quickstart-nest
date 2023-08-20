@@ -6,7 +6,7 @@
     "declaration": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "forceConsistentCasingInFileNames": false,
+    "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
     "incremental": true,
     "isolatedModules": true,
