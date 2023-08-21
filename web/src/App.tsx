@@ -1,29 +1,21 @@
-import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Suspense } from 'react';
+import { RouterProvider } from 'react-router-dom';
+import { router } from '@/router';
+import { Theme } from '@radix-ui/themes';
+import { GlobalStyle } from '@/styles/GlobalStyle';
+import { ToastProvider } from '@/components/Toast/ToastProvider';
+// import { Toast } from './components/Toast';
 
-function App() {
-  const [greeting, setGreeting] = useState('')
-
-  useEffect(() => {
-    fetch('/api').then(res => res.text()).then(setGreeting);
-  }, []);
-
+export function App() {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>{greeting}</h1>
-     
-    </>
-  )
+    <Suspense fallback="loading">
+      <Theme appearance="light" accentColor="bronze" grayColor="mauve" panelBackground="solid">
+        <ToastProvider>
+          {/* <ThemePanel /> */}
+          <RouterProvider router={router} />
+        </ToastProvider>
+      </Theme>
+      <GlobalStyle />
+    </Suspense>
+  );
 }
-
-export default App

@@ -1,7 +1,11 @@
 .idea/
 .turbo/
 dist/
+storybook-static/
 node_modules/
+main
+*.sqlite
+
 
 # Logs
 logs
@@ -27,6 +31,7 @@ lerna-debug.log*
 *.launch
 .settings/
 *.sublime-workspace
+.vscode
 
 # IDE - VSCode
 .vscode/*

@@ -1,0 +1,55 @@
+{
+  "errors": {
+    "generic": {
+      "title": "Oops! Ocorreu algum erro",
+      "description": "Tente novamente, por favor"
+    },
+    "network": {
+      "title": "Sem acesso à internet",
+      "description": "Por favor, verifique sua conexão com a internet"
+    },
+    "signIn": {
+      "title": "Oops! Ocorreu algum erro",
+      "description": "Usuário ou senha inválidos"
+    }
+  },
+  "fields": {
+    "email": {
+      "label": "Email",
+      "required": "Email é obrigatório",
+      "invalid": "Email inválido"
+    },
+    "fullName": {
+      "label": "Nome completo",
+      "required": "Nome é obrigatório"
+    },
+    "password": {
+      "label": "Senha",
+      "required": "Senha é obrigatória",
+      "min": "A senha precisa ter no mínimo {{length}} caracteres"
+    },
+    "confirmPassword": {
+      "label": "Confirmar senha",
+      "notMatch": "As senhas não coincidem"
+    }
+  },
+  "unlogged": {
+    "signIn": {
+      "signIn": "Entre",
+      "welcome": "Bem vindo de volta. Sentimos sua falta!",
+      "forgotPassword": "Esqueci a senha"
+    },
+    "signUp": {
+      "signUp": "Registre-se",
+      "welcome": "Bem vindo. Registre-se e descubra uma grande quantidade de novas funcionalidades para ajudar seu negócio"
+    }
+  },
+  "logged": {
+    "signOut": {
+      "signOut": "Sair"
+    },
+    "profile": {
+      "profile": "Perfil"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+.container {
+  max-width: 250px;
+  width: 100%;
+}
+
+.button {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: start;
+  color: var(--accent-a11);
+  text-decoration: none;
+  font-size: var(--font-size-2);
+  letter-spacing: var(--letter-spacing-2);
+  line-height: var(--line-height-2);
+  border-radius: var(--radius-4);
+  padding: var(--space-2);
+}
+
+.button:hover {
+  background-color: var(--accent-a3);
+}
+
+.buttonActive {
+  color: var(--accent-a11);
+  background-color: var(--accent-a4);
+}

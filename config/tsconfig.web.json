@@ -1,10 +1,10 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "esModuleInterop": true,
-    "noEmit": true,
-    "module": "ESNext",
-    /* Bundler mode */
+//    "moduleResolution": "bundler",
+//    "noEmit": true,
     "jsx": "react-jsx",
   },
 }

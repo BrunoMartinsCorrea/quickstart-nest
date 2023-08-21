@@ -17,6 +17,12 @@
         "!.next/cache/**"
       ]
     },
-    "lint": {}
+    "start": {
+      "dependsOn": [
+        "^start"
+      ]
+    },
+    "lint": {},
+    "format": {}
   }
 }
