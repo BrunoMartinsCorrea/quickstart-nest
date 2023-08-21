@@ -5,18 +5,14 @@ import { Request } from 'express';
 
 @Injectable()
 export class AuthenticationGuard implements CanActivate {
-  constructor(
-    private readonly authenticationService: AuthenticationService,
-    private readonly reflector: Reflector,
-  ) {}
+  constructor(private readonly authenticationService: AuthenticationService, private readonly reflector: Reflector) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const isPublic = this.reflector.get<boolean>('isPublic', context.getHandler());
 
     if (!isPublic) {
       const request = context.switchToHttp().getRequest<Request>();
-      const authorizationHeader = request.headers.authorization?.replace('Bearer ', '');
-      const jwt = await this.authenticationService.verifyToken(authorizationHeader);
+      const jwt = await this.authenticationService.verifyToken(request.headers.authorization);
       Logger.debug(`Request authenticated for user ${jwt.payload.sub}`);
     }
 

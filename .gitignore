@@ -4,6 +4,7 @@ dist/
 storybook-static/
 node_modules/
 main
+*.sqlite
 
 
 # Logs

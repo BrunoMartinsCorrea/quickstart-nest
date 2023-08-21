@@ -20,10 +20,7 @@ export class AuthenticationService {
     },
   } as JwtSignOptions;
 
-  constructor(
-    private readonly userService: UserService,
-    private readonly jwt: JwtService,
-  ) {}
+  constructor(private readonly userService: UserService, private readonly jwt: JwtService) {}
 
   async generateToken(userCredential: UserCredential) {
     const { id: userId } = await this.userService.validateByUsername(userCredential.username, userCredential.password);
@@ -39,8 +36,9 @@ export class AuthenticationService {
 
   async verifyToken(token: string) {
     try {
-      this.jwt.verify(token, this.defaultJwtOptions);
-      const jwtDecoded = this.jwt.decode(token, { json: true, complete: true });
+      const normalizedToken = token?.replace('Bearer ', '');
+      this.jwt.verify(normalizedToken, this.defaultJwtOptions);
+      const jwtDecoded = this.jwt.decode(normalizedToken, { json: true, complete: true });
 
       return { ...(jwtDecoded as object) } as Jwt;
     } catch (e) {
@@ -68,7 +66,7 @@ export class AuthenticationService {
         expiresIn: exp,
         jwtid: jti,
         subject,
-      },
+      }
     );
 
     const refresh = this.jwt.sign(
@@ -81,7 +79,7 @@ export class AuthenticationService {
         expiresIn: expRefresh,
         jwtid: jti,
         subject: subject,
-      },
+      }
     );
 
     return new Token(access, refresh);
