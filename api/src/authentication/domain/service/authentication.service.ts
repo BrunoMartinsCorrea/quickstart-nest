@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { v4 as uuidv4 } from 'uuid';
-import { addHours, addMinutes, getUnixTime } from 'date-fns';
+import { addMinutes, getUnixTime } from 'date-fns';
 import { JwtSignOptions } from '@nestjs/jwt/dist/interfaces';
 import { UserService } from '@/user/domain/service/user.service';
 import { UserCredential } from '@/user/domain/model/user-credential';
@@ -20,10 +20,7 @@ export class AuthenticationService {
     },
   } as JwtSignOptions;
 
-  constructor(
-    private readonly userService: UserService,
-    private readonly jwt: JwtService,
-  ) {}
+  constructor(private readonly userService: UserService, private readonly jwt: JwtService) {}
 
   async generateToken(userCredential: UserCredential) {
     const { id: userId } = await this.userService.validateByUsername(userCredential.username, userCredential.password);
@@ -51,13 +48,13 @@ export class AuthenticationService {
 
   private async generateTokenToSubject(subject: string) {
     const ACCESS_TOKEN_DURATION_IN_MINUTES = 5;
-    const REFRESH_TOKEN_DURATION_IN_HOURS = 1;
+    const REFRESH_TOKEN_DURATION_IN_MINUTES = 60;
 
     const jti = uuidv4();
     const now = new Date();
     const iat = getUnixTime(now);
     const exp = getUnixTime(addMinutes(now, ACCESS_TOKEN_DURATION_IN_MINUTES)) - iat;
-    const expRefresh = getUnixTime(addHours(now, REFRESH_TOKEN_DURATION_IN_HOURS)) - iat;
+    const expRefresh = getUnixTime(addMinutes(now, REFRESH_TOKEN_DURATION_IN_MINUTES)) - iat;
 
     const access = this.jwt.sign(
       {
@@ -68,7 +65,7 @@ export class AuthenticationService {
         expiresIn: exp,
         jwtid: jti,
         subject,
-      },
+      }
     );
 
     const refresh = this.jwt.sign(
@@ -81,7 +78,7 @@ export class AuthenticationService {
         expiresIn: expRefresh,
         jwtid: jti,
         subject: subject,
-      },
+      }
     );
 
     return new Token(access, refresh);

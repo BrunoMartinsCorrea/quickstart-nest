@@ -19,7 +19,6 @@ import { User } from '@/user/domain/model/user';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import { UserDto } from '@/user/http-server/dto/user.dto';
 import { CreateUserDto } from '@/user/http-server/dto/create-user.dto';
-import { Public } from '@/common/decorators/public.decorator';
 
 @ApiTags('user')
 @Controller('user')
@@ -27,7 +26,6 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  @Public()
   @HttpCode(HttpStatus.CREATED)
   @ApiConflictResponse({ type: ErrorResponseDto })
   async create(@Body() createUserDto: CreateUserDto, @Res() response: ExpressResponse) {

@@ -10,6 +10,7 @@
     "clean:api": "rm -rf api/node_modules api/.turbo api/dist",
     "clean:lib": "rm -rf config/node_modules eslint-config-custom/node_modules",
     "clean:web": "rm -rf web/node_modules web/.turbo web/dist web/storybook-static",
+    "predev": "yarn build",
     "dev": "turbo run dev",
     "format": "turbo run format",
     "lint": "turbo run lint",
