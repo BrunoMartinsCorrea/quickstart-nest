@@ -10,7 +10,7 @@ export function AuthenticationWrapper() {
     if (access) {
       navigate('/home');
     } else {
-      navigate('/');
+      navigate('/sign-in');
     }
   }, [access]);
 

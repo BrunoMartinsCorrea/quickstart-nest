@@ -43,5 +43,13 @@
       "signUp": "Registre-se",
       "welcome": "Bem vindo. Registre-se e descubra uma grande quantidade de novas funcionalidades para ajudar seu negócio"
     }
+  },
+  "logged": {
+    "signOut": {
+      "signOut": "Sair"
+    },
+    "profile": {
+      "profile": "Perfil"
+    }
   }
 }

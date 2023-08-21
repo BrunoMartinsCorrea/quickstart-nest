@@ -43,5 +43,13 @@
       "signUp": "Sign Up",
       "welcome": "Welcome. Sign up and discover a great amount of new features to scale your business"
     }
+  },
+  "logged": {
+    "signOut": {
+      "signOut": "Sign Out"
+    },
+    "profile": {
+      "profile": "Profile"
+    }
   }
 }

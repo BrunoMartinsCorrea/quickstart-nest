@@ -6,3 +6,8 @@
   z-index: 9999;
   background-color: var(--color-page-background);
 }
+
+.headerLink {
+  text-decoration: none;
+  color: inherit;
+}

@@ -9,7 +9,7 @@ import { ToastProvider } from '@/components/Toast/ToastProvider';
 export function App() {
   return (
     <Suspense fallback="loading">
-      <Theme appearance="dark" accentColor="bronze" grayColor="mauve" panelBackground="solid">
+      <Theme appearance="light" accentColor="bronze" grayColor="mauve" panelBackground="solid">
         <ToastProvider>
           {/* <ThemePanel /> */}
           <RouterProvider router={router} />

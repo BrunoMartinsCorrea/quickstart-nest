@@ -11,7 +11,7 @@ export function LocaleDropdown() {
           <GlobeIcon />
         </IconButton>
       </DropdownMenu.Trigger>
-      <DropdownMenu.Content>
+      <DropdownMenu.Content variant="soft">
         <DropdownMenu.RadioGroup value={i18n.language} onValueChange={i18n.changeLanguage}>
           {supportedLanguages.map((lang) => (
             <DropdownMenu.RadioItem key={lang.value} value={lang.value}>

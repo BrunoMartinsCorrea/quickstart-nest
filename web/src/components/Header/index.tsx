@@ -1,15 +1,24 @@
-import { Container, Flex, Separator } from '@radix-ui/themes';
-import { LocaleDropdown } from '../LocaleDropdown';
+import { Flex, Separator } from '@radix-ui/themes';
 import styles from './styles.module.css';
+import { ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 
-export function Header() {
+interface HeaderProps {
+  title?: ReactNode;
+  children: ReactNode;
+}
+
+export function Header({ title, children }: HeaderProps) {
   return (
     <header className={styles.header}>
-      <Container py="4">
-        <Flex width="100%" align="center" justify="end">
-          <LocaleDropdown />
-        </Flex>
-      </Container>
+      <Flex justify="between" align="center" width="100%" gap="4" p="4">
+        {title && (
+          <Link to="/home" className={styles.headerLink}>
+            {title}
+          </Link>
+        )}
+        {children}
+      </Flex>
       <Separator size="4" />
     </header>
   );
