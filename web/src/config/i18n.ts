@@ -3,6 +3,12 @@ import { initReactI18next } from 'react-i18next';
 
 import Backend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
+import { Language } from '@/models/Language';
+
+export const supportedLanguages: Language[] = [
+  { language: 'Potuguês Brasileiro', value: 'pt-BR' },
+  { language: 'English', value: 'en' },
+];
 
 i18n
   .use(Backend)
@@ -15,7 +21,7 @@ i18n
       escapeValue: false,
     },
     load: 'all',
-    supportedLngs: ['en', 'pt-BR'],
+    supportedLngs: supportedLanguages.map((lng) => lng.value),
   });
 
 export default i18n;
