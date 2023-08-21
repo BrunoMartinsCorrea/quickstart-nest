@@ -4,20 +4,19 @@
   "license": "MIT",
   "scripts": {
     "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "prestart": "yarn build",
-    "start": "nest start",
     "dev": "nest start --watch",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "lint": "eslint src --ext .ts,.tsx --fix",
+    "preseed": "yarn build",
+    "seed": "node dist/seeder -- --refresh",
+    "start": "yarn seed && nest start",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
-    "lint": "eslint src --ext .ts,.tsx --fix",
     "test": "jest",
-    "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "seed": "node dist/seeder -- --refresh",
-    "preseed": "yarn build"
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "@nestjs/common": "~10.1.3",

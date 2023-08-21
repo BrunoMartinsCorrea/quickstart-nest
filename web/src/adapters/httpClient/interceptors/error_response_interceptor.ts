@@ -34,7 +34,7 @@ httpClient.interceptors.response.use(undefined, (error) => {
         new ResponseError({
           ...defaultError,
           errorCode: 'NETWORK_ERROR',
-        })
+        }),
       );
     }
     return Promise.reject(defaultError);

@@ -20,7 +20,10 @@ export class AuthenticationService {
     },
   } as JwtSignOptions;
 
-  constructor(private readonly userService: UserService, private readonly jwt: JwtService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly jwt: JwtService,
+  ) {}
 
   async generateToken(userCredential: UserCredential) {
     const { id: userId } = await this.userService.validateByUsername(userCredential.username, userCredential.password);
@@ -65,7 +68,7 @@ export class AuthenticationService {
         expiresIn: exp,
         jwtid: jti,
         subject,
-      }
+      },
     );
 
     const refresh = this.jwt.sign(
@@ -78,7 +81,7 @@ export class AuthenticationService {
         expiresIn: expRefresh,
         jwtid: jti,
         subject: subject,
-      }
+      },
     );
 
     return new Token(access, refresh);

@@ -15,7 +15,7 @@
     "format": "turbo run format",
     "lint": "turbo run lint",
     "prestart": "yarn run build",
-    "start": "node api/dist/main"
+    "start": "turbo run start"
   },
   "devDependencies": {
     "@turbo/gen": "~1.10.12",
