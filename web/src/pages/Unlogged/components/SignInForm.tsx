@@ -8,7 +8,7 @@ import * as z from 'zod';
 import { useStore } from '@/stores/useStore';
 import { useTranslation } from 'react-i18next';
 import { useToast } from '@/hooks/useToast';
-import { ResponseError } from '@/models/ResponseError';
+import { ResponseError } from '@/types/ResponseError';
 
 const signInSchema = z.object({
   username: z.string().nonempty('fields.email.required'),

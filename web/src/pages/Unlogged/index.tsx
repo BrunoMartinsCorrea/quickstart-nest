@@ -4,9 +4,18 @@ import { SignUpForm } from './components/SignUpForm';
 import { useTranslation } from 'react-i18next';
 import { Header } from '@/components/Header';
 import { LocaleDropdown } from '@/components/LocaleDropdown';
+import { useNavigate } from 'react-router-dom';
+import { useStore } from '@/stores/useStore';
+import { useEffect } from 'react';
 
 export function Unlogged() {
+  const navigate = useNavigate();
+  const access = useStore((state) => state.access);
   const { t } = useTranslation('translation', { keyPrefix: 'unlogged' });
+
+  useEffect(() => {
+    if (access) navigate('/home');
+  }, [access]);
 
   return (
     <Grid>

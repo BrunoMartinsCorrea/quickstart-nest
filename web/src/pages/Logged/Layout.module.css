@@ -1,0 +1,5 @@
+.mainContainer {
+  margin-top: var(--space-4);
+  width: calc(100% - 250px);
+  margin-left: 250px;
+}

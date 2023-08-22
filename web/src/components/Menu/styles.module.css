@@ -1,12 +1,16 @@
 .container {
   max-width: 250px;
   width: 100%;
+  position: fixed;
+  top: 57px;
+  bottom: 0;
+  left: 0;
+  box-shadow: var(--shadow-2);
 }
 
 .button {
   display: flex;
   flex-wrap: wrap;
-  width: 100%;
   justify-content: start;
   color: var(--accent-a11);
   text-decoration: none;

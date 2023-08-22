@@ -3,17 +3,27 @@ import { LocaleDropdown } from '@/components/LocaleDropdown';
 import { Menu, MenuItem } from '@/components/Menu';
 import { useStore } from '@/stores/useStore';
 import { Avatar, Container, DropdownMenu, Flex, Grid, Heading } from '@radix-ui/themes';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
+import styles from './Layout.module.css';
+import { ThemePanel } from '@/ThemePanel';
 
 export function LoggedLayout() {
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const signOut = useStore((state) => state.signOut);
+  const access = useStore((state) => state.access);
+
+  useEffect(() => {
+    if (!access) navigate('/sign-in');
+  }, [access]);
 
   return (
     <Grid>
       <Header title={<Heading size="2">Backoffice</Heading>}>
         <Flex gap="4" align="center">
+          <ThemePanel />
           <LocaleDropdown />
           <DropdownMenu.Root>
             <DropdownMenu.Trigger>
@@ -39,7 +49,7 @@ export function LoggedLayout() {
             <MenuItem to="/users">Usuários</MenuItem>
           </Flex>
         </Menu>
-        <Flex mt="4" width="100%">
+        <Flex className={styles.mainContainer}>
           <Container>
             <Outlet />
           </Container>

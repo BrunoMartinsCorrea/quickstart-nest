@@ -1,4 +1,4 @@
-import { ResponseError } from '@/models/ResponseError';
+import { ResponseError } from '@/types/ResponseError';
 import { httpClient } from '../client';
 import { toast } from '@/hooks/useToast';
 import { isAxiosError } from 'axios';
@@ -34,7 +34,7 @@ httpClient.interceptors.response.use(undefined, (error) => {
         new ResponseError({
           ...defaultError,
           errorCode: 'NETWORK_ERROR',
-        }),
+        })
       );
     }
     return Promise.reject(defaultError);

@@ -1,32 +1,25 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { Unlogged } from '@/pages/Unlogged';
-import { AuthenticationWrapper } from './pages/AuthenticationWrapper';
 import { Home } from './pages/Logged/Home';
 import { LoggedLayout } from './pages/Logged/Layout';
 import { Users } from './pages/Logged/Users';
 
 export const router = createBrowserRouter([
   {
+    path: '/sign-in',
+    element: <Unlogged />,
+  },
+  {
     path: '/',
-    element: <AuthenticationWrapper />,
+    element: <LoggedLayout />,
     children: [
       {
-        path: '/sign-in',
-        element: <Unlogged />,
+        path: '/home',
+        element: <Home />,
       },
       {
-        path: '/',
-        element: <LoggedLayout />,
-        children: [
-          {
-            path: '/home',
-            element: <Home />,
-          },
-          {
-            path: '/users',
-            element: <Users />,
-          },
-        ],
+        path: '/users',
+        element: <Users />,
       },
     ],
   },
