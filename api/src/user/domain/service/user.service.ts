@@ -4,6 +4,7 @@ import { UserRepository } from '@/user/persistence/repository/user-repository';
 import { User } from '@/user/domain/model/user';
 import { InvalidCredentialsError } from '@/user/domain/error/invalid-credentials-error';
 import { EntityNotFoundError } from '@/common/error/entity-not-found-error';
+import { PaginationDto } from '@/common/dto/pagination.dto';
 
 @Injectable()
 export class UserService {
@@ -71,6 +72,10 @@ export class UserService {
     }
 
     return user;
+  }
+
+  async listAll(pagination: PaginationDto): Promise<[User[], number]> {
+    return this.repository.listAll(pagination);
   }
 
   async update(user: User) {

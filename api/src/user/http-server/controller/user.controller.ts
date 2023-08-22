@@ -6,9 +6,11 @@ import {
   HttpCode,
   HttpStatus,
   Param,
+  ParseIntPipe,
   ParseUUIDPipe,
   Post,
   Put,
+  Query,
   Res,
 } from '@nestjs/common';
 import { Response as ExpressResponse } from 'express';
@@ -19,6 +21,7 @@ import { User } from '@/user/domain/model/user';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import { UserDto } from '@/user/http-server/dto/user.dto';
 import { CreateUserDto } from '@/user/http-server/dto/create-user.dto';
+import { PaginatedResponseDto } from '@/common/dto/paginated-response.dto';
 
 @ApiTags('user')
 @Controller('user')
@@ -37,6 +40,23 @@ export class UserController {
     } as User);
 
     return response.setHeader('Location', `${response.req.url}/${createdUser.id}`).send();
+  }
+
+  @Get()
+  async listAll(@Query('page', ParseIntPipe) page: number, @Query('limit', ParseIntPipe) limit: number) {
+    console.log({ page, limit });
+
+    const [results, totalCount] = await this.userService.listAll({
+      limit,
+      page,
+    });
+
+    return {
+      results,
+      totalCount,
+      page,
+      limit,
+    } as PaginatedResponseDto<User>;
   }
 
   @Get(':id')

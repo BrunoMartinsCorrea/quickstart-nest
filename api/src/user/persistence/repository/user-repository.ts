@@ -4,6 +4,7 @@ import { Logger } from '@nestjs/common';
 import { UserEntity } from '../entity/user.entity';
 import { User } from '@/user/domain/model/user';
 import { EntityConflictError } from '@/common/error/entity-conflict-error';
+import { PaginationDto } from '@/common/dto/pagination.dto';
 
 export class UserRepository {
   constructor(@InjectRepository(UserEntity) private repository: Repository<UserEntity>) {}
@@ -27,6 +28,12 @@ export class UserRepository {
 
   async findOneByUsername(username: string): Promise<User | null> {
     return this.repository.findOneBy({ username });
+  }
+
+  async listAll(pagination: PaginationDto): Promise<[User[], number]> {
+    const { limit, page } = pagination;
+    const PAGE_INDEX_FIXER = 1;
+    return this.repository.findAndCount({ withDeleted: false, take: limit, skip: limit * (page - PAGE_INDEX_FIXER) });
   }
 
   async update(user: User) {
