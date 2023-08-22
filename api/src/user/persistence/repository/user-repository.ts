@@ -19,11 +19,8 @@ export class UserRepository {
     }
   }
 
-  async findOne(id: string) {
-    const user = await this.repository.findOne({ where: { id } });
-    if (user) {
-      return { ...user } as User;
-    }
+  async findOne(id: string): Promise<User> {
+    return this.repository.findOneBy({ id });
   }
 
   async findOneByUsername(username: string): Promise<User | null> {
