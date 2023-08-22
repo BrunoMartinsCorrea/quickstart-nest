@@ -1,5 +1,5 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { IsNull, Repository } from 'typeorm';
 import { Logger } from '@nestjs/common';
 import { UserEntity } from '../entity/user.entity';
 import { User } from '@/user/domain/model/user';
@@ -46,8 +46,7 @@ export class UserRepository {
   }
 
   async softDelete(id: string) {
-    const updateResult = await this.repository.softDelete({ id, deletedAt: null });
-
+    const updateResult = await this.repository.softDelete({ id, deletedAt: IsNull() });
     return !!updateResult.affected;
   }
 }
