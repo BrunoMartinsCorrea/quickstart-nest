@@ -19,7 +19,7 @@ export class AuthenticationController {
   @ApiUnauthorizedResponse({ type: ErrorResponseDto })
   async generateToken(@Body() generateTokenDto: CredentialsDto) {
     const token = await this.authenticationService.generateToken({ ...generateTokenDto });
-    return { ...token } as TokenDto;
+    return token as TokenDto;
   }
 
   @Post('refresh')
@@ -27,13 +27,13 @@ export class AuthenticationController {
   @HttpCode(HttpStatus.OK)
   async refreshToken(@Body() refreshTokenDto: RefreshTokenDto) {
     const token = await this.authenticationService.refreshToken(refreshTokenDto);
-    return { ...token } as TokenDto;
+    return token as TokenDto;
   }
 
   @Get('info')
   @HttpCode(HttpStatus.OK)
   async info(@Headers('Authorization') authorization: string) {
     const jwt = await this.authenticationService.verifyToken(authorization);
-    return { ...jwt } as InfoDto;
+    return jwt as InfoDto;
   }
 }

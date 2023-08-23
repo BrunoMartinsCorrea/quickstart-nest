@@ -8,6 +8,7 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { CommonModule } from '@/common/common.module';
 import ormConnection from '@/config/orm.connection';
 import { ConfigModule } from '@nestjs/config';
+import { AuthorizationModule } from './authorization/authorization.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { ConfigModule } from '@nestjs/config';
     CommonModule,
     AuthenticationModule,
     UserModule,
+    AuthorizationModule,
   ],
   controllers: [],
   providers: [],

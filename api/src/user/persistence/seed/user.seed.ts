@@ -11,12 +11,12 @@ export class UsersSeeder implements Seeder {
   private ADMIN_USERNAME: string = 'admin@admin.com';
 
   constructor(
-    private readonly userService: UserService,
-    @InjectRepository(UserEntity) private repository: Repository<UserEntity>,
+    private readonly service: UserService,
+    @InjectRepository(UserEntity) private repository: Repository<UserEntity>
   ) {}
 
   async seed(): Promise<void> {
-    await this.userService.create({
+    await this.service.create({
       email: this.ADMIN_USERNAME,
       username: this.ADMIN_USERNAME,
       fullName: 'Admin',

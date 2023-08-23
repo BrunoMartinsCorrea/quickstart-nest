@@ -7,6 +7,11 @@ import { UserService } from '@/user/domain/service/user.service';
 import { UserRepository } from '@/user/persistence/repository/user-repository';
 import ormConnection from '@/config/orm.connection';
 import { ConfigModule } from '@nestjs/config';
+import { RoleSeeder } from '@/authorization/persistence/seed/role.seed';
+import { AuthenticationModule } from '@/authentication/authentication.module';
+import { RoleEntity } from '@/authorization/persistence/entity/role.entity';
+import { RoleService } from '@/authorization/domain/service/role.service';
+import { RoleRepository } from '@/authorization/persistence/repository/role-repository';
 
 seeder({
   imports: [
@@ -14,8 +19,9 @@ seeder({
       load: [ormConnection],
     }),
     TypeOrmModule.forRoot(ormConnection() as TypeOrmModuleOptions),
-    TypeOrmModule.forFeature([UserEntity]),
+    TypeOrmModule.forFeature([UserEntity, RoleEntity]),
     UserModule,
+    AuthenticationModule,
   ],
-  providers: [UserService, UserRepository],
-}).run([UsersSeeder]);
+  providers: [UserService, UserRepository, RoleService, RoleRepository],
+}).run([UsersSeeder, RoleSeeder]);

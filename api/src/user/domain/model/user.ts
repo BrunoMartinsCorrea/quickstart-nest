@@ -1,15 +1,9 @@
-import { Auditing } from '@/common/model/auditing';
+import { Identity } from '@/common/model/identity';
 
-export class User implements Auditing {
-  constructor(
-    public id: string,
-    public createdAt: string,
-    public updatedAt: string,
-    public deletedAt: string,
-    public username: string,
-    public password: string,
-    public salt: string,
-    public fullName: string,
-    public email: string,
-  ) {}
-}
+export type User = Identity & {
+  username: string;
+  password: string;
+  salt: string;
+  fullName: string;
+  email: string;
+};

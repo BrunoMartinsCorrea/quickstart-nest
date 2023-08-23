@@ -11,8 +11,8 @@ export class UserRepository {
 
   async create(user: User) {
     try {
-      const savedUser = await this.repository.save({ ...user } as UserEntity);
-      return { ...savedUser } as User;
+      const savedUser = await this.repository.save(user as UserEntity);
+      return savedUser as User;
     } catch (e) {
       Logger.error(e);
       throw new EntityConflictError('User could not be created');
@@ -27,7 +27,7 @@ export class UserRepository {
     return this.repository.findOneBy({ username });
   }
 
-  async listAll(pagination: PaginationDto): Promise<[User[], number]> {
+  async findAll(pagination: PaginationDto): Promise<[User[], number]> {
     const { limit, page } = pagination;
     const PAGE_INDEX_FIXER = 1;
     return this.repository.findAndCount({ withDeleted: false, take: limit, skip: limit * (page - PAGE_INDEX_FIXER) });
@@ -35,7 +35,7 @@ export class UserRepository {
 
   async update(user: User) {
     try {
-      await this.repository.update({ id: user.id }, { ...user } as UserEntity);
+      await this.repository.update({ id: user.id }, user as UserEntity);
     } catch (e) {
       Logger.error(e);
       throw new EntityConflictError('User could not be updated');

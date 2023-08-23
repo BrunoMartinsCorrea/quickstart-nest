@@ -8,7 +8,7 @@ import { PaginationDto } from '@/common/dto/pagination.dto';
 
 @Injectable()
 export class UserService {
-  constructor(private repository: UserRepository) {}
+  constructor(private readonly repository: UserRepository) {}
 
   async create(user: User) {
     const encryptedUser = await this.encrypt(user);
@@ -74,8 +74,8 @@ export class UserService {
     return user;
   }
 
-  async listAll(pagination: PaginationDto): Promise<[User[], number]> {
-    return this.repository.listAll(pagination);
+  async findAll(pagination: PaginationDto): Promise<[User[], number]> {
+    return this.repository.findAll(pagination);
   }
 
   async update(user: User) {

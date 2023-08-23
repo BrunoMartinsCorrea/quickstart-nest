@@ -1,6 +1,4 @@
-export class UserCredential {
-  constructor(
-    readonly username: string,
-    readonly password: string,
-  ) {}
-}
+export type UserCredential = {
+  readonly username: string;
+  readonly password: string;
+};

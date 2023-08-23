@@ -1,11 +1,9 @@
-import { Column, Entity, Index } from 'typeorm';
-import { AuditingEntity } from '@/common/entity/auditing.entity';
+import { Column, Entity } from 'typeorm';
+import { IdentityEntity } from '@/common/entity/identity.entity';
 
 @Entity('user')
-export class UserEntity extends AuditingEntity {
-  @Index('ix_user_username')
-  @Index('uq_user_username', { unique: true })
-  @Column('varchar', { length: 255, nullable: false })
+export class UserEntity extends IdentityEntity {
+  @Column('varchar', { length: 255, nullable: false, unique: true })
   username: string;
 
   @Column('varchar', { length: 255, nullable: false })
@@ -17,7 +15,6 @@ export class UserEntity extends AuditingEntity {
   @Column('varchar', { length: 255, nullable: false })
   fullName: string;
 
-  @Index('uq_user_email', { unique: true })
-  @Column('varchar', { length: 255, nullable: false })
+  @Column('varchar', { length: 255, nullable: false, unique: true })
   email: string;
 }

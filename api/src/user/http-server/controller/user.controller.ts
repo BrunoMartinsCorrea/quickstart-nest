@@ -26,27 +26,20 @@ import { PaginatedResponseDto } from '@/common/dto/paginated-response.dto';
 @ApiTags('user')
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly service: UserService) {}
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
   @ApiConflictResponse({ type: ErrorResponseDto })
   async create(@Body() createUserDto: CreateUserDto, @Res() response: ExpressResponse) {
-    const createdUser = await this.userService.create({
-      username: createUserDto.username,
-      password: createUserDto.password,
-      fullName: createUserDto.fullName,
-      email: createUserDto.email,
-    } as User);
-
-    return response.setHeader('Location', `${response.req.url}/${createdUser.id}`).send();
+    return this.service.create(createUserDto as User).then((it) => {
+      return response.setHeader('Location', `${response.req.url}/${it.id}`).send(it as UserDto);
+    });
   }
 
   @Get()
-  async listAll(@Query('page', ParseIntPipe) page: number, @Query('limit', ParseIntPipe) limit: number) {
-    console.log({ page, limit });
-
-    const [results, totalCount] = await this.userService.listAll({
+  async findAll(@Query('page', ParseIntPipe) page: number, @Query('limit', ParseIntPipe) limit: number) {
+    const [results, totalCount] = await this.service.findAll({
       limit,
       page,
     });
@@ -62,21 +55,21 @@ export class UserController {
   @Get(':id')
   @ApiNotFoundResponse({ type: ErrorResponseDto })
   async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    const foundUser = await this.userService.findOne(id);
-    return { ...foundUser } as UserDto;
+    const foundUser = await this.service.findOne(id);
+    return foundUser as UserDto;
   }
 
   @Put(':id')
   @ApiUnauthorizedResponse({ type: ErrorResponseDto })
   async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    const updatedUser = await this.userService.update({ id, ...updateUserDto } as User);
-    return { ...updatedUser } as UserDto;
+    const updatedUser = await this.service.update({ id, ...updateUserDto } as User);
+    return updatedUser as UserDto;
   }
 
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiUnauthorizedResponse({ type: ErrorResponseDto })
   async softDelete(@Param('id') id: string) {
-    return this.userService.softDelete(id);
+    return this.service.softDelete(id);
   }
 }
