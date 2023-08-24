@@ -13,6 +13,13 @@
       "description": "Usuário ou senha inválidos"
     }
   },
+  "actions": {
+    "new": "Novo",
+    "toggleAll": "Selecionar todos"
+  },
+  "labels": {
+    "pagination": "Página {{page}} de {{totalPages}}"
+  },
   "fields": {
     "email": {
       "label": "Email",
@@ -51,5 +58,8 @@
     "profile": {
       "profile": "Perfil"
     }
+  },
+  "users": {
+    "title": "Usuários"
   }
 }

@@ -1,5 +1,5 @@
 import { TextFieldWithLabel } from '@/components/TextFieldWithLabel';
-import { useStore } from '@/stores/useStore';
+// import { useStore } from '@/stores/useStore';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
 import { Card, Flex, Text, TextField, IconButton, Button } from '@radix-ui/themes';
@@ -25,7 +25,7 @@ type SignUpFormData = z.infer<typeof signUpFormSchema>;
 export function SignUpForm() {
   const [visiblePassword, setVisiblePassword] = useState(false);
   const { t } = useTranslation();
-  const signUp = useStore((state) => state.signUp);
+  // const signUp = useStore((state) => state.signUp);
   const passwordId = useId();
   const confirmPasswordId = useId();
   const { register, handleSubmit, formState } = useForm<SignUpFormData>({
@@ -38,13 +38,13 @@ export function SignUpForm() {
   }
 
   async function handleSignUp(data: SignUpFormData) {
-    const { email, fullName, password } = data;
-    await signUp({
-      username: email,
-      email,
-      fullName,
-      password,
-    });
+    // const { email, fullName, password } = data;
+    // await signUp({
+    //   username: email,
+    //   email,
+    //   fullName,
+    //   password,
+    // });
   }
 
   return (

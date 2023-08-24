@@ -13,6 +13,13 @@
       "description": "Username or password invalid"
     }
   },
+  "actions": {
+    "new": "New",
+    "toggleAll": "Toggle all"
+  },
+  "labels": {
+    "pagination": "Page {{page}} of {{totalPages}}"
+  },
   "fields": {
     "email": {
       "label": "Email",
@@ -51,5 +58,8 @@
     "profile": {
       "profile": "Profile"
     }
+  },
+  "users": {
+    "title": "Users"
   }
 }
