@@ -6,7 +6,7 @@ import {
   HttpCode,
   HttpStatus,
   Param,
-  ParseIntPipe,
+  ParseUUIDPipe,
   Post,
   Put,
   Query,
@@ -19,6 +19,7 @@ import { RoleDto } from '../dto/role.dto';
 import { Role } from '@/authorization/domain/model/role';
 import { PaginatedResponseDto } from '@/common/dto/paginated-response.dto';
 import { Response as ExpressResponse } from 'express';
+import { PaginatedQueryDto } from '@/common/dto/paginated-query.dto';
 
 @ApiTags('role')
 @Controller('role')
@@ -37,38 +38,34 @@ export class RoleController {
   @Get()
   @HttpCode(HttpStatus.OK)
   @ApiUnauthorizedResponse({ type: ErrorResponseDto })
-  async findAll(@Query('page', ParseIntPipe) page: number, @Query('limit', ParseIntPipe) limit: number) {
-    const [results, totalCount] = await this.service.findAll({
-      limit,
-      page,
-    });
+  async findAll(@Query() paginatedQueryDto: PaginatedQueryDto) {
+    const [results, totalCount] = await this.service.findAll(paginatedQueryDto);
 
     return {
       results,
       totalCount,
-      page,
-      limit,
+      ...paginatedQueryDto,
     } as PaginatedResponseDto<Role>;
   }
 
   @Get(':id')
   @HttpCode(HttpStatus.OK)
   @ApiUnauthorizedResponse({ type: ErrorResponseDto })
-  async findOne(@Param('id') id: string) {
+  async findOne(@Param('id', ParseUUIDPipe) id: string) {
     return (await this.service.findOne(id)) as RoleDto;
   }
 
   @Put(':id')
   @HttpCode(HttpStatus.OK)
   @ApiUnauthorizedResponse({ type: ErrorResponseDto })
-  async update(@Param('id') id: string, @Body() roleDto: RoleDto) {
+  async update(@Param('id', ParseUUIDPipe) id: string, @Body() roleDto: RoleDto) {
     return (await this.service.update(roleDto as Role)) as RoleDto;
   }
 
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiUnauthorizedResponse({ type: ErrorResponseDto })
-  async remove(@Param('id') id: string) {
+  async remove(@Param('id', ParseUUIDPipe) id: string) {
     return this.service.softDelete(id);
   }
 }

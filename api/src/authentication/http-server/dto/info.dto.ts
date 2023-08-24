@@ -11,10 +11,4 @@ export class InfoDto {
 
   @ApiProperty()
   signature: string;
-
-  constructor(header: JwtHeader, payload: JwtPayload, signature: string) {
-    this.header = header;
-    this.payload = payload;
-    this.signature = signature;
-  }
 }

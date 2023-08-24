@@ -6,7 +6,6 @@ import {
   HttpCode,
   HttpStatus,
   Param,
-  ParseIntPipe,
   ParseUUIDPipe,
   Post,
   Put,
@@ -22,6 +21,7 @@ import { UpdateUserDto } from '../dto/update-user.dto';
 import { UserDto } from '@/user/http-server/dto/user.dto';
 import { CreateUserDto } from '@/user/http-server/dto/create-user.dto';
 import { PaginatedResponseDto } from '@/common/dto/paginated-response.dto';
+import { PaginatedQueryDto } from '@/common/dto/paginated-query.dto';
 
 @ApiTags('user')
 @Controller('user')
@@ -30,6 +30,7 @@ export class UserController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
+  @ApiUnauthorizedResponse({ type: ErrorResponseDto })
   @ApiConflictResponse({ type: ErrorResponseDto })
   async create(@Body() createUserDto: CreateUserDto, @Res() response: ExpressResponse) {
     return this.service.create(createUserDto as User).then((it) => {
@@ -38,30 +39,28 @@ export class UserController {
   }
 
   @Get()
-  async findAll(@Query('page', ParseIntPipe) page: number, @Query('limit', ParseIntPipe) limit: number) {
-    const [results, totalCount] = await this.service.findAll({
-      limit,
-      page,
-    });
+  @ApiUnauthorizedResponse({ type: ErrorResponseDto })
+  async findAll(@Query() paginatedQueryDto: PaginatedQueryDto) {
+    const [results, totalCount] = await this.service.findAll(paginatedQueryDto);
 
     return {
       results,
       totalCount,
-      page,
-      limit,
+      ...paginatedQueryDto,
     } as PaginatedResponseDto<User>;
   }
 
   @Get(':id')
+  @ApiUnauthorizedResponse({ type: ErrorResponseDto })
   @ApiNotFoundResponse({ type: ErrorResponseDto })
-  async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
+  async findOne(@Param('id', ParseUUIDPipe) id: string) {
     const foundUser = await this.service.findOne(id);
     return foundUser as UserDto;
   }
 
   @Put(':id')
   @ApiUnauthorizedResponse({ type: ErrorResponseDto })
-  async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+  async update(@Param('id', ParseUUIDPipe) id: string, @Body() updateUserDto: UpdateUserDto) {
     const updatedUser = await this.service.update({ id, ...updateUserDto } as User);
     return updatedUser as UserDto;
   }
@@ -69,7 +68,7 @@ export class UserController {
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiUnauthorizedResponse({ type: ErrorResponseDto })
-  async softDelete(@Param('id') id: string) {
+  async softDelete(@Param('id', ParseUUIDPipe) id: string) {
     return this.service.softDelete(id);
   }
 }

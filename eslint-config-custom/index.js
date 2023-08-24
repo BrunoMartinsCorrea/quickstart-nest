@@ -20,7 +20,7 @@ module.exports = {
         '@typescript-eslint/ban-ts-comment': 'off',
         '@typescript-eslint/default-param-last': 'error',
         '@typescript-eslint/no-empty-function': 'off',
-        '@typescript-eslint/no-magic-numbers': 'warn',
+        '@typescript-eslint/no-magic-numbers': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/no-unused-expressions': 'error',
         '@typescript-eslint/no-unused-vars': 'off',

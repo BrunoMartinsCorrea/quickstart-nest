@@ -19,8 +19,8 @@ export class UsersSeeder implements Seeder {
     await this.service.create({
       email: this.ADMIN_USERNAME,
       username: this.ADMIN_USERNAME,
-      fullName: 'Admin',
-      password: 'admin123',
+      fullName: 'Admilson',
+      password: 'Admin123!',
     } as User);
   }
 

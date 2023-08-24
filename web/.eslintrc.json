@@ -3,8 +3,5 @@
   "extends": [
     "custom",
     "plugin:storybook/recommended"
-  ],
-  "rules": {
-    "@typescript-eslint/no-magic-numbers": "off"
-  }
+  ]
 }

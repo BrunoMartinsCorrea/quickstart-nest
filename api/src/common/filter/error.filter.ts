@@ -1,4 +1,12 @@
-import { ArgumentsHost, Catch, ExceptionFilter, ForbiddenException, HttpStatus, Logger } from '@nestjs/common';
+import {
+  ArgumentsHost,
+  BadRequestException,
+  Catch,
+  ExceptionFilter,
+  ForbiddenException,
+  HttpStatus,
+  Logger,
+} from '@nestjs/common';
 import { Response } from 'express';
 import { AuthorizationError } from '../error/authorization-error';
 import { InvalidCredentialsError } from '@/user/domain/error/invalid-credentials-error';
@@ -20,7 +28,15 @@ export class ErrorFilter implements ExceptionFilter {
   private getResponseBody(exception: Error) {
     let errorCode: string;
     let statusCode: number;
+    let message: string;
+
     switch (exception.constructor) {
+      case BadRequestException:
+        statusCode = HttpStatus.BAD_REQUEST;
+        errorCode = HttpStatus[statusCode];
+        Logger.error((exception as BadRequestException).getResponse());
+        message = ((exception as BadRequestException).getResponse() as { message: string[] }).message.join(', ');
+        break;
       case AuthorizationError:
       case InvalidCredentialsError:
         statusCode = HttpStatus.UNAUTHORIZED;
@@ -48,11 +64,15 @@ export class ErrorFilter implements ExceptionFilter {
         Logger.error(exception.stack);
     }
 
+    if (!message) {
+      message = exception.message.trim() ? exception.message : 'Something went wrong';
+    }
+
     return {
       statusCode,
       timestamp: new Date().toISOString(),
       errorCode,
-      message: exception.message.trim() ? exception.message : 'Something went wrong',
+      message,
     } as ErrorResponseDto;
   }
 }
