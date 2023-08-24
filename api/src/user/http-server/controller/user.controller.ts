@@ -22,6 +22,7 @@ import { UserDto } from '@/user/http-server/dto/user.dto';
 import { CreateUserDto } from '@/user/http-server/dto/create-user.dto';
 import { PaginatedResponseDto } from '@/common/dto/paginated-response.dto';
 import { PaginatedQueryDto } from '@/common/dto/paginated-query.dto';
+import { Public } from '@/common/decorator/public.decorator';
 
 @ApiTags('user')
 @Controller('user')
@@ -39,6 +40,7 @@ export class UserController {
   }
 
   @Get()
+  @Public()
   @ApiUnauthorizedResponse({ type: ErrorResponseDto })
   async findAll(@Query() paginatedQueryDto: PaginatedQueryDto) {
     const [results, totalCount] = await this.service.findAll(paginatedQueryDto);

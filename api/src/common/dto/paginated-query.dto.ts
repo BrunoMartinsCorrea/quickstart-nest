@@ -1,12 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNumber } from 'class-validator';
+import { IsOptional } from 'class-validator';
+import { Type } from 'class-transformer';
 
 export class PaginatedQueryDto {
-  @ApiProperty({ example: 0 })
-  @IsNumber(null, { message: 'page is not a number' })
-  page: number;
+  @ApiProperty({ example: 0, default: 0 })
+  @Type(() => Number)
+  @IsOptional()
+  page: number = 0;
 
-  @ApiProperty({ example: 10 })
-  @IsNumber(null, { message: 'limit is not a number' })
-  limit: number;
+  @ApiProperty({ example: 10, default: 10 })
+  @Type(() => Number)
+  @IsOptional()
+  limit: number = 10;
 }
