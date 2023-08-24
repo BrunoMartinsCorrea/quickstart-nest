@@ -18,7 +18,8 @@
     "toggleAll": "Selecionar todos"
   },
   "labels": {
-    "pagination": "Página {{page}} de {{totalPages}}"
+    "pagination": "Página {{page}} de {{totalPages}}",
+    "rowsPerPage": "Linhas por página"
   },
   "fields": {
     "email": {

@@ -1,9 +1,9 @@
 import { Pagination } from '@/components/Pagination';
-import { TableRoot } from '@/components/TableRoot';
+import { ColumnsVisibilityDropdown, TableRoot } from '@/components/Table';
 import { User } from '@/domain/user';
 import { useStore } from '@/stores/useStore';
-import { DotsVerticalIcon, GearIcon } from '@radix-ui/react-icons';
-import { Button, Flex, Heading, IconButton, Popover, Select, Separator, Table, Text } from '@radix-ui/themes';
+import { DotsVerticalIcon } from '@radix-ui/react-icons';
+import { Button, Flex, Heading, IconButton, Table } from '@radix-ui/themes';
 import { PaginationState, createColumnHelper, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -49,47 +49,11 @@ export function Users() {
         id: 'action',
         enableHiding: false,
         header: () => (
-          <Popover.Root>
-            <Popover.Trigger>
-              <IconButton variant="ghost">
-                <GearIcon />
-              </IconButton>
-            </Popover.Trigger>
-            <Popover.Content>
-              <Flex direction="column">
-                <label style={{ display: 'flex', alignItems: 'center' }}>
-                  <input
-                    style={{ marginRight: 8 }}
-                    type="checkbox"
-                    {...{
-                      checked: table.getIsAllColumnsVisible(),
-                      onChange: table.getToggleAllColumnsVisibilityHandler(),
-                    }}
-                  />
-                  {t('actions.toggleAll')}
-                </label>
-                <Separator my="2" size="4" />
-                <Flex gap="1" direction="column">
-                  {table.getAllLeafColumns().map((column) => {
-                    if (column.id !== 'action')
-                      return (
-                        <label key={column.id} style={{ display: 'flex', alignItems: 'center' }}>
-                          <input
-                            style={{ marginRight: 8 }}
-                            {...{
-                              type: 'checkbox',
-                              checked: column.getIsVisible(),
-                              onChange: column.getToggleVisibilityHandler(),
-                            }}
-                          />{' '}
-                          {column.id}
-                        </label>
-                      );
-                  })}
-                </Flex>
-              </Flex>
-            </Popover.Content>
-          </Popover.Root>
+          <ColumnsVisibilityDropdown
+            isAllColumnsVisible={table.getIsAllColumnsVisible()}
+            onToggleAllColumnsVisibility={table.getToggleAllColumnsVisibilityHandler()}
+            columns={table.getAllLeafColumns()}
+          />
         ),
         cell: (info) => (
           <IconButton variant="ghost">
@@ -139,7 +103,6 @@ export function Users() {
   });
 
   function handlePageSizeChange(size: string) {
-    console.log(size);
     setPagination((value) => ({ ...value, pageSize: Number(size) }));
   }
 
@@ -153,7 +116,7 @@ export function Users() {
       <Flex justify="end" align="center" gap="4">
         <Button variant="solid">{t('actions.new')}</Button>
       </Flex>
-      {users && (
+      {!!users.results.length && (
         <TableRoot variant="surface">
           <Table.Header>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -177,26 +140,7 @@ export function Users() {
           </Table.Body>
         </TableRoot>
       )}
-      <Flex justify="end" align="center" gap="4">
-        <Select.Root onValueChange={handlePageSizeChange} defaultValue={pagination.pageSize.toString()}>
-          <Select.Trigger />
-          <Select.Content variant="soft">
-            <Select.Group>
-              <Select.Item value="1">1</Select.Item>
-              <Select.Item value="10">10</Select.Item>
-              <Select.Item value="20">20</Select.Item>
-              <Select.Item value="30">30</Select.Item>
-              <Select.Item value="40">40</Select.Item>
-              <Select.Item value="50">50</Select.Item>
-            </Select.Group>
-          </Select.Content>
-        </Select.Root>
-        <Text weight="bold" size="2">
-          {t('labels.pagination', {
-            page: table.getState().pagination.pageIndex + 1,
-            totalPages: table.getPageCount(),
-          })}
-        </Text>
+      <Flex justify="end">
         <Pagination
           onFirstPage={() => table.setPageIndex(0)}
           onPrevious={() => table.previousPage()}
@@ -204,6 +148,9 @@ export function Users() {
           onLastPage={() => table.setPageIndex(table.getPageCount() - 1)}
           hasPreviousPage={table.getCanPreviousPage()}
           hasNextPage={table.getCanNextPage()}
+          onPageSizeChange={handlePageSizeChange}
+          currentPage={table.getState().pagination.pageIndex + 1}
+          totalPages={table.getPageCount()}
         />
       </Flex>
     </Flex>
