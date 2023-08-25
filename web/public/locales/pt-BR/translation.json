@@ -15,7 +15,12 @@
   },
   "actions": {
     "new": "Novo",
-    "toggleAll": "Selecionar todos"
+    "toggleAll": "Selecionar todos",
+    "nextPage": "Próxima página",
+    "lastPage": "Última página",
+    "previousPage": "Página anterior",
+    "firstPage": "Primeira página",
+    "changeLanguage": "Mudar idioma"
   },
   "labels": {
     "pagination": "Página {{page}} de {{totalPages}}",
@@ -61,6 +66,14 @@
     }
   },
   "users": {
-    "title": "Usuários"
+    "title": "Usuários",
+    "schema": {
+      "fullName": "Nome completo",
+      "email": "Email",
+      "createdAt": "Data criação",
+      "updatedAt": "Data atualização",
+      "username": "Usuário",
+      "id": "ID"
+    }
   }
 }

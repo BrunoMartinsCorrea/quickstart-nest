@@ -40,7 +40,7 @@ export function ColumnsVisibilityDropdown<T>({
           <Separator my="2" size="4" />
           <Flex gap="1" direction="column">
             {columns.map((column) => {
-              if (column.id.toLowerCase() !== 'action')
+              if (column.getCanHide())
                 return (
                   <label key={column.id} className={styles.checkboxContainer}>
                     <input
@@ -50,8 +50,8 @@ export function ColumnsVisibilityDropdown<T>({
                         checked: column.getIsVisible(),
                         onChange: column.getToggleVisibilityHandler(),
                       }}
-                    />{' '}
-                    {column.id}
+                    />
+                    {column.columnDef.header as string}
                   </label>
                 );
             })}

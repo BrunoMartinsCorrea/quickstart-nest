@@ -1,0 +1,7 @@
+.row:not(:disabled):hover {
+  background-color: var(--accent-a1);
+}
+
+.selected {
+  background-color: var(--accent-a2) !important;
+}

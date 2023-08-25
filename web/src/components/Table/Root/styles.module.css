@@ -1,0 +1,22 @@
+.table {
+  width: 100%;
+}
+
+.table td:last-child {
+  width: auto;
+  text-align: right;
+}
+
+.table thead tr th:last-child {
+  text-align: right;
+}
+
+.table td:first-child {
+  width: var(--space-2);
+  text-align: left;
+}
+
+.table thead tr th:first-child {
+  width: var(--space-2);
+  text-align: left;
+}

@@ -15,7 +15,12 @@
   },
   "actions": {
     "new": "New",
-    "toggleAll": "Toggle all"
+    "toggleAll": "Toggle all",
+    "nextPage": "Next page",
+    "lastPage": "Last page",
+    "previousPage": "Previous page",
+    "firstPage": "First page",
+    "changeLanguage": "Change language"
   },
   "labels": {
     "pagination": "Page {{page}} of {{totalPages}}",
@@ -61,6 +66,14 @@
     }
   },
   "users": {
-    "title": "Users"
+    "title": "Users",
+    "schema": {
+      "fullName": "Full name",
+      "email": "Email",
+      "createdAt": "Created at",
+      "updatedAt": "Updated at",
+      "username": "Username",
+      "id": "ID"
+    }
   }
 }

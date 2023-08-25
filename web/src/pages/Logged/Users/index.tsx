@@ -1,9 +1,9 @@
 import { Pagination } from '@/components/Pagination';
-import { ColumnsVisibilityDropdown, TableRoot } from '@/components/Table';
+import { ColumnsVisibilityDropdown, TableRoot, TableRow } from '@/components/Table';
 import { User } from '@/domain/user';
 import { useStore } from '@/stores/useStore';
 import { DotsVerticalIcon } from '@radix-ui/react-icons';
-import { Button, Flex, Heading, IconButton, Table } from '@radix-ui/themes';
+import { Button, Checkbox, Flex, Heading, IconButton, Table } from '@radix-ui/themes';
 import { PaginationState, createColumnHelper, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -14,35 +14,60 @@ export function Users() {
   const { t, i18n } = useTranslation();
   const users = useStore((state) => state.users);
   const getUsers = useStore((state) => state.getUsers);
+  const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: 1,
+  });
+  const [rowSelection, setRowSelection] = useState({});
 
   const dateFormatter = useMemo(() => {
     return new Intl.DateTimeFormat(i18n.language);
   }, [i18n.language]);
 
+  function toggleAllSelection(checked: boolean) {
+    table.getRowModel().rows.forEach((row) => {
+      row.toggleSelected(checked);
+    });
+  }
+
   const columns = useMemo(
     () => [
+      column.display({
+        id: 'select',
+        enableHiding: false,
+        header: ({ table }) => <Checkbox checked={table.getIsAllRowsSelected()} onCheckedChange={toggleAllSelection} />,
+        cell: ({ row }) => {
+          return (
+            <Checkbox
+              onCheckedChange={row.getToggleSelectedHandler()}
+              disabled={!row.getCanSelect()}
+              checked={row.getIsSelected()}
+            />
+          );
+        },
+      }),
       column.accessor('fullName', {
-        header: 'Full name',
+        header: t('users.schema.fullName'),
         cell: (info) => info.getValue(),
       }),
       column.accessor('email', {
-        header: 'Email',
+        header: t('users.schema.email'),
         cell: (info) => info.getValue(),
       }),
       column.accessor('createdAt', {
-        header: 'Created At',
+        header: t('users.schema.createdAt'),
         cell: (info) => dateFormatter.format(info.getValue()),
       }),
       column.accessor('updatedAt', {
-        header: 'Updated At',
+        header: t('users.schema.updatedAt'),
         cell: (info) => dateFormatter.format(info.getValue()),
       }),
       column.accessor('username', {
-        header: 'Username',
+        header: t('users.schema.username'),
         cell: (info) => info.getValue(),
       }),
       column.accessor('id', {
-        header: 'ID',
+        header: t('users.schema.id'),
         cell: (info) => info.getValue(),
       }),
       column.display({
@@ -65,11 +90,6 @@ export function Users() {
     [i18n.language]
   );
 
-  const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
-    pageIndex: 0,
-    pageSize: 1,
-  });
-
   const pagination = useMemo(
     () => ({
       pageIndex,
@@ -91,6 +111,7 @@ export function Users() {
     pageCount: pageCount(),
     state: {
       pagination,
+      rowSelection,
     },
     initialState: {
       columnVisibility: {
@@ -99,6 +120,8 @@ export function Users() {
         id: false,
       },
     },
+    enableRowSelection: true,
+    onRowSelectionChange: setRowSelection,
     getCoreRowModel: getCoreRowModel(),
   });
 
@@ -131,11 +154,11 @@ export function Users() {
           </Table.Header>
           <Table.Body>
             {table.getRowModel().rows.map((row) => (
-              <Table.Row key={row.id}>
+              <TableRow key={row.id} isSelected={row.getIsSelected()}>
                 {row.getVisibleCells().map((cell) => (
                   <Table.Cell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</Table.Cell>
                 ))}
-              </Table.Row>
+              </TableRow>
             ))}
           </Table.Body>
         </TableRoot>

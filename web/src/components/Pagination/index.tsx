@@ -1,5 +1,5 @@
 import { ChevronLeftIcon, ChevronRightIcon, DoubleArrowLeftIcon, DoubleArrowRightIcon } from '@radix-ui/react-icons';
-import { Flex, IconButton, Text, Select } from '@radix-ui/themes';
+import { Flex, IconButton, Text, Select, Tooltip } from '@radix-ui/themes';
 import { useTranslation } from 'react-i18next';
 
 interface PaginationProps {
@@ -54,18 +54,26 @@ export function Pagination({
         })}
       </Text>
       <Flex gap="2">
-        <IconButton variant="soft" onClick={onFirstPage} disabled={!hasPreviousPage}>
-          <DoubleArrowLeftIcon width={16} />
-        </IconButton>
-        <IconButton variant="soft" onClick={onPrevious} disabled={!hasPreviousPage}>
-          <ChevronLeftIcon width={16} />
-        </IconButton>
-        <IconButton variant="soft" onClick={onNext} disabled={!hasNextPage}>
-          <ChevronRightIcon width={16} />
-        </IconButton>
-        <IconButton variant="soft" onClick={onLastPage} disabled={!hasNextPage}>
-          <DoubleArrowRightIcon width={16} />
-        </IconButton>
+        <Tooltip content={t('actions.firstPage')}>
+          <IconButton variant="soft" onClick={onFirstPage} disabled={!hasPreviousPage}>
+            <DoubleArrowLeftIcon width={16} />
+          </IconButton>
+        </Tooltip>
+        <Tooltip content={t('actions.previousPage')}>
+          <IconButton variant="soft" onClick={onPrevious} disabled={!hasPreviousPage}>
+            <ChevronLeftIcon width={16} />
+          </IconButton>
+        </Tooltip>
+        <Tooltip content={t('actions.nextPage')}>
+          <IconButton variant="soft" onClick={onNext} disabled={!hasNextPage}>
+            <ChevronRightIcon width={16} />
+          </IconButton>
+        </Tooltip>
+        <Tooltip content={t('actions.lastPage')}>
+          <IconButton variant="soft" onClick={onLastPage} disabled={!hasNextPage}>
+            <DoubleArrowRightIcon width={16} />
+          </IconButton>
+        </Tooltip>
       </Flex>
     </Flex>
   );
