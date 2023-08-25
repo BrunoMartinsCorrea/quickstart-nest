@@ -1,7 +1,7 @@
 import { httpClient } from '../client';
 import axios, { AxiosRequestConfig, isAxiosError } from 'axios';
-import { useStore } from '@/stores/useStore';
-import { TokenDto } from '@/services/authentication';
+import { TokenDto } from 'ui/services/authentication';
+import { useStore } from '~/stores/useStore';
 
 httpClient.interceptors.response.use(undefined, async (error) => {
   if (isAxiosError(error)) {

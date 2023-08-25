@@ -20,7 +20,13 @@
     "lastPage": "Last page",
     "previousPage": "Previous page",
     "firstPage": "First page",
-    "changeLanguage": "Change language"
+    "changeLanguage": "Change language",
+    "duplicate": "Duplicate",
+    "delete": "Delete",
+    "deleteSelected": "Delete selected",
+    "edit": "Edit",
+    "refresh": "Refresh",
+    "cancel": "Cancel"
   },
   "labels": {
     "pagination": "Page {{page}} of {{totalPages}}",
@@ -74,6 +80,16 @@
       "updatedAt": "Updated at",
       "username": "Username",
       "id": "ID"
+    },
+    "deleteDialog": {
+      "title": {
+        "singular": "Delete User",
+        "plural": "Delete Users"
+      },
+      "description": {
+        "singular": "Are you sure you want to delete this user? This action is permanent and cannot be undone.",
+        "plural": "Are you sure you want to delete these users? This action is permanent and cannot be undone."
+      }
     }
   }
 }

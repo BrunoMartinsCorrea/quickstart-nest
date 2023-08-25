@@ -1,6 +1,6 @@
-import { ResponseError } from '@/types/ResponseError';
+import { ResponseError } from '~/types/ResponseError';
 import { httpClient } from '../client';
-import { toast } from '@/hooks/useToast';
+import { toast } from '~/hooks/useToast';
 import { isAxiosError } from 'axios';
 import i18n from 'i18next';
 

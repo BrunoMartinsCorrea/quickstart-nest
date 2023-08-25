@@ -1,4 +1,4 @@
-import { useStore } from '@/stores/useStore';
+import { useStore } from '~/stores/useStore';
 import { httpClient } from '../client';
 import i18next from 'i18next';
 

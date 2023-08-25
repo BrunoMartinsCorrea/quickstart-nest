@@ -20,7 +20,13 @@
     "lastPage": "Última página",
     "previousPage": "Página anterior",
     "firstPage": "Primeira página",
-    "changeLanguage": "Mudar idioma"
+    "changeLanguage": "Mudar idioma",
+    "duplicate": "Duplicar",
+    "delete": "Deletar",
+    "deleteSelected": "Deletar selecionados",
+    "edit": "Editar",
+    "refresh": "Atualizar",
+    "cancel": "Cancelar"
   },
   "labels": {
     "pagination": "Página {{page}} de {{totalPages}}",
