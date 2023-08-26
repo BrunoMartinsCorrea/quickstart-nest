@@ -1,4 +1,3 @@
-import i18next from 'i18next';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DotsVerticalIcon, UpdateIcon } from '@radix-ui/react-icons';
@@ -26,6 +25,7 @@ import {
   getFilteredRowModel,
 } from '@tanstack/react-table';
 import { DeleteDialog } from './components/DeleteDialog';
+import i18next from 'i18next';
 
 const column = createColumnHelper<User>();
 
@@ -39,7 +39,7 @@ type DeleteDialogState = {
   users: User[];
 };
 
-export function Users() {
+export default function Users() {
   const { t, i18n } = useTranslation();
   const users = useStore((state) => state.users);
   const getUsers = useStore((state) => state.getUsers);
@@ -89,27 +89,27 @@ export function Users() {
         },
       }),
       column.accessor('fullName', {
-        header: t('users.schema.fullName'),
+        header: t('schema.fullName', { ns: 'users' }),
         cell: (info) => info.getValue(),
       }),
       column.accessor('email', {
-        header: t('users.schema.email'),
+        header: t('schema.email', { ns: 'users' }),
         cell: (info) => info.getValue(),
       }),
       column.accessor('createdAt', {
-        header: t('users.schema.createdAt'),
+        header: t('schema.createdAt', { ns: 'users' }),
         cell: (info) => dateFormatter.format(info.getValue()),
       }),
       column.accessor('updatedAt', {
-        header: t('users.schema.updatedAt'),
+        header: t('schema.updatedAt', { ns: 'users' }),
         cell: (info) => dateFormatter.format(info.getValue()),
       }),
       column.accessor('username', {
-        header: t('users.schema.username'),
+        header: t('schema.username', { ns: 'users' }),
         cell: (info) => info.getValue(),
       }),
       column.accessor('id', {
-        header: t('users.schema.id'),
+        header: t('schema.id', { ns: 'users' }),
         cell: (info) => info.getValue(),
       }),
       column.display({
@@ -197,7 +197,7 @@ export function Users() {
   return (
     <>
       <Flex direction="column" gap="3">
-        <Heading my="4">{t('users.title')}</Heading>
+        <Heading my="4">{t('title', { ns: 'users' })}</Heading>
         <Flex justify="between" align="center" gap="4">
           <Tooltip content={t('actions.refresh')}>
             <IconButton variant="soft" onClick={refresh}>

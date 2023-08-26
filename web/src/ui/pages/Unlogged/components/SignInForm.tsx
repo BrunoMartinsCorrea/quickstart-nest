@@ -53,13 +53,13 @@ export function SignInForm() {
           <TextFieldWithLabel
             label={t('fields.email.label')}
             placeholder={t('fields.email.label')}
-            errorText={t(errors.username?.message ?? '')}
+            errorText={t((errors.username?.message ?? '') as 'fields.email.label')}
             {...register('username')}
           />
           <TextFieldWithLabel
             label={t('fields.password.label')}
             htmlFor={passwordId}
-            errorText={t(errors.password?.message ?? '')}
+            errorText={t((errors.password?.message ?? '') as 'fields.email.label')}
           >
             <TextField.Root>
               <TextField.Input

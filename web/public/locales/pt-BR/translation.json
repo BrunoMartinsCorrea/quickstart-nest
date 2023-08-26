@@ -70,16 +70,5 @@
     "profile": {
       "profile": "Perfil"
     }
-  },
-  "users": {
-    "title": "Usuários",
-    "schema": {
-      "fullName": "Nome completo",
-      "email": "Email",
-      "createdAt": "Data criação",
-      "updatedAt": "Data atualização",
-      "username": "Usuário",
-      "id": "ID"
-    }
   }
 }

@@ -55,19 +55,19 @@ export function SignUpForm() {
           <TextFieldWithLabel
             label={t('fields.email.label')}
             placeholder={t('fields.email.label')}
-            errorText={t(errors.email?.message ?? '')}
+            errorText={t((errors.email?.message ?? '') as 'fields.email.label')}
             {...register('email')}
           />
           <TextFieldWithLabel
             label={t('fields.fullName.label')}
             placeholder={t('fields.fullName.label')}
-            errorText={t(errors.fullName?.message ?? '')}
+            errorText={t((errors.fullName?.message ?? '') as 'fields.email.label')}
             {...register('fullName')}
           />
           <TextFieldWithLabel
             label={t('fields.password.label')}
             htmlFor={passwordId}
-            errorText={t(errors.password?.message ?? '', { length: 6 })}
+            errorText={t((errors.password?.message ?? '') as 'fields.email.label', { length: 6 })}
           >
             <TextField.Root>
               <TextField.Input
@@ -86,7 +86,7 @@ export function SignUpForm() {
           <TextFieldWithLabel
             label={t('fields.confirmPassword.label')}
             htmlFor={confirmPasswordId}
-            errorText={t(errors.confirmPassword?.message ?? '')}
+            errorText={t((errors.confirmPassword?.message ?? '') as 'fields.email.label')}
           >
             <TextField.Root>
               <TextField.Input

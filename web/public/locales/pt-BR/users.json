@@ -1,0 +1,17 @@
+{
+  "title": "Usuários",
+  "schema": {
+    "fullName": "Nome completo",
+    "email": "Email",
+    "createdAt": "Data criação",
+    "updatedAt": "Data atualização",
+    "username": "Usuário",
+    "id": "ID"
+  },
+  "deleteDialog": {
+    "title_one": "Deletar Usuário",
+    "title_other": "Deletar Usuários",
+    "description_one": "Você tem certeza que quer deletar esse usuário? Esta ação é permanente e não pode ser desfeita.",
+    "description_other": "Você tem certeza que quer deletar esses usuários? Esta ação é permanente e não pode ser desfeita."
+  }
+}

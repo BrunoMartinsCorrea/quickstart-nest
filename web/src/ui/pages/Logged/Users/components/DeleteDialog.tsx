@@ -10,20 +10,18 @@ interface DeleteDialogProps {
 
 export function DeleteDialog({ open, users, onOpenChange }: DeleteDialogProps) {
   const { t } = useTranslation();
-  const hasMany = users.length > 1;
-
   return (
     <AlertDialog.Root open={open} onOpenChange={onOpenChange}>
       <AlertDialog.Content style={{ maxWidth: 500 }}>
-        <AlertDialog.Title>{t(`users.deleteDialog.title.${hasMany ? 'plural' : 'singular'}`)}</AlertDialog.Title>
+        <AlertDialog.Title>{t('deleteDialog.title', { count: users.length, ns: 'users' })}</AlertDialog.Title>
         <AlertDialog.Description size="2">
-          {t(`users.deleteDialog.description.${hasMany ? 'plural' : 'singular'}`)}
+          {t('deleteDialog.description', { count: users.length, ns: 'users' })}
         </AlertDialog.Description>
         <Table.Root variant="ghost" my="4">
           <Table.Header>
             <Table.Row>
-              <Table.ColumnHeaderCell>{t('users.schema.fullName')}</Table.ColumnHeaderCell>
-              <Table.ColumnHeaderCell>{t('users.schema.email')}</Table.ColumnHeaderCell>
+              <Table.ColumnHeaderCell>{t('schema.fullName', { ns: 'users' })}</Table.ColumnHeaderCell>
+              <Table.ColumnHeaderCell>{t('schema.email', { ns: 'users' })}</Table.ColumnHeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>

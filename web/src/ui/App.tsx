@@ -2,9 +2,9 @@ import { Suspense, useEffect } from 'react';
 import { RouterProvider } from 'react-router-dom';
 import { router } from './router';
 import { Theme } from '@radix-ui/themes';
-import { GlobalStyle } from '~/styles/GlobalStyle';
 import { ToastProvider } from '~/components/Toast/ToastProvider';
 import { useStore } from '~/stores/useStore';
+import '~/styles/global.css';
 
 export function App() {
   const appearance = useStore((state) => state.appearance);
@@ -21,7 +21,6 @@ export function App() {
           <RouterProvider router={router} />
         </ToastProvider>
       </Theme>
-      <GlobalStyle />
     </Suspense>
   );
 }

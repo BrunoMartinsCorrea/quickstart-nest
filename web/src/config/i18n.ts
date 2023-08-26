@@ -6,7 +6,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import { Language } from '~/types/Language';
 
 export const supportedLanguages: Language[] = [
-  { language: 'Potuguês Brasileiro', value: 'pt-BR' },
+  { language: 'Português Brasileiro', value: 'pt-BR' },
   { language: 'English', value: 'en' },
 ];
 
@@ -15,13 +15,17 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    fallbackLng: 'pt-BR',
+    partialBundledLanguages: true,
+    fallbackLng: 'en',
     debug: false,
     interpolation: {
       escapeValue: false,
     },
     load: 'all',
     supportedLngs: supportedLanguages.map((lng) => lng.value),
+    backend: {
+      loadPath: '/locales/{{lng}}/{{ns}}.json',
+    },
   });
 
 export default i18n;
