@@ -1,6 +1,6 @@
 import { SetState } from 'zustand';
 import { StoreState } from './useStore';
-import { AuthenticationService, CredentialsDto, TokenDto } from '../services/authentication';
+import { AuthenticationService, CredentialsDto, TokenDto } from '@/domain/authentication';
 
 export type AuthenticationState = {
   access?: string;

@@ -7,9 +7,9 @@ import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { ThemePanel } from '~/components/ThemePanel';
-import styles from './Layout.module.css';
+import styles from './styles.module.css';
 
-export function LoggedLayout() {
+export function InternalLayout() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const signOut = useStore((state) => state.signOut);
@@ -38,15 +38,16 @@ export function LoggedLayout() {
             <DropdownMenu.Content variant="soft">
               <DropdownMenu.Item>{t('logged.profile.profile')}</DropdownMenu.Item>
               <DropdownMenu.Separator />
-              <DropdownMenu.Item onClick={signOut}>{t('logged.signOut.signOut')}</DropdownMenu.Item>
+              <DropdownMenu.Item onClick={signOut}>{t('actions.signOut')}</DropdownMenu.Item>
             </DropdownMenu.Content>
           </DropdownMenu.Root>
         </Flex>
       </Header>
       <Flex>
         <Menu>
-          <Flex gap="4" direction="column">
-            <MenuItem to="/users">Usuários</MenuItem>
+          <Flex gap="1" direction="column">
+            <MenuItem to="/">{t('menu.home')}</MenuItem>
+            <MenuItem to="/users">{t('menu.users')}</MenuItem>
           </Flex>
         </Menu>
         <Flex className={styles.mainContainer}>

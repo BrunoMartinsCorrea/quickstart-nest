@@ -40,7 +40,7 @@ type DeleteDialogState = {
 };
 
 export default function Users() {
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation('users');
   const users = useStore((state) => state.users);
   const getUsers = useStore((state) => state.getUsers);
   const [pagination, setPagination] = useState<PaginationState>(() => defaultPagination);
@@ -89,27 +89,27 @@ export default function Users() {
         },
       }),
       column.accessor('fullName', {
-        header: t('schema.fullName', { ns: 'users' }),
+        header: t('schema.fullName'),
         cell: (info) => info.getValue(),
       }),
       column.accessor('email', {
-        header: t('schema.email', { ns: 'users' }),
+        header: t('schema.email'),
         cell: (info) => info.getValue(),
       }),
       column.accessor('createdAt', {
-        header: t('schema.createdAt', { ns: 'users' }),
+        header: t('schema.createdAt'),
         cell: (info) => dateFormatter.format(info.getValue()),
       }),
       column.accessor('updatedAt', {
-        header: t('schema.updatedAt', { ns: 'users' }),
+        header: t('schema.updatedAt'),
         cell: (info) => dateFormatter.format(info.getValue()),
       }),
       column.accessor('username', {
-        header: t('schema.username', { ns: 'users' }),
+        header: t('schema.username'),
         cell: (info) => info.getValue(),
       }),
       column.accessor('id', {
-        header: t('schema.id', { ns: 'users' }),
+        header: t('schema.id'),
         cell: (info) => info.getValue(),
       }),
       column.display({
@@ -130,11 +130,11 @@ export default function Users() {
               </IconButton>
             </DropdownMenu.Trigger>
             <DropdownMenu.Content variant="soft">
-              <DropdownMenu.Item>{t('actions.edit')}</DropdownMenu.Item>
-              <DropdownMenu.Item>{t('actions.duplicate')}</DropdownMenu.Item>
+              <DropdownMenu.Item>{t('actions.edit', { ns: 'translation' })}</DropdownMenu.Item>
+              <DropdownMenu.Item>{t('actions.duplicate', { ns: 'translation' })}</DropdownMenu.Item>
               <DropdownMenu.Separator />
               <DropdownMenu.Item color="red" onClick={() => handleDeleteUser(info.row.original)}>
-                {t('actions.delete')}
+                {t('actions.delete', { ns: 'translation' })}
               </DropdownMenu.Item>
               {hasSelection && (
                 <DropdownMenu.Item color="red" onClick={handleDeleteMany}>
@@ -197,14 +197,14 @@ export default function Users() {
   return (
     <>
       <Flex direction="column" gap="3">
-        <Heading my="4">{t('title', { ns: 'users' })}</Heading>
+        <Heading my="4">{t('title')}</Heading>
         <Flex justify="between" align="center" gap="4">
-          <Tooltip content={t('actions.refresh')}>
+          <Tooltip content={t('actions.refresh', { ns: 'translation' })}>
             <IconButton variant="soft" onClick={refresh}>
               <UpdateIcon />
             </IconButton>
           </Tooltip>
-          <Button variant="solid">{t('actions.new')}</Button>
+          <Button variant="solid">{t('actions.new', { ns: 'translation' })}</Button>
         </Flex>
         {!!users.results.length && (
           <TableRoot variant="surface">
@@ -232,11 +232,11 @@ export default function Users() {
                     </TableRow>
                   </ContextMenu.Trigger>
                   <ContextMenu.Content variant="soft">
-                    <ContextMenu.Item>{t('actions.edit')}</ContextMenu.Item>
-                    <ContextMenu.Item>{t('actions.duplicate')}</ContextMenu.Item>
+                    <ContextMenu.Item>{t('actions.edit', { ns: 'translation' })}</ContextMenu.Item>
+                    <ContextMenu.Item>{t('actions.duplicate', { ns: 'translation' })}</ContextMenu.Item>
                     <ContextMenu.Separator />
                     <ContextMenu.Item color="red" onClick={() => handleDeleteUser(row.original)}>
-                      {t('actions.delete')}
+                      {t('actions.delete', { ns: 'translation' })}
                     </ContextMenu.Item>
                     {hasSelection && (
                       <ContextMenu.Item color="red" onClick={handleDeleteMany}>

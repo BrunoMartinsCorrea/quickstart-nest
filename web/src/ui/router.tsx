@@ -1,11 +1,11 @@
 import React, { Suspense } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import { Unlogged } from './pages/Unlogged';
-import { Home } from './pages/Logged/Home';
-import { LoggedLayout } from './pages/Logged/Layout';
 import { Spinner } from './components/Spinner';
+import { InternalLayout } from './layouts/internal';
+import { Home } from '~/pages/Home';
 
-const Users = React.lazy(() => import('~/pages/Logged/Users'));
+const Users = React.lazy(() => import('~/pages/Users'));
 
 export const router = createBrowserRouter([
   {
@@ -14,10 +14,10 @@ export const router = createBrowserRouter([
   },
   {
     path: '/',
-    element: <LoggedLayout />,
+    element: <InternalLayout />,
     children: [
       {
-        path: '/home',
+        path: '/',
         element: <Home />,
       },
       {

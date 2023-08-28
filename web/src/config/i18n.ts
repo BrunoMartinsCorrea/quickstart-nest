@@ -3,7 +3,10 @@ import { initReactI18next } from 'react-i18next';
 
 import Backend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
-import { Language } from '~/types/Language';
+export interface Language {
+  language: string;
+  value: string;
+}
 
 export const supportedLanguages: Language[] = [
   { language: 'Português Brasileiro', value: 'pt-BR' },

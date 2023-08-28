@@ -27,7 +27,8 @@ interface Resources {
       "deleteSelected": "Delete selected",
       "edit": "Edit",
       "refresh": "Refresh",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "signOut": "Sign Out"
     },
     "labels": {
       "pagination": "Page {{page}} of {{totalPages}}",
@@ -53,6 +54,10 @@ interface Resources {
         "notMatch": "Passwords does not match"
       }
     },
+    "menu": {
+      "home": "Home",
+      "users": "Users"
+    },
     "unlogged": {
       "signIn": {
         "signIn": "Sign In",
@@ -65,9 +70,6 @@ interface Resources {
       }
     },
     "logged": {
-      "signOut": {
-        "signOut": "Sign Out"
-      },
       "profile": {
         "profile": "Profile"
       }

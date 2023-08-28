@@ -26,7 +26,8 @@
     "deleteSelected": "Delete selected",
     "edit": "Edit",
     "refresh": "Refresh",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "signOut": "Sign Out"
   },
   "labels": {
     "pagination": "Page {{page}} of {{totalPages}}",
@@ -52,6 +53,10 @@
       "notMatch": "Passwords does not match"
     }
   },
+  "menu": {
+    "home": "Home",
+    "users": "Users"
+  },
   "unlogged": {
     "signIn": {
       "signIn": "Sign In",
@@ -64,9 +69,6 @@
     }
   },
   "logged": {
-    "signOut": {
-      "signOut": "Sign Out"
-    },
     "profile": {
       "profile": "Profile"
     }

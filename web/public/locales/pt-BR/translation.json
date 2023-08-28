@@ -26,7 +26,8 @@
     "deleteSelected": "Deletar selecionados",
     "edit": "Editar",
     "refresh": "Atualizar",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "signOut": "Sair"
   },
   "labels": {
     "pagination": "Página {{page}} de {{totalPages}}",
@@ -52,6 +53,10 @@
       "notMatch": "As senhas não coincidem"
     }
   },
+  "menu": {
+    "home": "Página inicial",
+    "users": "Usuários"
+  },
   "unlogged": {
     "signIn": {
       "signIn": "Entre",
@@ -64,9 +69,6 @@
     }
   },
   "logged": {
-    "signOut": {
-      "signOut": "Sair"
-    },
     "profile": {
       "profile": "Perfil"
     }

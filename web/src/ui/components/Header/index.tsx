@@ -13,7 +13,7 @@ export function Header({ title, children }: HeaderProps) {
     <header className={styles.header}>
       <Flex justify="between" align="center" width="100%" gap="4" p="4">
         {title && (
-          <Link to="/home" className={styles.headerLink}>
+          <Link to="/" className={styles.headerLink}>
             {title}
           </Link>
         )}
