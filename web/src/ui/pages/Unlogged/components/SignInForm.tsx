@@ -5,7 +5,7 @@ import { useId, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { useStore } from '~/stores/useStore';
+import { useGlobalStore } from '~/stores/useGlobalStore';
 import { useTranslation } from 'react-i18next';
 import { useToast } from '~/hooks/useToast';
 import { ResponseError } from '~/types/ResponseError';
@@ -20,7 +20,7 @@ type SignInFormData = z.infer<typeof signInSchema>;
 export function SignInForm() {
   const { t } = useTranslation();
   const [visiblePassword, setVisiblePassword] = useState(false);
-  const signIn = useStore((state) => state.signIn);
+  const signIn = useGlobalStore((state) => state.signIn);
   const passwordId = useId();
   const { register, handleSubmit, formState } = useForm<SignInFormData>({
     resolver: zodResolver(signInSchema),

@@ -1,11 +1,11 @@
 import axios, { AxiosRequestConfig, isAxiosError } from 'axios';
 import { TokenDto } from '@/domain/authentication';
-import { useStore } from '~/stores/useStore';
+import { useGlobalStore } from '~/stores/useGlobalStore';
 import { httpClient } from '../client';
 
 httpClient.interceptors.response.use(undefined, async (error) => {
   if (isAxiosError(error)) {
-    const { access, refresh, updateAccess, signOut } = useStore.getState();
+    const { access, refresh, updateAccess, signOut } = useGlobalStore.getState();
     if (access && error.response?.status === 401) {
       try {
         const response = await axios.post<TokenDto>('/api/authentication/refresh', {

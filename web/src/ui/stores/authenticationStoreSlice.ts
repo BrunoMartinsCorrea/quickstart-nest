@@ -1,5 +1,5 @@
 import { SetState } from 'zustand';
-import { StoreState } from './useStore';
+import { GlobalStoreState } from './useGlobalStore';
 import { AuthenticationService, CredentialsDto, TokenDto } from '@/domain/authentication';
 
 export type AuthenticationState = {
@@ -10,7 +10,7 @@ export type AuthenticationState = {
   signIn: (payload: CredentialsDto) => Promise<void>;
 };
 
-export const createAuthenticationSlice = (set: SetState<StoreState>) => ({
+export const createAuthenticationSlice = (set: SetState<GlobalStoreState>) => ({
   access: undefined,
   refresh: undefined,
   signOut: () => set({ access: undefined, refresh: undefined }),

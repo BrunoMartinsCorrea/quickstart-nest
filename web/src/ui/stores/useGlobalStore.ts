@@ -3,9 +3,9 @@ import { devtools, persist } from 'zustand/middleware';
 import { PreferencesState, createPreferencesSlice } from './preferencesStoreSlice';
 import { AuthenticationState, createAuthenticationSlice } from './authenticationStoreSlice';
 
-export type StoreState = AuthenticationState & PreferencesState;
+export type GlobalStoreState = AuthenticationState & PreferencesState;
 
-export const useStore = create<StoreState>()(
+export const useGlobalStore = create<GlobalStoreState>()(
   devtools(
     persist(
       (set, get) => ({

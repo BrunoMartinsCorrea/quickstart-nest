@@ -1,10 +1,10 @@
 import { Button, Flex, Heading } from '@radix-ui/themes';
 import { httpClient } from '@/adapters/httpClient';
 import { SignUpForm } from '~/pages/Unlogged/components/SignUpForm';
-import { useStore } from '~/stores/useStore';
+import { useGlobalStore } from '~/stores/useGlobalStore';
 
 export function Home() {
-  const signOut = useStore((state) => state.signOut);
+  const signOut = useGlobalStore((state) => state.signOut);
 
   function handleRequest() {
     httpClient.get(`/user/ce8ea3d2-2fc0-4747-99c1-209f6cefb95f`).then((res) => {

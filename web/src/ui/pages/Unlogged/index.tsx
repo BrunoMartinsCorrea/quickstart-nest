@@ -5,13 +5,13 @@ import { useTranslation } from 'react-i18next';
 import { Header } from '~/components/Header';
 import { LocaleDropdown } from '~/components/LocaleDropdown';
 import { useNavigate } from 'react-router-dom';
-import { useStore } from '~/stores/useStore';
+import { useGlobalStore } from '~/stores/useGlobalStore';
 import { useEffect } from 'react';
 import { ThemePanel } from '~/components/ThemePanel';
 
 export function Unlogged() {
   const navigate = useNavigate();
-  const access = useStore((state) => state.access);
+  const access = useGlobalStore((state) => state.access);
   const { t } = useTranslation('translation', { keyPrefix: 'unlogged' });
 
   useEffect(() => {

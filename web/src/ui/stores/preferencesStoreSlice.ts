@@ -1,5 +1,5 @@
 import { GetState, SetState } from 'zustand';
-import { StoreState } from './useStore';
+import { GlobalStoreState } from './useGlobalStore';
 
 type Appearance = 'light' | 'dark';
 
@@ -8,7 +8,7 @@ export type PreferencesState = {
   changeAppearance: (appearance: Appearance) => void;
 };
 
-export const createPreferencesSlice = (set: SetState<StoreState>, get: GetState<StoreState>) => ({
+export const createPreferencesSlice = (set: SetState<GlobalStoreState>, get: GetState<GlobalStoreState>) => ({
   appearance: 'light' as const,
   changeAppearance: (value: Appearance) => {
     const html = document.querySelector('html');

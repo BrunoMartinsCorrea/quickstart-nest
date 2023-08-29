@@ -1,7 +1,7 @@
 import { Header } from '~/components/Header';
 import { LocaleDropdown } from '~/components/LocaleDropdown';
 import { Menu, MenuItem } from '~/components/Menu';
-import { useStore } from '~/stores/useStore';
+import { useGlobalStore } from '~/stores/useGlobalStore';
 import { Avatar, Container, DropdownMenu, Flex, Grid, Heading } from '@radix-ui/themes';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -12,8 +12,8 @@ import styles from './styles.module.css';
 export function InternalLayout() {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const signOut = useStore((state) => state.signOut);
-  const access = useStore((state) => state.access);
+  const signOut = useGlobalStore((state) => state.signOut);
+  const access = useGlobalStore((state) => state.access);
 
   useEffect(() => {
     if (!access) navigate('/sign-in');

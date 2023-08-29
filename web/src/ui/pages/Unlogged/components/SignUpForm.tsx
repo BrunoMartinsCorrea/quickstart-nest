@@ -1,5 +1,5 @@
 import { TextFieldWithLabel } from '~/components/TextFieldWithLabel';
-// import { useStore } from '@/stores/useStore';
+// import { useStore } from '@/stores/useGlobalStore';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
 import { Card, Flex, Text, TextField, IconButton, Button } from '@radix-ui/themes';

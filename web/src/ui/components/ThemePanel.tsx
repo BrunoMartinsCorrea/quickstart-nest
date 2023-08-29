@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { useStore } from '../stores/useStore';
+import { useGlobalStore } from '../stores/useGlobalStore';
 import { IconButton, ThemePanel as RadixThemePanel } from '@radix-ui/themes';
 import { MagicWandIcon } from '@radix-ui/react-icons';
 
 export function ThemePanel() {
   const [showPanel, setShowPanel] = useState(false);
-  const changeAppearance = useStore((state) => state.changeAppearance);
+  const changeAppearance = useGlobalStore((state) => state.changeAppearance);
 
   return (
     <>
