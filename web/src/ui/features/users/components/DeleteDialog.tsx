@@ -1,17 +1,15 @@
-import { User } from '@/domain/user';
 import { AlertDialog, Button, Flex, Table } from '@radix-ui/themes';
 import { useTranslation } from 'react-i18next';
+import { useCloseDeleteDialog, useIsDeleteDialogOpen, useSelectedUsers } from '../hooks';
 
-interface DeleteDialogProps {
-  open: boolean;
-  users: User[];
-  onOpenChange: (open: boolean) => void;
-}
-
-export function DeleteDialog({ open, users, onOpenChange }: DeleteDialogProps) {
+export function DeleteDialog() {
   const { t } = useTranslation();
+  const close = useCloseDeleteDialog();
+  const open = useIsDeleteDialogOpen();
+  const users = useSelectedUsers();
+
   return (
-    <AlertDialog.Root open={open} onOpenChange={onOpenChange}>
+    <AlertDialog.Root open={open} onOpenChange={close}>
       <AlertDialog.Content style={{ maxWidth: 500 }}>
         <AlertDialog.Title>{t('deleteDialog.title', { count: users.length, ns: 'users' })}</AlertDialog.Title>
         <AlertDialog.Description size="2">

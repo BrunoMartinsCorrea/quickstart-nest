@@ -5,7 +5,7 @@ import { Spinner } from './components/Spinner';
 import { InternalLayout } from './layouts/internal';
 import { Home } from '~/pages/Home';
 
-const Users = React.lazy(() => import('~/pages/Users'));
+const Users = React.lazy(() => import('~/features/users'));
 
 export const router = createBrowserRouter([
   {

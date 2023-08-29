@@ -4,7 +4,11 @@ import { router } from './router';
 import { Theme } from '@radix-ui/themes';
 import { ToastProvider } from '~/components/Toast/ToastProvider';
 import { useStore } from '~/stores/useStore';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import '~/styles/global.css';
+
+const queryClient = new QueryClient();
 
 export function App() {
   const appearance = useStore((state) => state.appearance);
@@ -18,7 +22,10 @@ export function App() {
     <Suspense fallback="loading">
       <Theme appearance={appearance} accentColor="bronze" panelBackground="solid">
         <ToastProvider>
-          <RouterProvider router={router} />
+          <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router} />
+            <ReactQueryDevtools />
+          </QueryClientProvider>
         </ToastProvider>
       </Theme>
     </Suspense>

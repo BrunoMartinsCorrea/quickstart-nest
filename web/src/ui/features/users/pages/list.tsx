@@ -1,21 +1,10 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { DotsVerticalIcon, UpdateIcon } from '@radix-ui/react-icons';
+import { DotsVerticalIcon } from '@radix-ui/react-icons';
 import { User } from '@/domain/user';
-import { useStore } from '~/stores/useStore';
 import { Pagination } from '~/components/Pagination';
-import { ColumnsVisibilityDropdown, TableRoot, TableRow } from '~/components/Table';
-import {
-  Button,
-  Checkbox,
-  ContextMenu,
-  DropdownMenu,
-  Flex,
-  Heading,
-  IconButton,
-  Table,
-  Tooltip,
-} from '@radix-ui/themes';
+import { ColumnHeaderCell, ColumnsVisibilityDropdown, TableRoot, TableRow } from '~/components/Table';
+import { Button, Checkbox, ContextMenu, DropdownMenu, Flex, Heading, IconButton, Table } from '@radix-ui/themes';
 import {
   PaginationState,
   createColumnHelper,
@@ -23,9 +12,15 @@ import {
   getCoreRowModel,
   useReactTable,
   getFilteredRowModel,
+  SortingState,
+  getSortedRowModel,
 } from '@tanstack/react-table';
-import { DeleteDialog } from './components/DeleteDialog';
+import { DeleteDialog } from '../components/DeleteDialog';
 import i18next from 'i18next';
+import { useDeleteDialog, useGetUsers } from '../hooks';
+import { produce } from 'immer';
+import { useQuery } from '@tanstack/react-query';
+import { Spinner } from '~/components/Spinner';
 
 const column = createColumnHelper<User>();
 
@@ -34,21 +29,15 @@ const defaultPagination: PaginationState = {
   pageSize: 1,
 };
 
-type DeleteDialogState = {
-  open: boolean;
-  users: User[];
-};
-
-export default function Users() {
+export function UsersList() {
   const { t, i18n } = useTranslation('users');
-  const users = useStore((state) => state.users);
-  const getUsers = useStore((state) => state.getUsers);
+  const getUsers = useGetUsers();
+  const deleteDialog = useDeleteDialog();
   const [pagination, setPagination] = useState<PaginationState>(() => defaultPagination);
   const [rowSelection, setRowSelection] = useState({});
-  const [deleteDialog, setDeleteDialog] = useState<DeleteDialogState>(() => ({
-    open: false,
-    users: [],
-  }));
+  const [sorting, setSorting] = useState<SortingState>([]);
+
+  const dateFormatter = useMemo(() => new Intl.DateTimeFormat(i18n.language), [i18n.language]);
 
   const hasSelection = JSON.stringify(rowSelection) !== '{}';
 
@@ -58,25 +47,25 @@ export default function Users() {
     });
   }
 
-  function refresh() {
-    setPagination((value) => ({
-      pageIndex: 0,
-      pageSize: value.pageSize,
-    }));
-  }
+  const { data, isFetching, refetch } = useQuery(
+    ['users', pagination.pageIndex, pagination.pageSize],
+    () => getUsers({ page: pagination.pageIndex, limit: pagination.pageSize }),
+    {
+      staleTime: 15000,
+    }
+  );
 
-  const dateFormatter = useMemo(() => new Intl.DateTimeFormat(i18n.language), [i18n.language]);
-
-  const pageCount = useCallback(() => {
-    const calc = users.limit ? Math.ceil(users.totalCount / users.limit) : 1;
+  const pageCount = useMemo(() => {
+    const calc = data?.limit ? Math.ceil(data.totalCount / data.limit) : 1;
     return calc < 1 ? 1 : calc;
-  }, [users]);
+  }, [data]);
 
   const columns = useMemo(
     () => [
       column.display({
         id: 'select',
         enableHiding: false,
+        enableSorting: false,
         header: ({ table }) => <Checkbox checked={table.getIsAllRowsSelected()} onCheckedChange={toggleAllSelection} />,
         cell: ({ row }) => {
           return (
@@ -115,6 +104,7 @@ export default function Users() {
       column.display({
         id: 'action',
         enableHiding: false,
+        enableSorting: false,
         header: () => (
           <ColumnsVisibilityDropdown
             isAllColumnsVisible={table.getIsAllColumnsVisible()}
@@ -150,14 +140,16 @@ export default function Users() {
   );
 
   const table = useReactTable({
-    data: users.results ?? [],
+    data: data?.results ?? [],
     columns,
     manualPagination: true,
     onPaginationChange: setPagination,
-    pageCount: pageCount(),
+    onSortingChange: setSorting,
+    pageCount,
     state: {
       pagination,
       rowSelection,
+      sorting,
     },
     initialState: {
       columnVisibility: {
@@ -170,51 +162,49 @@ export default function Users() {
     onRowSelectionChange: setRowSelection,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    getSortedRowModel: getSortedRowModel(),
   });
 
   function handlePageSizeChange(size: string) {
-    setPagination((value) => ({ ...value, pageSize: Number(size) }));
+    setPagination(
+      produce((draft) => {
+        draft.pageSize = Number(size);
+      })
+    );
+    refetch();
   }
 
   function handleDeleteUser(user: User) {
-    setDeleteDialog({
-      open: true,
-      users: [user],
-    });
+    deleteDialog([user]);
   }
 
   function handleDeleteMany() {
-    setDeleteDialog({
-      open: true,
-      users: table.getSelectedRowModel().rows.map((row) => row.original),
-    });
+    deleteDialog(table.getSelectedRowModel().rows.map((row) => row.original));
   }
-
-  useEffect(() => {
-    getUsers({ page: pagination.pageIndex + 1, limit: pagination.pageSize });
-  }, [pagination]);
 
   return (
     <>
       <Flex direction="column" gap="3">
         <Heading my="4">{t('title')}</Heading>
         <Flex justify="between" align="center" gap="4">
-          <Tooltip content={t('actions.refresh', { ns: 'translation' })}>
-            <IconButton variant="soft" onClick={refresh}>
-              <UpdateIcon />
-            </IconButton>
-          </Tooltip>
-          <Button variant="solid">{t('actions.new', { ns: 'translation' })}</Button>
+          {isFetching && <Spinner size={20} color="accent" />}
+          <Flex justify="end" width="100%">
+            <Button variant="solid">{t('actions.new', { ns: 'translation' })}</Button>
+          </Flex>
         </Flex>
-        {!!users.results.length && (
+        {!!data?.results.length && (
           <TableRoot variant="surface">
             <Table.Header>
               {table.getHeaderGroups().map((headerGroup) => (
                 <Table.Row key={headerGroup.id}>
                   {headerGroup.headers.map((header) => (
-                    <Table.ColumnHeaderCell key={header.id}>
-                      {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                    </Table.ColumnHeaderCell>
+                    <ColumnHeaderCell
+                      key={header.id}
+                      onSort={header.column.getCanSort() ? header.column.getToggleSortingHandler() : undefined}
+                      sortDirection={header.column.getIsSorted() as string}
+                    >
+                      {flexRender(header.column.columnDef.header, header.getContext())}
+                    </ColumnHeaderCell>
                   ))}
                 </Table.Row>
               ))}
@@ -264,16 +254,7 @@ export default function Users() {
           />
         </Flex>
       </Flex>
-      <DeleteDialog
-        open={deleteDialog.open}
-        users={deleteDialog.users}
-        onOpenChange={(value) =>
-          setDeleteDialog({
-            open: value,
-            users: [],
-          })
-        }
-      />
+      <DeleteDialog />
     </>
   );
 }

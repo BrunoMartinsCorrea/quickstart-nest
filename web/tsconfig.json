@@ -11,6 +11,7 @@
       "~/components/*": ["ui/components/*"],
       "~/hooks/*": ["ui/hooks/*"],
       "~/pages/*": ["ui/pages/*"],
+      "~/features/*": ["ui/features/*"],
       "~/stores/*": ["ui/stores/*"],
       "~/styles/*": ["ui/styles/*"],
       "~/types/*": ["ui/types/*"]
