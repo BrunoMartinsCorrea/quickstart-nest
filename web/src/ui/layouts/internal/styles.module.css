@@ -3,3 +3,33 @@
   width: calc(100% - 250px);
   margin-left: 250px;
 }
+
+.menuContainer {
+  z-index: 9999999;
+}
+
+.menuContainer aside {
+  max-width: 250px;
+}
+
+.toggleVisibility {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+@media (max-width: 768px) {
+  .menuContainer {
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.2s;
+  }
+
+  .menuContainer aside {
+    max-width: none;
+  }
+
+  .mainContainer {
+    width: 100%;
+    margin: 0 auto;
+  }
+}

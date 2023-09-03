@@ -9,11 +9,11 @@ interface MenuProps {
 
 export function Menu({ children }: MenuProps) {
   return (
-    <Box className={styles.container}>
+    <aside className={styles.container}>
       <ScrollArea scrollbars="vertical">
         <Box p="4">{children}</Box>
       </ScrollArea>
-    </Box>
+    </aside>
   );
 }
 
@@ -25,7 +25,11 @@ interface MenuButtonProps {
 
 export function MenuItem({ to, onClick, children }: MenuButtonProps) {
   return (
-    <NavLink to={to} className={({ isActive }) => `${styles.button} ${isActive ? styles.buttonActive : ''}`}>
+    <NavLink
+      to={to}
+      className={({ isActive }) => `${styles.button} ${isActive ? styles.buttonActive : ''}`}
+      onClick={onClick}
+    >
       {children}
     </NavLink>
   );
