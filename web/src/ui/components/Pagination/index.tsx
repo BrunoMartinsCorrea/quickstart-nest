@@ -30,7 +30,14 @@ export function Pagination({
   const { t } = useTranslation();
 
   return (
-    <Flex align="center" gap="4">
+    <Flex
+      align="center"
+      gap="4"
+      direction={{
+        initial: 'column',
+        md: 'row',
+      }}
+    >
       <Flex gap="2" align="center">
         <Text weight="bold" size="2">
           {t('labels.rowsPerPage')}
@@ -50,33 +57,43 @@ export function Pagination({
           </Select.Content>
         </Select.Root>
       </Flex>
-      <Text weight="bold" size="2">
-        {t('labels.pagination', {
-          page: currentPage,
-          totalPages,
-        })}
-      </Text>
-      <Flex gap="2">
-        <Tooltip content={t('actions.firstPage')}>
-          <IconButton variant="soft" onClick={onFirstPage} disabled={!hasPreviousPage}>
-            <DoubleArrowLeftIcon width={16} />
-          </IconButton>
-        </Tooltip>
-        <Tooltip content={t('actions.previousPage')}>
-          <IconButton variant="soft" onClick={onPrevious} disabled={!hasPreviousPage}>
-            <ChevronLeftIcon width={16} />
-          </IconButton>
-        </Tooltip>
-        <Tooltip content={t('actions.nextPage')}>
-          <IconButton variant="soft" onClick={onNext} disabled={!hasNextPage}>
-            <ChevronRightIcon width={16} />
-          </IconButton>
-        </Tooltip>
-        <Tooltip content={t('actions.lastPage')}>
-          <IconButton variant="soft" onClick={onLastPage} disabled={!hasNextPage}>
-            <DoubleArrowRightIcon width={16} />
-          </IconButton>
-        </Tooltip>
+      <Flex
+        justify="center"
+        align="center"
+        gap="4"
+        direction={{
+          initial: 'column-reverse',
+          md: 'row',
+        }}
+      >
+        <Text weight="bold" size="2">
+          {t('labels.pagination', {
+            page: currentPage,
+            totalPages,
+          })}
+        </Text>
+        <Flex gap="2" style={{ flex: 1 }}>
+          <Tooltip content={t('actions.firstPage')}>
+            <IconButton variant="soft" onClick={onFirstPage} disabled={!hasPreviousPage}>
+              <DoubleArrowLeftIcon width={16} />
+            </IconButton>
+          </Tooltip>
+          <Tooltip content={t('actions.previousPage')}>
+            <IconButton variant="soft" onClick={onPrevious} disabled={!hasPreviousPage}>
+              <ChevronLeftIcon width={16} />
+            </IconButton>
+          </Tooltip>
+          <Tooltip content={t('actions.nextPage')}>
+            <IconButton variant="soft" onClick={onNext} disabled={!hasNextPage}>
+              <ChevronRightIcon width={16} />
+            </IconButton>
+          </Tooltip>
+          <Tooltip content={t('actions.lastPage')}>
+            <IconButton variant="soft" onClick={onLastPage} disabled={!hasNextPage}>
+              <DoubleArrowRightIcon width={16} />
+            </IconButton>
+          </Tooltip>
+        </Flex>
       </Flex>
     </Flex>
   );

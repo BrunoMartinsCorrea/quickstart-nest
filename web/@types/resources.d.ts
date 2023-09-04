@@ -28,11 +28,17 @@ interface Resources {
       "edit": "Edit",
       "refresh": "Refresh",
       "cancel": "Cancel",
-      "signOut": "Sign Out"
+      "signOut": "Sign Out",
+      "asc": "Asc",
+      "desc": "Desc",
+      "clear": "Clear",
+      "apply": "Apply"
     },
     "labels": {
       "pagination": "Page {{page}} of {{totalPages}}",
-      "rowsPerPage": "Rows per page"
+      "rowsPerPage": "Rows per page",
+      "sortBy": "Sort by",
+      "toggleVisibility": "Toggle visibility"
     },
     "fields": {
       "email": {

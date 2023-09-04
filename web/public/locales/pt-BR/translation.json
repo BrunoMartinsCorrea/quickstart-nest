@@ -27,11 +27,17 @@
     "edit": "Editar",
     "refresh": "Atualizar",
     "cancel": "Cancelar",
-    "signOut": "Sair"
+    "signOut": "Sair",
+    "asc": "Asc",
+    "desc": "Desc",
+    "clear": "Limpar",
+    "apply": "Aplicar"
   },
   "labels": {
     "pagination": "Página {{page}} de {{totalPages}}",
-    "rowsPerPage": "Linhas por página"
+    "rowsPerPage": "Linhas por página",
+    "sortBy": "Ordenar por",
+    "toggleVisibility": "Alternar visibilidade"
   },
   "fields": {
     "email": {

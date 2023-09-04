@@ -13,6 +13,7 @@ export function Label({ size = '2', ...props }: LabelProps) {
         lineHeight: `var(--line-height-${size})`,
         letterSpacing: `var(--letter-spacing-${size})`,
         fontWeight: 'var(--font-weight-medium)',
+        userSelect: 'none',
       }}
     />
   );

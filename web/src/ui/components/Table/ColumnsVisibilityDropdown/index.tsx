@@ -1,5 +1,5 @@
 import { GearIcon } from '@radix-ui/react-icons';
-import { Checkbox, Flex, IconButton, Popover, Separator } from '@radix-ui/themes';
+import { Checkbox, Flex, IconButton, Popover, Separator, Text } from '@radix-ui/themes';
 import { useTranslation } from 'react-i18next';
 import { Column } from '@tanstack/react-table';
 import styles from './styles.module.css';
@@ -29,7 +29,10 @@ export function ColumnsVisibilityDropdown<T>({
         </IconButton>
       </Popover.Trigger>
       <Popover.Content>
-        <Flex direction="column">
+        <Flex direction="column" gap="2">
+          <Text weight="bold" size="2">
+            {t('labels.toggleVisibility')}
+          </Text>
           <label className={styles.checkboxContainer}>
             <Checkbox
               className={styles.input}
@@ -38,7 +41,7 @@ export function ColumnsVisibilityDropdown<T>({
             />
             {t('actions.toggleAll')}
           </label>
-          <Separator my="2" size="4" />
+          <Separator size="4" />
           <Flex gap="1" direction="column">
             {columns.map((column) => {
               if (column.getCanHide())
