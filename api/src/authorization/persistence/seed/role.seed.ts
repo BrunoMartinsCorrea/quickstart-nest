@@ -18,7 +18,7 @@ export class RoleSeeder implements Seeder {
 
   constructor(
     private readonly service: RoleService,
-    @InjectRepository(RoleEntity) private repository: Repository<RoleEntity>
+    @InjectRepository(RoleEntity) private repository: Repository<RoleEntity>,
   ) {}
 
   async seed(): Promise<void> {

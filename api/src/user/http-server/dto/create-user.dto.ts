@@ -14,7 +14,7 @@ export class CreateUserDto {
   @MaxLength(255, { message: 'password length has exceeded 255 characteres' })
   @IsStrongPassword(
     { minLength: 8, minNumbers: 1, minSymbols: 1, minLowercase: 1, minUppercase: 1 },
-    { message: 'password is not strong enough' }
+    { message: 'password is not strong enough' },
   )
   password: string;
 

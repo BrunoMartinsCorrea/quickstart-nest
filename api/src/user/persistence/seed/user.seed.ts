@@ -7,12 +7,12 @@ import { UserEntity } from '../entity/user.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class UsersSeeder implements Seeder {
+export class UserSeeder implements Seeder {
   private ADMIN_USERNAME: string = 'admin@admin.com';
 
   constructor(
     private readonly service: UserService,
-    @InjectRepository(UserEntity) private repository: Repository<UserEntity>
+    @InjectRepository(UserEntity) private repository: Repository<UserEntity>,
   ) {}
 
   async seed(): Promise<void> {

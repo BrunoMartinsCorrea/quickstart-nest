@@ -25,5 +25,5 @@ export const createUserStore = () =>
       },
       openDeleteDialog: (selectedUsers: User[]) => set({ selectedUsers, deleteDialogOpen: true }),
       closeDeleteDialog: () => set({ selectedUsers: [], deleteDialogOpen: false }),
-    }))
+    })),
   );

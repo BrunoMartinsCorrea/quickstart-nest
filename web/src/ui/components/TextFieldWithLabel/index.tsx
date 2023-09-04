@@ -30,5 +30,5 @@ export const TextFieldWithLabel = React.forwardRef<React.ElementRef<typeof TextF
         )}
       </Flex>
     );
-  }
+  },
 );

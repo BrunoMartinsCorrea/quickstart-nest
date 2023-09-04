@@ -54,7 +54,7 @@ export function UsersList() {
   }
 
   const { data, isFetching, refetch } = useQuery(['users', pagination.pageIndex, pagination.pageSize], () =>
-    getUsers({ page: pagination.pageIndex, limit: pagination.pageSize })
+    getUsers({ page: pagination.pageIndex, limit: pagination.pageSize }),
   );
 
   const pageCount = useMemo(() => {
@@ -117,7 +117,7 @@ export function UsersList() {
         ),
       }),
     ],
-    [i18n.language, hasSelection]
+    [i18n.language, hasSelection],
   );
 
   const table = useReactTable({
@@ -150,7 +150,7 @@ export function UsersList() {
     setPagination(
       produce((draft) => {
         draft.pageSize = Number(size);
-      })
+      }),
     );
     refetch();
   }
