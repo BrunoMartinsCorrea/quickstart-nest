@@ -12,11 +12,24 @@ import { UserGroupController } from '@/authorization/http-server/controller/user
 import { UserGroupService } from '@/authorization/domain/service/user-group.service';
 import { UserGroupEntity } from '@/authorization/persistence/entity/user-group.entity';
 import { UserGroupRepository } from '@/authorization/persistence/repository/user-group-repository';
+import { RoleGroupController } from '@/authorization/http-server/controller/role-group.controller';
+import { RoleGroupRepository } from '@/authorization/persistence/repository/role-group-repository';
+import { RoleGroupService } from '@/authorization/domain/service/role-group.service';
+import { RoleGroupEntity } from '@/authorization/persistence/entity/role-group.entity';
 
 @Module({
-  controllers: [ClientController, RoleController, UserGroupController],
-  providers: [ClientRepository, ClientService, RoleRepository, RoleService, UserGroupRepository, UserGroupService],
-  imports: [TypeOrmModule.forFeature([ClientEntity, RoleEntity, UserGroupEntity])],
-  exports: [ClientService, RoleService, UserGroupService],
+  controllers: [ClientController, RoleController, RoleGroupController, UserGroupController],
+  providers: [
+    ClientRepository,
+    ClientService,
+    RoleRepository,
+    RoleService,
+    RoleGroupRepository,
+    RoleGroupService,
+    UserGroupRepository,
+    UserGroupService,
+  ],
+  imports: [TypeOrmModule.forFeature([ClientEntity, RoleEntity, RoleGroupEntity, UserGroupEntity])],
+  exports: [ClientService, RoleService, RoleGroupService, UserGroupService],
 })
 export class AuthorizationModule {}
