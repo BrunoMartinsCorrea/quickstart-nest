@@ -24,7 +24,7 @@ import { PaginatedResponseDto } from '@/common/dto/paginated-response.dto';
 import { PaginatedQueryDto } from '@/common/dto/paginated-query.dto';
 import { Public } from '@/common/decorator/public.decorator';
 
-@ApiTags('user')
+@ApiTags('User')
 @Controller('user')
 export class UserController {
   constructor(private readonly service: UserService) {}

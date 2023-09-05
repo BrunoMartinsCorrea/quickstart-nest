@@ -16,6 +16,10 @@ import { ClientSeeder } from '@/authorization/persistence/seed/client.seed';
 import { ClientRepository } from '@/authorization/persistence/repository/client-repository';
 import { ClientService } from '@/authorization/domain/service/client.service';
 import { ClientEntity } from '@/authorization/persistence/entity/client.entity';
+import { UserGroupEntity } from '@/authorization/persistence/entity/user-group.entity';
+import { UserGroupRepository } from './authorization/persistence/repository/user-group-repository';
+import { UserGroupService } from '@/authorization/domain/service/user-group.service';
+import { UserGroupSeeder } from '@/authorization/persistence/seed/user-group.seed';
 
 seeder({
   imports: [
@@ -23,9 +27,18 @@ seeder({
       load: [ormConnection],
     }),
     TypeOrmModule.forRoot(ormConnection() as TypeOrmModuleOptions),
-    TypeOrmModule.forFeature([ClientEntity, UserEntity, RoleEntity]),
+    TypeOrmModule.forFeature([ClientEntity, RoleEntity, UserGroupEntity, UserEntity]),
     UserModule,
     AuthenticationModule,
   ],
-  providers: [ClientService, ClientRepository, UserService, UserRepository, RoleService, RoleRepository],
-}).run([ClientSeeder, UserSeeder, RoleSeeder]);
+  providers: [
+    ClientService,
+    ClientRepository,
+    RoleService,
+    RoleRepository,
+    UserGroupService,
+    UserGroupRepository,
+    UserService,
+    UserRepository,
+  ],
+}).run([ClientSeeder, RoleSeeder, UserGroupSeeder, UserSeeder]);

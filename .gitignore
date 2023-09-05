@@ -5,6 +5,7 @@ storybook-static/
 node_modules/
 main
 *.sqlite
+*.mjs
 
 
 # Logs

@@ -14,23 +14,23 @@ import {
 } from '@nestjs/common';
 import { ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
 import { ErrorResponseDto } from '@/common/dto/error-response.dto';
-import { ClientService } from '@/authorization/domain/service/client.service';
-import { ClientDto } from '../dto/client.dto';
-import { Client } from '@/authorization/domain/model/client';
+import { UserGroupService } from '@/authorization/domain/service/user-group.service';
+import { UserGroupDto } from '../dto/user-group.dto';
+import { UserGroup } from '@/authorization/domain/model/user-group';
 import { PaginatedResponseDto } from '@/common/dto/paginated-response.dto';
 import { Response as ExpressResponse } from 'express';
 import { PaginatedQueryDto } from '@/common/dto/paginated-query.dto';
 
-@ApiTags('Client')
-@Controller('client')
-export class ClientController {
-  constructor(private readonly service: ClientService) {}
+@ApiTags('User Group')
+@Controller('user-group')
+export class UserGroupController {
+  constructor(private readonly service: UserGroupService) {}
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
   @ApiUnauthorizedResponse({ type: ErrorResponseDto })
-  async create(@Body() createClientDto: ClientDto, @Res() response: ExpressResponse) {
-    return this.service.create(createClientDto as Client).then((it) => {
+  async create(@Body() createUserGroupDto: UserGroupDto, @Res() response: ExpressResponse) {
+    return this.service.create(createUserGroupDto as UserGroup).then((it) => {
       return response.setHeader('Location', `${response.req.url}/${it.id}`).send(it);
     });
   }
@@ -45,21 +45,21 @@ export class ClientController {
       results,
       totalCount,
       ...paginatedQueryDto,
-    } as PaginatedResponseDto<Client>;
+    } as PaginatedResponseDto<UserGroup>;
   }
 
   @Get(':id')
   @HttpCode(HttpStatus.OK)
   @ApiUnauthorizedResponse({ type: ErrorResponseDto })
   async findOne(@Param('id', ParseUUIDPipe) id: string) {
-    return (await this.service.findOne(id)) as ClientDto;
+    return (await this.service.findOne(id)) as UserGroupDto;
   }
 
   @Put(':id')
   @HttpCode(HttpStatus.OK)
   @ApiUnauthorizedResponse({ type: ErrorResponseDto })
-  async update(@Param('id', ParseUUIDPipe) id: string, @Body() clientDto: ClientDto) {
-    return (await this.service.update(clientDto as Client)) as ClientDto;
+  async update(@Param('id', ParseUUIDPipe) id: string, @Body() userGroupDto: UserGroupDto) {
+    return (await this.service.update(userGroupDto as UserGroup)) as UserGroupDto;
   }
 
   @Delete(':id')

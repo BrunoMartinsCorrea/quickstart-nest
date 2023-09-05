@@ -21,7 +21,7 @@ import { PaginatedResponseDto } from '@/common/dto/paginated-response.dto';
 import { Response as ExpressResponse } from 'express';
 import { PaginatedQueryDto } from '@/common/dto/paginated-query.dto';
 
-@ApiTags('role')
+@ApiTags('Role')
 @Controller('role')
 export class RoleController {
   constructor(private readonly service: RoleService) {}

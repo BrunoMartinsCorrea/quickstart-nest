@@ -9,7 +9,7 @@ import { Public } from '@/common/decorator/public.decorator';
 import { InfoDto } from '@/authentication/http-server/dto/info.dto';
 import { Request } from 'express';
 
-@ApiTags('authentication')
+@ApiTags('Authentication')
 @Controller('authentication')
 export class AuthenticationController {
   constructor(private readonly authenticationService: AuthenticationService) {}
