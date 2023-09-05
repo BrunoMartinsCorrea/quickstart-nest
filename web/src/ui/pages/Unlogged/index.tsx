@@ -15,7 +15,7 @@ export function Unlogged() {
   const { t } = useTranslation('translation', { keyPrefix: 'unlogged' });
 
   useEffect(() => {
-    if (access) navigate('/home');
+    if (access) navigate('/');
   }, [access]);
 
   return (

@@ -61,7 +61,8 @@
   },
   "menu": {
     "home": "Home",
-    "users": "Users"
+    "users": "Users",
+    "authorization": "Authorization"
   },
   "unlogged": {
     "signIn": {

@@ -20,7 +20,7 @@ export function App() {
 
   return (
     <Suspense fallback="loading">
-      <Theme appearance={appearance} accentColor="bronze" panelBackground="solid">
+      <Theme appearance={appearance} accentColor="mint" panelBackground="solid">
         <ToastProvider>
           <QueryClientProvider client={queryClient}>
             <RouterProvider router={router} />

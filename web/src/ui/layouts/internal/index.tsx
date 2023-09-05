@@ -30,6 +30,7 @@ export function InternalLayout() {
           <Flex gap="1" direction="column">
             <MenuItem to="/">{t('menu.home')}</MenuItem>
             <MenuItem to="/users">{t('menu.users')}</MenuItem>
+            <MenuItem to="/authorization">{t('menu.authorization')}</MenuItem>
           </Flex>
         </Menu>
       </Box>

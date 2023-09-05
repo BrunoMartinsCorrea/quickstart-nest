@@ -1,4 +1,8 @@
 interface Resources {
+  "authorization": {
+    "title": "Authorization",
+    "description": "Configure role groups and user groups"
+  },
   "translation": {
     "errors": {
       "generic": {
@@ -62,7 +66,8 @@ interface Resources {
     },
     "menu": {
       "home": "Home",
-      "users": "Users"
+      "users": "Users",
+      "authorization": "Authorization"
     },
     "unlogged": {
       "signIn": {

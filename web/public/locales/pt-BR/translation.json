@@ -61,7 +61,8 @@
   },
   "menu": {
     "home": "Página inicial",
-    "users": "Usuários"
+    "users": "Usuários",
+    "authorization": "Autorização"
   },
   "unlogged": {
     "signIn": {
