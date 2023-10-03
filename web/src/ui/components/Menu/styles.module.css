@@ -6,6 +6,7 @@
   left: 0;
   box-shadow: var(--shadow-2);
   background-color: var(--color-page-background);
+  z-index: 50;
 }
 
 .button {

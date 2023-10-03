@@ -22,7 +22,6 @@ import { UserDto } from '@/user/http-server/dto/user.dto';
 import { CreateUserDto } from '@/user/http-server/dto/create-user.dto';
 import { PaginatedResponseDto } from '@/common/dto/paginated-response.dto';
 import { PaginatedQueryDto } from '@/common/dto/paginated-query.dto';
-import { Public } from '@/common/decorator/public.decorator';
 
 @ApiTags('User')
 @Controller('user')
@@ -34,13 +33,13 @@ export class UserController {
   @ApiUnauthorizedResponse({ type: ErrorResponseDto })
   @ApiConflictResponse({ type: ErrorResponseDto })
   async create(@Body() createUserDto: CreateUserDto, @Res() response: ExpressResponse) {
+    console.log(createUserDto);
     return this.service.create(createUserDto as User).then((it) => {
       return response.setHeader('Location', `${response.req.url}/${it.id}`).send(it as UserDto);
     });
   }
 
   @Get()
-  @Public()
   @ApiUnauthorizedResponse({ type: ErrorResponseDto })
   async findAll(@Query() paginatedQueryDto: PaginatedQueryDto) {
     const [results, totalCount] = await this.service.findAll(paginatedQueryDto);

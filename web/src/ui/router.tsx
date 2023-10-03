@@ -4,6 +4,7 @@ import { Unlogged } from './pages/Unlogged';
 import { InternalLayout } from './layouts/internal';
 import { Home } from '~/pages/Home';
 import { LoadingOutlet } from './layouts/internal/loadingOutlet';
+import { Appearance } from './pages/Appearance';
 
 const Users = React.lazy(() => import('~/features/users'));
 const Authorization = React.lazy(() => import('~/features/authorization'));
@@ -20,6 +21,10 @@ export const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />,
+      },
+      {
+        path: '/appearance',
+        element: <Appearance />,
       },
       {
         path: '/users',

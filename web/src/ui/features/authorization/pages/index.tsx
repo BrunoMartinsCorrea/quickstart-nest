@@ -1,5 +1,6 @@
 import { Box, Flex, Heading, Tabs, Text } from '@radix-ui/themes';
 import { useTranslation } from 'react-i18next';
+import { RoleGroups } from '../components/RoleGroups';
 
 export function AuthorizationPage() {
   const { t } = useTranslation('authorization');
@@ -13,12 +14,12 @@ export function AuthorizationPage() {
       </Flex>
       <Tabs.Root defaultValue="role_groups">
         <Tabs.List>
-          <Tabs.Trigger value="role_groups">Role Groups</Tabs.Trigger>
-          <Tabs.Trigger value="user_groups">User Groups</Tabs.Trigger>
+          <Tabs.Trigger value="role_groups">{t('roleGroups.title')}</Tabs.Trigger>
+          <Tabs.Trigger value="user_groups">{t('userGroups.title')}</Tabs.Trigger>
         </Tabs.List>
         <Box mt="3">
           <Tabs.Content value="role_groups">
-            <Text>Role groups</Text>
+            <RoleGroups />
           </Tabs.Content>
           <Tabs.Content value="user_groups">
             <Text>User groups</Text>

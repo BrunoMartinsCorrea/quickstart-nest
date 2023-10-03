@@ -1,4 +1,10 @@
 {
   "title": "Autorização",
-  "description": "Configure grupos de permissões e grupos de usuários"
+  "description": "Configure grupos de permissões e grupos de usuários",
+  "userGroups": {
+    "title": "Grupos de Usuário"
+  },
+  "roleGroups": {
+    "title": "Grupos de Permissão"
+  }
 }

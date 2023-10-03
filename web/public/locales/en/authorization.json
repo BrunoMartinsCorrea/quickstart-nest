@@ -1,4 +1,10 @@
 {
   "title": "Authorization",
-  "description": "Configure role groups and user groups"
+  "description": "Configure role groups and user groups",
+  "userGroups": {
+    "title": "User Groups"
+  },
+  "roleGroups": {
+    "title": "Role Groups"
+  }
 }

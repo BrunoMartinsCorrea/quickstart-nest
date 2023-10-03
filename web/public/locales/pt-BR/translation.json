@@ -75,9 +75,34 @@
       "welcome": "Bem vindo. Registre-se e descubra uma grande quantidade de novas funcionalidades para ajudar seu negócio"
     }
   },
-  "logged": {
-    "profile": {
-      "profile": "Perfil"
+  "appearance": {
+    "title": "Aparência",
+    "description": "Mude a aparência da plataforma do jeito que preferir",
+    "theme": "Tema",
+    "roundedBorders": {
+      "title": "Bordas arredondadas",
+      "values": {
+        "none": "0%",
+        "small": "25%",
+        "medium": "50%",
+        "large": "75%",
+        "full": "100%"
+      }
+    },
+    "LighDarkMode": {
+      "title": "Modo claro/escuro",
+      "values": {
+        "light": "Claro",
+        "dark": "Escuro",
+        "inherit": "Seguir o sistema"
+      }
+    },
+    "example": {
+      "title": "Exemplo",
+      "description": "Veja abaixo como ficam diferentes componentes com o tema definido"
     }
+  },
+  "profile": {
+    "title": "Profile"
   }
 }

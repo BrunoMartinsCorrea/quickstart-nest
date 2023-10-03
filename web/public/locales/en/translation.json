@@ -75,9 +75,34 @@
       "welcome": "Welcome. Sign up and discover a great amount of new features to scale your business"
     }
   },
-  "logged": {
-    "profile": {
-      "profile": "Profile"
+  "appearance": {
+    "title": "Appearance",
+    "description": "Change the platform appearance the way you want",
+    "theme": "Theme",
+    "roundedBorders": {
+      "title": "Rounded borders",
+      "values": {
+        "none": "0%",
+        "small": "25%",
+        "medium": "50%",
+        "large": "75%",
+        "full": "100%"
+      }
+    },
+    "LighDarkMode": {
+      "title": "Light/Dark mode",
+      "values": {
+        "light": "Light",
+        "dark": "Dark",
+        "inherit": "Follow System"
+      }
+    },
+    "example": {
+      "title": "Example",
+      "description": "This is a sample text"
     }
+  },
+  "profile": {
+    "title": "Profile"
   }
 }

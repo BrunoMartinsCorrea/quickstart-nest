@@ -14,9 +14,8 @@ import {
   SortingState,
   getSortedRowModel,
 } from '@tanstack/react-table';
-import { useDeleteDialog, useGetUsers } from '../../hooks';
+import { useDeleteDialog, useUsers } from '../../hooks';
 import { produce } from 'immer';
-import { useQuery } from '@tanstack/react-query';
 import { Spinner } from '~/components/Spinner';
 import { Hide } from '~/components/Hide';
 import styles from './styles.module.css';
@@ -27,6 +26,7 @@ import { OptionsContextMenu } from '../../components/OptionsContextMenu';
 import { OptionsDropdown } from '../../components/OptionsDropdown';
 import { DeleteDialog } from '../../components/DeleteDialog';
 import React from 'react';
+import { NewUserDrawer } from '../../components/NewUserDrawer';
 
 const column = createColumnHelper<User>();
 
@@ -37,7 +37,6 @@ const defaultPagination: PaginationState = {
 
 export function UsersList() {
   const { t, i18n } = useTranslation('users');
-  const getUsers = useGetUsers();
   const deleteDialog = useDeleteDialog();
   const [pagination, setPagination] = useState<PaginationState>(() => defaultPagination);
   const [rowSelection, setRowSelection] = useState({});
@@ -53,9 +52,7 @@ export function UsersList() {
     });
   }
 
-  const { data, isFetching, refetch } = useQuery(['users', pagination.pageIndex, pagination.pageSize], () =>
-    getUsers({ page: pagination.pageIndex, limit: pagination.pageSize }),
-  );
+  const { data, isFetching, refetch } = useUsers({ ...pagination });
 
   const pageCount = useMemo(() => {
     const calc = data?.limit ? Math.ceil(data.totalCount / data.limit) : 1;
@@ -117,7 +114,7 @@ export function UsersList() {
         ),
       }),
     ],
-    [i18n.language, hasSelection],
+    [i18n.language, hasSelection]
   );
 
   const table = useReactTable({
@@ -150,7 +147,7 @@ export function UsersList() {
     setPagination(
       produce((draft) => {
         draft.pageSize = Number(size);
-      }),
+      })
     );
     refetch();
   }
@@ -186,7 +183,9 @@ export function UsersList() {
         <Flex justify="between" align="center" gap="4">
           {isFetching && <Spinner size={20} color="accent" />}
           <Flex justify="end" width="100%">
-            <Button variant="solid">{t('actions.new', { ns: 'translation' })}</Button>
+            <NewUserDrawer>
+              <Button variant="solid">{t('actions.new', { ns: 'translation' })}</Button>
+            </NewUserDrawer>
           </Flex>
         </Flex>
         <Hide gtOrEq="md">

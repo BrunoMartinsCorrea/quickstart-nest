@@ -15,9 +15,9 @@ export const useGlobalStore = create<GlobalStoreState>()(
       {
         name: '@quickstart:auth',
         version: 0,
-        partialize: ({ access, refresh, appearance }) => ({ access, refresh, appearance }),
-      },
+        partialize: ({ access, refresh, theme }) => ({ access, refresh, theme }),
+      }
     ),
-    { enabled: true },
-  ),
+    { enabled: true }
+  )
 );

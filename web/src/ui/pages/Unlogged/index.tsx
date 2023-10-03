@@ -7,7 +7,6 @@ import { LocaleDropdown } from '~/components/LocaleDropdown';
 import { useNavigate } from 'react-router-dom';
 import { useGlobalStore } from '~/stores/useGlobalStore';
 import { useEffect } from 'react';
-import { ThemePanel } from '~/components/ThemePanel';
 
 export function Unlogged() {
   const navigate = useNavigate();
@@ -22,7 +21,6 @@ export function Unlogged() {
     <Grid>
       <Header>
         <Flex width="100%" align="center" justify="end" gap="4">
-          <ThemePanel />
           <LocaleDropdown />
         </Flex>
       </Header>

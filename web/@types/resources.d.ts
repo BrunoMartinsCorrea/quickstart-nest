@@ -1,7 +1,13 @@
 interface Resources {
   "authorization": {
     "title": "Authorization",
-    "description": "Configure role groups and user groups"
+    "description": "Configure role groups and user groups",
+    "userGroups": {
+      "title": "User Groups"
+    },
+    "roleGroups": {
+      "title": "Role Groups"
+    }
   },
   "translation": {
     "errors": {
@@ -80,10 +86,35 @@ interface Resources {
         "welcome": "Welcome. Sign up and discover a great amount of new features to scale your business"
       }
     },
-    "logged": {
-      "profile": {
-        "profile": "Profile"
+    "appearance": {
+      "title": "Appearance",
+      "description": "Change the platform appearance the way you want",
+      "theme": "Theme",
+      "roundedBorders": {
+        "title": "Rounded borders",
+        "values": {
+          "none": "0%",
+          "small": "25%",
+          "medium": "50%",
+          "large": "75%",
+          "full": "100%"
+        }
+      },
+      "LighDarkMode": {
+        "title": "Light/Dark mode",
+        "values": {
+          "light": "Light",
+          "dark": "Dark",
+          "inherit": "Follow System"
+        }
+      },
+      "example": {
+        "title": "Example",
+        "description": "This is a sample text"
       }
+    },
+    "profile": {
+      "title": "Profile"
     }
   },
   "users": {
@@ -94,6 +125,7 @@ interface Resources {
       "createdAt": "Created at",
       "updatedAt": "Updated at",
       "username": "Username",
+      "password": "Password",
       "id": "ID"
     },
     "deleteDialog": {
@@ -101,6 +133,46 @@ interface Resources {
       "title_other": "Delete Users",
       "description_one": "Are you sure you want to delete this user? This action is permanent and cannot be undone.",
       "description_other": "Are you sure you want to delete these users? This action is permanent and cannot be undone."
+    },
+    "form": {
+      "title": {
+        "new": "New user",
+        "edit": "Edit user"
+      },
+      "description": {
+        "new": "Fill in the fields below to create a new user",
+        "edit": "Edit the fields below to change the user settings"
+      },
+      "fields": {
+        "email": {
+          "label": "Email",
+          "required": "Email is required",
+          "invalid": "Email is not valid"
+        },
+        "fullName": {
+          "label": "Full name",
+          "required": "Name is required"
+        },
+        "password": {
+          "label": "Password",
+          "required": "Password is required",
+          "min": "Password must have at least {{length}} characters"
+        },
+        "confirmPassword": {
+          "label": "Confirm password",
+          "notMatch": "Passwords does not match"
+        }
+      },
+      "action": {
+        "new": "Create",
+        "edit": "Change"
+      },
+      "result": {
+        "success": {
+          "title": "User created",
+          "description": "This new user can be used to log in now"
+        }
+      }
     }
   }
 }

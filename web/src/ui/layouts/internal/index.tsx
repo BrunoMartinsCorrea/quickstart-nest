@@ -6,7 +6,6 @@ import { Avatar, Box, Container, DropdownMenu, Flex, Grid, Heading, IconButton }
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { ThemePanel } from '~/components/ThemePanel';
 import styles from './styles.module.css';
 import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 import { Hide } from '~/components/Hide';
@@ -36,7 +35,6 @@ export function InternalLayout() {
       </Box>
       <Header title={<Heading size="2">Backoffice</Heading>}>
         <Flex gap="4" align="center">
-          <ThemePanel />
           <LocaleDropdown />
           <DropdownMenu.Root>
             <DropdownMenu.Trigger>
@@ -49,7 +47,8 @@ export function InternalLayout() {
               />
             </DropdownMenu.Trigger>
             <DropdownMenu.Content variant="soft">
-              <DropdownMenu.Item>{t('logged.profile.profile')}</DropdownMenu.Item>
+              <DropdownMenu.Item>{t('profile.title')}</DropdownMenu.Item>
+              <DropdownMenu.Item onClick={() => navigate('/appearance')}>{t('appearance.title')}</DropdownMenu.Item>
               <DropdownMenu.Separator />
               <DropdownMenu.Item onClick={signOut}>{t('actions.signOut')}</DropdownMenu.Item>
             </DropdownMenu.Content>

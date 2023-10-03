@@ -1,10 +1,10 @@
 import { ResponseError } from '~/types/ResponseError';
 import { httpClient } from '../client';
 import { toast } from '~/hooks/useToast';
-import { isAxiosError } from 'axios';
+import { AxiosError, isAxiosError } from 'axios';
 import i18n from 'i18next';
 
-httpClient.interceptors.response.use(undefined, (error) => {
+httpClient.interceptors.response.use(undefined, (error: AxiosError<ResponseError>) => {
   const defaultError = new ResponseError({
     statusCode: 500,
     message: 'Unexpected Error',
@@ -15,14 +15,14 @@ httpClient.interceptors.response.use(undefined, (error) => {
   if (isAxiosError(error)) {
     if (error.response) {
       if (error.response.data.errorCode) {
-        const response = new ResponseError(error.response.data);
-        if (response.statusCode === 500) {
+        console.log(error.response.data);
+        if (error.response.data.statusCode === 500) {
           toast({
             title: i18n.t('errors.generic.title'),
             description: i18n.t('errors.generic.description'),
           });
         }
-        return Promise.reject(response);
+        return Promise.reject(error.response.data);
       }
       return Promise.reject(defaultError);
     } else if (error.code === 'ERR_NETWORK') {
@@ -34,7 +34,7 @@ httpClient.interceptors.response.use(undefined, (error) => {
         new ResponseError({
           ...defaultError,
           errorCode: 'NETWORK_ERROR',
-        }),
+        })
       );
     }
     return Promise.reject(defaultError);
