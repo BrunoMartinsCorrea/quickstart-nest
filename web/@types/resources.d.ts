@@ -111,6 +111,34 @@ interface Resources {
       "example": {
         "title": "Example",
         "description": "This is a sample text"
+      },
+      "colors": {
+        "gray": "Gray",
+        "gold": "Gold",
+        "bronze": "Bronze",
+        "brown": "Brown",
+        "yellow": "Yellow",
+        "amber": "Amber",
+        "orange": "Orange",
+        "tomato": "Tomato",
+        "red": "Red",
+        "ruby": "Ruby",
+        "crimson": "Crimson",
+        "pink": "Pink",
+        "plum": "Plum",
+        "purple": "Purple",
+        "violet": "Violet",
+        "iris": "Iris",
+        "indigo": "Indigo",
+        "blue": "Blue",
+        "cyan": "Cyan",
+        "teal": "Teal",
+        "jade": "Jade",
+        "green": "Green",
+        "grass": "Grass",
+        "lime": "Lime",
+        "mint": "Mint",
+        "sky": "Sky"
       }
     },
     "profile": {

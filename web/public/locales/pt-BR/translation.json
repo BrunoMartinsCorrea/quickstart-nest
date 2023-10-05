@@ -100,6 +100,34 @@
     "example": {
       "title": "Exemplo",
       "description": "Veja abaixo como ficam diferentes componentes com o tema definido"
+    },
+    "colors": {
+      "gray": "Cinza",
+      "gold": "Ouro",
+      "bronze": "Bronze",
+      "brown": "Marrom",
+      "yellow": "Amarelo",
+      "amber": "Âmbar",
+      "orange": "Laranja",
+      "tomato": "Tomate",
+      "red": "Vermelho",
+      "ruby": "Rubi",
+      "crimson": "Carmesim",
+      "pink": "Rosa",
+      "plum": "Ameixa",
+      "purple": "Roxo",
+      "violet": "Violeta",
+      "iris": "Íris",
+      "indigo": "Índigo",
+      "blue": "Azul",
+      "cyan": "Ciano",
+      "teal": "Azul-petróleo",
+      "jade": "Jade",
+      "green": "Verde",
+      "grass": "Grama",
+      "lime": "Lima",
+      "mint": "Menta",
+      "sky": "Céu"
     }
   },
   "profile": {

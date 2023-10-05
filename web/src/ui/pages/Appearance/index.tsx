@@ -5,9 +5,9 @@ import styles from './styles.module.css';
 import { DesktopIcon, MoonIcon, SunIcon } from '@radix-ui/react-icons';
 import { useGlobalStore } from '~/stores/useGlobalStore';
 import { useForm } from 'react-hook-form';
-import * as z from 'zod';
 import { ThemeExample } from './components/ThemeExample';
 import { produce } from 'immer';
+import * as z from 'zod';
 
 const themeFormSchema = z.object({
   accentColor: z.string(),
@@ -29,6 +29,8 @@ export function Appearance() {
       appearance: theme.appearance,
     },
   });
+
+  console.log(themeAccentColorsOrdered.toString());
 
   const appearances = [
     {
@@ -69,7 +71,7 @@ export function Appearance() {
                 className={styles.colorSwatch}
                 style={{ backgroundColor: `var(--${color}-9)`, color: `var(--${color}-9-contrast)` }}
               >
-                {color}
+                {t(`appearance.colors.${color}`)}
                 <input
                   className={styles.colorSwatchInput}
                   type="radio"
