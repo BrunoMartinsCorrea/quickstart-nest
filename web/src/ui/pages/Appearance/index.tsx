@@ -7,6 +7,7 @@ import { useGlobalStore } from '~/stores/useGlobalStore';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { ThemeExample } from './components/ThemeExample';
+import { produce } from 'immer';
 
 const themeFormSchema = z.object({
   accentColor: z.string(),
@@ -142,7 +143,13 @@ export function Appearance() {
                     value={value.label}
                     {...register('appearance')}
                     onChange={(e) => {
-                      changeTheme({ ...theme, appearance: e.target.value as typeof theme.appearance });
+                      const newTheme = produce(theme, (draft) => {
+                        const appearance = e.target.value as typeof theme.appearance;
+                        draft.followSystem = appearance === 'inherit';
+                        draft.appearance = appearance;
+                      });
+                      console.log('newTheme', newTheme);
+                      changeTheme(newTheme);
                     }}
                   />
                   <Flex gap="2" p="3" align="center">

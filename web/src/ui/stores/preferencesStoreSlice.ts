@@ -2,23 +2,30 @@ import { GetState, SetState } from 'zustand';
 import { GlobalStoreState } from './useGlobalStore';
 import { ThemeOptions } from '@radix-ui/themes';
 
-export type PreferencesState = {
-  theme: ThemeOptions;
-  changeTheme: (theme: ThemeOptions) => void;
+export type Theme = ThemeOptions & {
+  followSystem: boolean;
 };
+
+export type PreferencesState = {
+  theme: Theme;
+  changeTheme: (theme: Theme) => void;
+};
+
+const getPreferredTheme = () => (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 
 export const createPreferencesSlice = (set: SetState<GlobalStoreState>, get: GetState<GlobalStoreState>) => ({
   theme: {
     accentColor: 'mint',
     radius: 'medium',
     scaling: '100%',
-    appearance: 'light',
-  } as ThemeOptions,
-  changeTheme: (theme: ThemeOptions) => {
-    const html = document.querySelector('html');
+    appearance: getPreferredTheme(),
+    followSystem: true,
+  } as Theme,
+  changeTheme: (theme: Theme) => {
     const current = get().theme;
+    const html = document.querySelector('html');
     html?.classList.remove(current.appearance);
-    html?.classList.add(theme.appearance === 'inherit' ? 'system' : theme.appearance);
+    html?.classList.add(theme.followSystem ? getPreferredTheme() : theme.appearance);
     set({ theme });
   },
 });
