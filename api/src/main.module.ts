@@ -9,6 +9,7 @@ import { CommonModule } from '@/common/common.module';
 import ormConnection from '@/config/orm.connection';
 import { ConfigModule } from '@nestjs/config';
 import { AuthorizationModule } from './authorization/authorization.module';
+import { RouterModule } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -24,6 +25,12 @@ import { AuthorizationModule } from './authorization/authorization.module';
     AuthenticationModule,
     UserModule,
     AuthorizationModule,
+    RouterModule.register([
+      {
+        path: 'authorization',
+        module: AuthorizationModule,
+      },
+    ]),
   ],
   controllers: [],
   providers: [],

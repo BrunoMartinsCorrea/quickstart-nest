@@ -1,3 +1,5 @@
 import { Description } from '@/common/model/description';
 
-export type UserGroup = Description;
+export type UserGroup = Description & {
+  active: boolean;
+};

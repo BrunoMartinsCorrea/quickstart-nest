@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { RoleController } from '@/authorization/http-server/controller/role.controller';
 import { RoleService } from '@/authorization/domain/service/role.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -16,6 +16,7 @@ import { RoleGroupController } from '@/authorization/http-server/controller/role
 import { RoleGroupRepository } from '@/authorization/persistence/repository/role-group-repository';
 import { RoleGroupService } from '@/authorization/domain/service/role-group.service';
 import { RoleGroupEntity } from '@/authorization/persistence/entity/role-group.entity';
+import { PaginationMiddleware } from '@/common/middleware/pagination.middleware';
 
 @Module({
   controllers: [ClientController, RoleController, RoleGroupController, UserGroupController],
@@ -32,4 +33,8 @@ import { RoleGroupEntity } from '@/authorization/persistence/entity/role-group.e
   imports: [TypeOrmModule.forFeature([ClientEntity, RoleEntity, RoleGroupEntity, UserGroupEntity])],
   exports: [ClientService, RoleService, RoleGroupService, UserGroupService],
 })
-export class AuthorizationModule {}
+export class AuthorizationModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(PaginationMiddleware).forRoutes({ path: '*/role', method: RequestMethod.GET });
+  }
+}
