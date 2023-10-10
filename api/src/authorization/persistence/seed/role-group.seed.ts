@@ -4,12 +4,11 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { RoleGroupService } from '@/authorization/domain/service/role-group.service';
 import { RoleGroupEntity } from '@/authorization/persistence/entity/role-group.entity';
-import { RoleGroup } from '@/authorization/domain/model/role-group';
 
 @Injectable()
 export class RoleGroupSeeder implements Seeder {
-  private readonly ROLE_GROUPS: { name: string; description: string }[] = [
-    { name: 'User administrators', description: 'System user administrator' },
+  private readonly ROLE_GROUPS: { name: string; description: string; roles: string[] }[] = [
+    { name: 'User administrators', description: 'System user administrator', roles: [] },
   ];
 
   constructor(
@@ -19,7 +18,8 @@ export class RoleGroupSeeder implements Seeder {
 
   async seed(): Promise<void> {
     for (const value of this.ROLE_GROUPS) {
-      await this.service.create(value as RoleGroup);
+      console.log(value);
+      await this.service.create(value);
     }
   }
 
