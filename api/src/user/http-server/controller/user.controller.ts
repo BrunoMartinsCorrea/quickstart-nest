@@ -33,7 +33,6 @@ export class UserController {
   @ApiUnauthorizedResponse({ type: ErrorResponseDto })
   @ApiConflictResponse({ type: ErrorResponseDto })
   async create(@Body() createUserDto: CreateUserDto, @Res() response: ExpressResponse) {
-    console.log(createUserDto);
     return this.service.create(createUserDto as User).then((it) => {
       return response.setHeader('Location', `${response.req.url}/${it.id}`).send(it as UserDto);
     });

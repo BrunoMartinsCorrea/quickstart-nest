@@ -41,7 +41,7 @@ export class RoleGroupService {
 
   async update(id: string, { name, description, roles }: RoleGroupDto) {
     const roleGroup = await this.findOne(id);
-    console.log(roleGroup);
+
     return this.repository
       .update(
         produce(roleGroup, (draft) => {

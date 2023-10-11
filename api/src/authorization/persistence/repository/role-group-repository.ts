@@ -81,13 +81,9 @@ export class RoleGroupRepository {
       const roleIdsToKeep = rolesToKeep.map((r) => r.id);
       const newRelationIds = roleIds.filter((id) => !roleIdsToKeep.includes(id));
 
-      console.log('rolesToKeep', rolesToKeep);
-      console.log('roleIdsToKeep', roleIdsToKeep);
-
       await queryRunner.manager.softDelete(RoleGroupToRoleEntity, {
         roleId: Not(In(roleIdsToKeep)),
       });
-      console.log('newRelationIds', newRelationIds);
 
       const newRoles: RoleEntity[] = [];
 
