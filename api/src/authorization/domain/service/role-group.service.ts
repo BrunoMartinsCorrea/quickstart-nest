@@ -17,7 +17,7 @@ export class RoleGroupService {
         name,
         description,
       } as RoleGroup,
-      roles
+      roles,
     );
 
     Logger.log(`Role group created { "id": "${createdRoleGroup.id}" }`);
@@ -48,7 +48,7 @@ export class RoleGroupService {
           draft.name = name;
           draft.description = description;
         }),
-        roles
+        roles,
       )
       .then((it) => {
         Logger.log(`Role group updated { "id": "${it.id}" }`);

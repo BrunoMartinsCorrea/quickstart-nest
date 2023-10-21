@@ -8,7 +8,15 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class UserSeeder implements Seeder {
-  private ADMIN_USERNAME: string = 'admin@admin.com';
+  public static readonly ADMIN_USERNAME = 'admin@admin.com';
+  public static readonly ADMIN_USER = {
+    id: '00000000-0000-0000-0000-000000000000',
+    email: UserSeeder.ADMIN_USERNAME,
+    username: UserSeeder.ADMIN_USERNAME,
+    fullName: 'Admilson',
+    password: 'Admin123!',
+    salt: '',
+  } as User;
 
   constructor(
     private readonly service: UserService,
@@ -16,15 +24,10 @@ export class UserSeeder implements Seeder {
   ) {}
 
   async seed(): Promise<void> {
-    await this.service.create({
-      email: this.ADMIN_USERNAME,
-      username: this.ADMIN_USERNAME,
-      fullName: 'Admilson',
-      password: 'Admin123!',
-    } as User);
+    await this.service.create(UserSeeder.ADMIN_USER);
   }
 
   async drop(): Promise<void> {
-    await this.repository.delete({ username: this.ADMIN_USERNAME });
+    await this.repository.delete({ username: UserSeeder.ADMIN_USERNAME });
   }
 }

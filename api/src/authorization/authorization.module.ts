@@ -18,9 +18,13 @@ import { RoleGroupService } from '@/authorization/domain/service/role-group.serv
 import { RoleGroupEntity } from '@/authorization/persistence/entity/role-group.entity';
 import { PaginationMiddleware } from '@/common/middleware/pagination.middleware';
 import { RoleGroupToRoleEntity } from './persistence/entity/role-group-to-role.entity';
+import { UserGroupUserService } from '@/authorization/domain/service/user-group-user.service';
+import { UserGroupUserEntity } from '@/authorization/persistence/entity/user-group-user.entity';
+import { UserGroupUserRepository } from '@/authorization/persistence/repository/user-group-user-repository';
+import { UserGroupUserController } from '@/authorization/http-server/controller/user-group-user.controller';
 
 @Module({
-  controllers: [ClientController, RoleController, RoleGroupController, UserGroupController],
+  controllers: [ClientController, RoleController, RoleGroupController, UserGroupController, UserGroupUserController],
   providers: [
     ClientRepository,
     ClientService,
@@ -30,11 +34,20 @@ import { RoleGroupToRoleEntity } from './persistence/entity/role-group-to-role.e
     RoleGroupService,
     UserGroupRepository,
     UserGroupService,
+    UserGroupUserRepository,
+    UserGroupUserService,
   ],
   imports: [
-    TypeOrmModule.forFeature([ClientEntity, RoleEntity, RoleGroupEntity, UserGroupEntity, RoleGroupToRoleEntity]),
+    TypeOrmModule.forFeature([
+      ClientEntity,
+      RoleEntity,
+      RoleGroupEntity,
+      RoleGroupToRoleEntity,
+      UserGroupEntity,
+      UserGroupUserEntity,
+    ]),
   ],
-  exports: [ClientService, RoleService, RoleGroupService, UserGroupService],
+  exports: [ClientService, RoleService, RoleGroupService, UserGroupService, UserGroupUserService],
 })
 export class AuthorizationModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
@@ -44,7 +57,7 @@ export class AuthorizationModule implements NestModule {
       {
         path: '*/role-group',
         method: RequestMethod.GET,
-      }
+      },
     );
   }
 }

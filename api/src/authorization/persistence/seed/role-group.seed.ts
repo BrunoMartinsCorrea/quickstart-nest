@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { Seeder } from 'nestjs-seeder';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -14,10 +14,12 @@ export class RoleGroupSeeder implements Seeder {
     private readonly service: RoleGroupService,
     private readonly roleService: RoleService,
     @InjectRepository(RoleGroupEntity) private repository: Repository<RoleGroupEntity>,
-    @InjectRepository(RoleGroupEntity) private roleGroupToRoleRepository: Repository<RoleGroupToRoleEntity>
+    @InjectRepository(RoleGroupToRoleEntity) private roleGroupToRoleRepository: Repository<RoleGroupToRoleEntity>,
   ) {}
 
   async seed(): Promise<void> {
+    Logger.log(`Seeding ${this.constructor.name}`);
+
     const role = await this.roleService.findOneByName('BACKOFFICE_USER_ADMIN');
     const ROLE_GROUPS: RoleGroupDto[] = [
       { name: 'User administrators', description: 'System user administrator', roles: [role.id] },
@@ -28,6 +30,8 @@ export class RoleGroupSeeder implements Seeder {
   }
 
   async drop(): Promise<void> {
+    Logger.log(`Dropping ${this.constructor.name}`);
+
     await this.roleGroupToRoleRepository.clear();
     await this.repository.clear();
   }

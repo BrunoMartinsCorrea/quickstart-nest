@@ -19,11 +19,16 @@ import { ClientEntity } from '@/authorization/persistence/entity/client.entity';
 import { UserGroupEntity } from '@/authorization/persistence/entity/user-group.entity';
 import { UserGroupRepository } from './authorization/persistence/repository/user-group-repository';
 import { UserGroupService } from '@/authorization/domain/service/user-group.service';
+import { UserGroupSeeder } from '@/authorization/persistence/seed/user-group.seed';
 import { RoleGroupEntity } from '@/authorization/persistence/entity/role-group.entity';
 import { RoleGroupRepository } from '@/authorization/persistence/repository/role-group-repository';
 import { RoleGroupService } from '@/authorization/domain/service/role-group.service';
 import { RoleGroupToRoleEntity } from '@/authorization/persistence/entity/role-group-to-role.entity';
 import { RoleGroupSeeder } from '@/authorization/persistence/seed/role-group.seed';
+import { UserGroupUserSeeder } from '@/authorization/persistence/seed/user-group-user.seed';
+import { UserGroupUserRepository } from '@/authorization/persistence/repository/user-group-user-repository';
+import { UserGroupUserService } from '@/authorization/domain/service/user-group-user.service';
+import { UserGroupUserEntity } from '@/authorization/persistence/entity/user-group-user.entity';
 
 seeder({
   imports: [
@@ -37,6 +42,7 @@ seeder({
       RoleGroupEntity,
       RoleGroupToRoleEntity,
       UserGroupEntity,
+      UserGroupUserEntity,
       UserEntity,
     ]),
     UserModule,
@@ -51,7 +57,9 @@ seeder({
     RoleGroupRepository,
     UserGroupService,
     UserGroupRepository,
+    UserGroupUserService,
+    UserGroupUserRepository,
     UserService,
     UserRepository,
   ],
-}).run([ClientSeeder, RoleSeeder, RoleGroupSeeder, UserSeeder]);
+}).run([ClientSeeder, RoleSeeder, RoleGroupSeeder, UserGroupSeeder, UserGroupUserSeeder, UserSeeder]);

@@ -14,7 +14,7 @@ export class CreateUserDto {
   @MaxLength(255, { message: '$property length has exceeded $constraint1 characteres' })
   @IsStrongPassword(
     { minLength: 8, minNumbers: 1, minSymbols: 1, minLowercase: 1, minUppercase: 1 },
-    { message: '$property is not strong enough' }
+    { message: '$property is not strong enough' },
   )
   password: string;
 

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { Seeder } from 'nestjs-seeder';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -8,23 +8,27 @@ import { UserGroup } from '@/authorization/domain/model/user-group';
 
 @Injectable()
 export class UserGroupSeeder implements Seeder {
-  private readonly USER_GROUPS: { name: string; description: string }[] = [
+  public static readonly USER_GROUPS = [
     { name: 'Administrators', description: 'System administrators' },
-  ];
+  ] as UserGroup[];
 
   constructor(
     private readonly service: UserGroupService,
-    @InjectRepository(UserGroupEntity) private repository: Repository<UserGroupEntity>
+    @InjectRepository(UserGroupEntity) private repository: Repository<UserGroupEntity>,
   ) {}
 
   async seed(): Promise<void> {
-    for (const value of this.USER_GROUPS) {
+    Logger.log(`Seeding ${this.constructor.name}`);
+
+    for (const value of UserGroupSeeder.USER_GROUPS) {
       await this.service.create(value as UserGroup);
     }
   }
 
   async drop(): Promise<void> {
-    for (const value of this.USER_GROUPS) {
+    Logger.log(`Dropping ${this.constructor.name}`);
+
+    for (const value of UserGroupSeeder.USER_GROUPS) {
       await this.repository.delete({ name: value.name });
     }
   }

@@ -11,7 +11,7 @@ import { RoleEntity } from '../entity/role.entity';
 export class RoleGroupRepository {
   constructor(
     @InjectRepository(RoleGroupEntity) private repository: Repository<RoleGroupEntity>,
-    private readonly dataSource: DataSource
+    private readonly dataSource: DataSource,
   ) {}
 
   async create({ name, description }: RoleGroup, roleIds: string[]) {
