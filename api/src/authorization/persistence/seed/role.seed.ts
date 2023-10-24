@@ -8,17 +8,17 @@ import { Role } from '@/authorization/domain/model/role';
 
 @Injectable()
 export class RoleSeeder implements Seeder {
-  private readonly ROLES: { name: string; description: string }[] = [
-    { name: 'BACKOFFICE_USER_OWNER', description: 'User owner' },
+  public readonly ROLES = [
+    { id: '00000000-0000-0000-0000-000000000000', name: 'BACKOFFICE_USER_OWNER', description: 'User owner' },
     { name: 'BACKOFFICE_USER_ADMIN', description: 'User admin' },
     { name: 'BACKOFFICE_USER_EDITOR', description: 'User editor' },
     { name: 'BACKOFFICE_USER_CREATOR', description: 'User creator' },
     { name: 'BACKOFFICE_USER_VIEWER', description: 'User viewer' },
-  ];
+  ] as Role[];
 
   constructor(
     private readonly service: RoleService,
-    @InjectRepository(RoleEntity) private repository: Repository<RoleEntity>,
+    @InjectRepository(RoleEntity) private repository: Repository<RoleEntity>
   ) {}
 
   async seed(): Promise<void> {

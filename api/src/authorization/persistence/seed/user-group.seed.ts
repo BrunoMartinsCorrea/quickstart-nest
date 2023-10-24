@@ -9,12 +9,12 @@ import { UserGroup } from '@/authorization/domain/model/user-group';
 @Injectable()
 export class UserGroupSeeder implements Seeder {
   public static readonly USER_GROUPS = [
-    { name: 'Administrators', description: 'System administrators' },
+    { id: '00000000-0000-0000-0000-000000000000', name: 'Administrators', description: 'System administrators' },
   ] as UserGroup[];
 
   constructor(
     private readonly service: UserGroupService,
-    @InjectRepository(UserGroupEntity) private repository: Repository<UserGroupEntity>,
+    @InjectRepository(UserGroupEntity) private repository: Repository<UserGroupEntity>
   ) {}
 
   async seed(): Promise<void> {

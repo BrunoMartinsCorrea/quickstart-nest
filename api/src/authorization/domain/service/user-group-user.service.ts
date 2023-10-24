@@ -3,12 +3,13 @@ import { UserGroupUserRepository } from '@/authorization/persistence/repository/
 import { EntityNotFoundError } from '@/common/error/entity-not-found-error';
 import { PaginationDto } from '@/common/dto/pagination.dto';
 import { UserGroupUser } from '../model/user-group-user';
+import { UserGroupUserView } from '@/authorization/domain/model/user-group-user-view';
 
 @Injectable()
 export class UserGroupUserService {
   constructor(private readonly repository: UserGroupUserRepository) {}
 
-  async create(userGroupUser: UserGroupUser): Promise<UserGroupUser> {
+  async create(userGroupUser: UserGroupUser): Promise<UserGroupUserView> {
     const createdUserGroup = await this.repository.create(userGroupUser);
 
     Logger.log(`User group user created { "id": "${createdUserGroup.id}" }`);
@@ -16,7 +17,7 @@ export class UserGroupUserService {
     return createdUserGroup;
   }
 
-  async findOne(id: string): Promise<UserGroupUser> {
+  async findOne(id: string): Promise<UserGroupUserView> {
     const userGroupUser = await this.repository.findOne(id);
 
     if (!userGroupUser) {
@@ -26,7 +27,7 @@ export class UserGroupUserService {
     return userGroupUser;
   }
 
-  async findAll(pagination: PaginationDto): Promise<[UserGroupUser[], number]> {
+  async findAll(pagination: PaginationDto): Promise<[UserGroupUserView[], number]> {
     return this.repository.listAll(pagination);
   }
 

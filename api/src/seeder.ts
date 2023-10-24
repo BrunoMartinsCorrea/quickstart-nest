@@ -62,4 +62,4 @@ seeder({
     UserService,
     UserRepository,
   ],
-}).run([ClientSeeder, RoleSeeder, RoleGroupSeeder, UserGroupSeeder, UserGroupUserSeeder, UserSeeder]);
+}).run([ClientSeeder, RoleSeeder, UserSeeder, RoleGroupSeeder, UserGroupSeeder, UserGroupUserSeeder]);

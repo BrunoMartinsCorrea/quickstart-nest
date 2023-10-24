@@ -1,5 +1,6 @@
 import * as path from 'path';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
 export default () =>
   ({
@@ -12,4 +13,5 @@ export default () =>
     entities: [path.join(__dirname, '..', '/**/*.entity{.ts,.js}')],
     synchronize: true,
     autoLoadEntities: true,
-  }) as TypeOrmModuleOptions;
+    namingStrategy: new SnakeNamingStrategy(),
+  } as TypeOrmModuleOptions);

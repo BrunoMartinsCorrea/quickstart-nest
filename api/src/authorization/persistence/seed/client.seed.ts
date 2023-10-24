@@ -8,13 +8,13 @@ import { Client } from '@/authorization/domain/model/client';
 
 @Injectable()
 export class ClientSeeder implements Seeder {
-  private readonly CLIENTS: { name: string; description: string }[] = [
-    { name: 'BACKOFFICE', description: 'Backoffice app client' },
-  ];
+  public readonly CLIENTS = [
+    { id: '00000000-0000-0000-0000-000000000000', name: 'BACKOFFICE', description: 'Backoffice app client' },
+  ] as Client[];
 
   constructor(
     private readonly service: ClientService,
-    @InjectRepository(ClientEntity) private repository: Repository<ClientEntity>,
+    @InjectRepository(ClientEntity) private repository: Repository<ClientEntity>
   ) {}
 
   async seed(): Promise<void> {
