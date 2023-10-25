@@ -12,19 +12,20 @@ export class UserGroupUserRepository {
 
   async create(userGroupUser: UserGroupUser): Promise<UserGroupUserView> {
     try {
-      return this.repository
-        .save({ user: { id: userGroupUser.userId }, userGroup: { id: userGroupUser.userGroupId } })
-        .then((it) => {
-          return this.findOne(it.id);
-        });
+      return this.repository.save({ user: { id: userGroupUser.userId }, userGroup: { id: userGroupUser.userGroupId } });
     } catch (e) {
       Logger.error(e);
       throw new EntityConflictError('User group user could not be created');
     }
   }
 
-  async findOne(id: string): Promise<UserGroupUserView> {
-    return this.repository.findOneBy({ id });
+  async findOne(userGroupUser: UserGroupUser): Promise<UserGroupUserView> {
+    return this.repository
+      .createQueryBuilder('ugu')
+      .innerJoinAndSelect('ugu.user', 'u')
+      .innerJoinAndSelect('ugu.userGroup', 'ug')
+      .where('u.id = :userId AND ug.id = :userGroupId', userGroupUser)
+      .getOne();
   }
 
   async listAll(pagination: PaginationDto): Promise<[UserGroupUserView[], number]> {
@@ -48,8 +49,8 @@ export class UserGroupUserRepository {
     }
   }
 
-  async softDelete(id: string) {
-    const updateResult = await this.repository.softDelete({ id, deletedAt: IsNull() });
+  async softDelete(userGroupUser: UserGroupUser) {
+    const updateResult = await this.repository.softDelete({ ...userGroupUser, deletedAt: IsNull() });
     return !!updateResult.affected;
   }
 }

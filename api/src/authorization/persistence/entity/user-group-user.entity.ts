@@ -1,12 +1,12 @@
-import { Entity, JoinColumn, ManyToOne, Unique } from 'typeorm';
-import { IdentityEntity } from '@/common/entity/identity.entity';
+import { Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
 import { UserEntity } from '@/user/persistence/entity/user.entity';
 import { UserGroupEntity } from '@/authorization/persistence/entity/user-group.entity';
+import { AuditingEntity } from '@/common/entity/auditing.entity';
 
 @Entity('user_group_user')
-@Unique(['user', 'userGroup'])
-export class UserGroupUserEntity extends IdentityEntity {
-  @ManyToOne((_) => UserEntity, (object) => object.id, {
+export class UserGroupUserEntity extends AuditingEntity {
+  @PrimaryColumn({ name: 'user_id' })
+  @ManyToOne((_) => UserEntity, (user) => user.id, {
     cascade: true,
     onDelete: 'CASCADE',
     eager: true,
@@ -15,7 +15,8 @@ export class UserGroupUserEntity extends IdentityEntity {
   @JoinColumn()
   user: UserEntity;
 
-  @ManyToOne((_) => UserGroupEntity, (object) => object.id, {
+  @PrimaryColumn({ name: 'user_group_id' })
+  @ManyToOne((_) => UserGroupEntity, (userGroup) => userGroup.id, {
     cascade: true,
     onDelete: 'CASCADE',
     eager: true,

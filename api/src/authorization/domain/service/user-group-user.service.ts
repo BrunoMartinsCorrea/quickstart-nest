@@ -12,19 +12,21 @@ export class UserGroupUserService {
   async create(userGroupUser: UserGroupUser): Promise<UserGroupUserView> {
     const createdUserGroup = await this.repository.create(userGroupUser);
 
-    Logger.log(`User group user created { "id": "${createdUserGroup.id}" }`);
+    Logger.log(
+      `User group user created { "userId": "${createdUserGroup.user.id}", "userGroupId": "${createdUserGroup.userGroup.id}" }`
+    );
 
     return createdUserGroup;
   }
 
-  async findOne(id: string): Promise<UserGroupUserView> {
-    const userGroupUser = await this.repository.findOne(id);
+  async findOne(userGroupUser: UserGroupUser): Promise<UserGroupUserView> {
+    const userGroupUserView = await this.repository.findOne(userGroupUser);
 
-    if (!userGroupUser) {
+    if (!userGroupUserView) {
       throw new EntityNotFoundError('User group user not found');
     }
 
-    return userGroupUser;
+    return userGroupUserView;
   }
 
   async findAll(pagination: PaginationDto): Promise<[UserGroupUserView[], number]> {
@@ -33,17 +35,19 @@ export class UserGroupUserService {
 
   async update(userGroupUser: UserGroupUser) {
     return this.repository.update(userGroupUser).then((it) => {
-      Logger.log(`User group user updated { "id": "${it.id}" }`);
+      Logger.log(`User group user updated { "userId": "${it.user.id}", "userGroupId": "${it.userGroup.id}" }`);
 
       return it;
     });
   }
 
-  async softDelete(id: string) {
-    const hasDeleted = await this.repository.softDelete(id);
+  async softDelete(userGroupUser: UserGroupUser) {
+    const hasDeleted = await this.repository.softDelete(userGroupUser);
 
     if (hasDeleted) {
-      Logger.log(`User group user deleted { "id": "${id}" }`);
+      Logger.log(
+        `User group user deleted { "userId": "${userGroupUser.userId}", "userGroupId": "${userGroupUser.userGroupId}" }`
+      );
     } else {
       throw new EntityNotFoundError('User group user not found');
     }

@@ -8,7 +8,6 @@ import {
   Param,
   ParseUUIDPipe,
   Post,
-  Put,
   Query,
   Res,
 } from '@nestjs/common';
@@ -33,7 +32,7 @@ export class UserGroupUserController {
   @ApiUnauthorizedResponse({ type: ErrorResponseDto })
   async create(@Body() userGroupUserDto: UserGroupUserDto, @Res() response: ExpressResponse) {
     return this.service.create(userGroupUserDto as UserGroupUser).then((it) => {
-      return response.setHeader('Location', `${response.req.url}/${it.id}`).send();
+      return response.setHeader('Location', `${response.req.url}/${it.userGroup.id}/${it.user.id}`).send();
     });
   }
 
@@ -50,24 +49,23 @@ export class UserGroupUserController {
     } as PaginatedResponseDto<UserGroupUserView>;
   }
 
-  @Get(':id')
+  @Get(':userGroupId/:userId')
   @HttpCode(HttpStatus.OK)
   @ApiUnauthorizedResponse({ type: ErrorResponseDto })
-  async findOne(@Param('id', ParseUUIDPipe) id: string) {
-    return (await this.service.findOne(id)) as UserGroupUserViewDto;
+  async findOne(
+    @Param('userGroupId', ParseUUIDPipe) userGroupId: string,
+    @Param('userId', ParseUUIDPipe) userId: string
+  ) {
+    return (await this.service.findOne({ userGroupId, userId } as UserGroupUser)) as UserGroupUserViewDto;
   }
 
-  @Put(':id')
-  @HttpCode(HttpStatus.OK)
-  @ApiUnauthorizedResponse({ type: ErrorResponseDto })
-  async update(@Param('id', ParseUUIDPipe) id: string, @Body() userGroupUserDto: UserGroupUserDto) {
-    return (await this.service.update(userGroupUserDto as UserGroupUser)) as UserGroupUserViewDto;
-  }
-
-  @Delete(':id')
+  @Delete(':userGroupId/:userId')
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiUnauthorizedResponse({ type: ErrorResponseDto })
-  async remove(@Param('id', ParseUUIDPipe) id: string) {
-    return this.service.softDelete(id);
+  async remove(
+    @Param('userGroupId', ParseUUIDPipe) userGroupId: string,
+    @Param('userId', ParseUUIDPipe) userId: string
+  ) {
+    return this.service.softDelete({ userGroupId, userId } as UserGroupUser);
   }
 }

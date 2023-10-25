@@ -1,6 +1,6 @@
-import { Identity } from '@/common/model/identity';
+import { Auditing } from '@/common/model/auditing';
 
-export type UserGroupUser = Identity & {
+export type UserGroupUser = Auditing & {
   userId: string;
   userGroupId: string;
 };

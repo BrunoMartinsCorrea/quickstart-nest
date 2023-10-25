@@ -26,6 +26,8 @@ export class UserGroupUserSeeder implements Seeder {
   async drop(): Promise<void> {
     Logger.log(`Dropping ${this.constructor.name}`);
 
-    await this.repository.delete(`user_id = '${UserSeeder.ADMIN_USER.id}'`);
+    for (const value of UserGroupUserSeeder.USER_GROUP_USERS) {
+      await this.repository.delete({ user: { id: value.user.id }, userGroup: { id: value.userGroup.id } });
+    }
   }
 }
