@@ -18,7 +18,6 @@ export function ThemeProvider(props: ThemeProviderProps) {
         changeTheme(
           produce(theme, (draft) => {
             draft.followSystem = true;
-            draft.appearance = event.matches ? 'dark' : 'light';
           })
         );
       }

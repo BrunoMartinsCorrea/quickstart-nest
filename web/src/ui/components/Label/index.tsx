@@ -14,6 +14,7 @@ export function Label({ size = '2', ...props }: LabelProps) {
         letterSpacing: `var(--letter-spacing-${size})`,
         fontWeight: 'var(--font-weight-medium)',
         userSelect: 'none',
+        ...props.style,
       }}
     />
   );

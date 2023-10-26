@@ -19,10 +19,12 @@
 .close {
   line-height: 0;
   border: 0;
+  padding: 0;
   background-color: transparent;
   cursor: pointer;
   align-self: flex-end;
   margin-top: var(--space-2);
+  color: var(--accent-a11);
 }
 
 .content {

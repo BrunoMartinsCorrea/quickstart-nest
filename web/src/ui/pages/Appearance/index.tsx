@@ -30,8 +30,6 @@ export function Appearance() {
     },
   });
 
-  console.log(themeAccentColorsOrdered.toString());
-
   const appearances = [
     {
       label: 'light',
