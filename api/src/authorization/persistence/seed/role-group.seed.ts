@@ -14,7 +14,6 @@ export class RoleGroupSeeder implements Seeder {
       name: 'User administrators',
       description: 'System user administrator',
       active: true,
-      roles: [{ id: '00000000-0000-0000-0000-000000000000' }],
     },
   ] as RoleGroup[];
 

@@ -1,6 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDefined, IsOptional, IsUUID } from 'class-validator';
-import { RoleDto } from '@/authorization/http-server/dto/role.dto';
+import { IsDefined } from 'class-validator';
 
 export class RoleGroupDto {
   @ApiProperty({ example: 'User administrator' })
@@ -11,9 +10,7 @@ export class RoleGroupDto {
   @IsDefined({ message: 'description is not defined' })
   description: string;
 
-  @ApiProperty({ example: [''] })
+  @ApiProperty({ example: true })
   @IsDefined({ message: '$property is not defined' })
-  @IsUUID(undefined, { each: true })
-  @IsOptional()
-  roles: RoleDto[];
+  active: boolean;
 }
