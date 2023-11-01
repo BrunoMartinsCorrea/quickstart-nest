@@ -17,14 +17,24 @@ import { RoleGroupRepository } from '@/authorization/persistence/repository/role
 import { RoleGroupService } from '@/authorization/domain/service/role-group.service';
 import { RoleGroupEntity } from '@/authorization/persistence/entity/role-group.entity';
 import { PaginationMiddleware } from '@/common/middleware/pagination.middleware';
-import { RoleGroupToRoleEntity } from './persistence/entity/role-group-to-role.entity';
 import { UserGroupUserService } from '@/authorization/domain/service/user-group-user.service';
 import { UserGroupUserEntity } from '@/authorization/persistence/entity/user-group-user.entity';
 import { UserGroupUserRepository } from '@/authorization/persistence/repository/user-group-user-repository';
 import { UserGroupUserController } from '@/authorization/http-server/controller/user-group-user.controller';
+import { RoleGroupRoleRepository } from '@/authorization/persistence/repository/role-group-role-repository';
+import { RoleGroupRoleService } from '@/authorization/domain/service/role-group-role.service';
+import { RoleGroupRoleEntity } from '@/authorization/persistence/entity/role-group-role.entity';
+import { RoleGroupRoleController } from '@/authorization/http-server/controller/role-group-role.controller';
 
 @Module({
-  controllers: [ClientController, RoleController, RoleGroupController, UserGroupController, UserGroupUserController],
+  controllers: [
+    ClientController,
+    RoleController,
+    RoleGroupController,
+    RoleGroupRoleController,
+    UserGroupController,
+    UserGroupUserController,
+  ],
   providers: [
     ClientRepository,
     ClientService,
@@ -32,6 +42,8 @@ import { UserGroupUserController } from '@/authorization/http-server/controller/
     RoleService,
     RoleGroupRepository,
     RoleGroupService,
+    RoleGroupRoleRepository,
+    RoleGroupRoleService,
     UserGroupRepository,
     UserGroupService,
     UserGroupUserRepository,
@@ -42,12 +54,12 @@ import { UserGroupUserController } from '@/authorization/http-server/controller/
       ClientEntity,
       RoleEntity,
       RoleGroupEntity,
-      RoleGroupToRoleEntity,
+      RoleGroupRoleEntity,
       UserGroupEntity,
       UserGroupUserEntity,
     ]),
   ],
-  exports: [ClientService, RoleService, RoleGroupService, UserGroupService, UserGroupUserService],
+  exports: [ClientService, RoleService, RoleGroupService, RoleGroupRoleService, UserGroupService, UserGroupUserService],
 })
 export class AuthorizationModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
@@ -57,7 +69,7 @@ export class AuthorizationModule implements NestModule {
       {
         path: '*/role-group',
         method: RequestMethod.GET,
-      },
+      }
     );
   }
 }

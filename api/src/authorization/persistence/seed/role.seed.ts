@@ -8,7 +8,7 @@ import { Role } from '@/authorization/domain/model/role';
 
 @Injectable()
 export class RoleSeeder implements Seeder {
-  public readonly ROLES = [
+  public static readonly ROLES = [
     { id: '00000000-0000-0000-0000-000000000000', name: 'BACKOFFICE_USER_OWNER', description: 'User owner' },
     { name: 'BACKOFFICE_USER_ADMIN', description: 'User admin' },
     { name: 'BACKOFFICE_USER_EDITOR', description: 'User editor' },
@@ -24,7 +24,7 @@ export class RoleSeeder implements Seeder {
   async seed(): Promise<void> {
     Logger.log(`Seeding ${this.constructor.name}`);
 
-    for (const value of this.ROLES) {
+    for (const value of RoleSeeder.ROLES) {
       await this.service.create(value as Role);
     }
   }
@@ -32,7 +32,7 @@ export class RoleSeeder implements Seeder {
   async drop(): Promise<void> {
     Logger.log(`Dropping ${this.constructor.name}`);
 
-    for (const value of this.ROLES) {
+    for (const value of RoleSeeder.ROLES) {
       await this.repository.delete({ name: value.name });
     }
   }

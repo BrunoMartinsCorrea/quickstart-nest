@@ -50,7 +50,11 @@ export class UserGroupUserRepository {
   }
 
   async softDelete(userGroupUser: UserGroupUser) {
-    const updateResult = await this.repository.softDelete({ ...userGroupUser, deletedAt: IsNull() });
+    const updateResult = await this.repository.softDelete({
+      user: { id: userGroupUser.userId },
+      userGroup: { id: userGroupUser.userGroupId },
+      deletedAt: IsNull(),
+    });
     return !!updateResult.affected;
   }
 }

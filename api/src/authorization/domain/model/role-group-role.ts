@@ -1,3 +1,6 @@
-import { Identity } from '@/common/model/identity';
+import { Auditing } from '@/common/model/auditing';
 
-export type RoleGroupRole = Identity;
+export type RoleGroupRole = Auditing & {
+  roleId: string;
+  roleGroupId: string;
+};

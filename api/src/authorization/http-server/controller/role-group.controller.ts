@@ -30,7 +30,7 @@ export class RoleGroupController {
   @HttpCode(HttpStatus.CREATED)
   @ApiUnauthorizedResponse({ type: ErrorResponseDto })
   async create(@Body() createRoleGroupDto: RoleGroupDto, @Res() response: ExpressResponse) {
-    return this.service.create(createRoleGroupDto).then((it) => {
+    return this.service.create(createRoleGroupDto as RoleGroup).then((it) => {
       return response.setHeader('Location', `${response.req.url}/${it.id}`).send(it);
     });
   }
@@ -52,14 +52,14 @@ export class RoleGroupController {
   @HttpCode(HttpStatus.OK)
   @ApiUnauthorizedResponse({ type: ErrorResponseDto })
   async findOne(@Param('id', ParseUUIDPipe) id: string) {
-    return await this.service.findOne(id);
+    return (await this.service.findOne(id)) as RoleGroupDto;
   }
 
   @Put(':id')
   @HttpCode(HttpStatus.OK)
   @ApiUnauthorizedResponse({ type: ErrorResponseDto })
   async update(@Param('id', ParseUUIDPipe) id: string, @Body() roleGroupDto: RoleGroupDto) {
-    return await this.service.update(id, roleGroupDto);
+    return (await this.service.update(roleGroupDto as RoleGroup)) as RoleGroupDto;
   }
 
   @Delete(':id')
