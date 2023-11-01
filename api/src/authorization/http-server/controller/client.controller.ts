@@ -59,7 +59,10 @@ export class ClientController {
   @HttpCode(HttpStatus.OK)
   @ApiUnauthorizedResponse({ type: ErrorResponseDto })
   async update(@Param('id', ParseUUIDPipe) id: string, @Body() clientDto: ClientDto) {
-    return (await this.service.update(clientDto as Client)) as ClientDto;
+    return (await this.service.update({
+      id,
+      ...clientDto,
+    } as Client)) as ClientDto;
   }
 
   @Delete(':id')
