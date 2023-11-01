@@ -31,6 +31,10 @@ import { UserGroupUserEntity } from '@/authorization/persistence/entity/user-gro
 import { RoleGroupRoleEntity } from '@/authorization/persistence/entity/role-group-role.entity';
 import { RoleGroupRoleRepository } from '@/authorization/persistence/repository/role-group-role-repository';
 import { RoleGroupRoleSeeder } from '@/authorization/persistence/seed/role-group-role.seed';
+import { UserRoleClientEntity } from '@/authorization/persistence/entity/user-role-client.entity';
+import { UserRoleClientService } from '@/authorization/domain/service/user-role-client.service';
+import { UserRoleClientRepository } from '@/authorization/persistence/repository/user-role-client-repository';
+import { UserRoleClientSeeder } from '@/authorization/persistence/seed/user-role-client.seed';
 
 seeder({
   imports: [
@@ -45,6 +49,7 @@ seeder({
       RoleGroupRoleEntity,
       UserGroupEntity,
       UserGroupUserEntity,
+      UserRoleClientEntity,
       UserEntity,
     ]),
     UserModule,
@@ -62,6 +67,8 @@ seeder({
     UserGroupRepository,
     UserGroupUserService,
     UserGroupUserRepository,
+    UserRoleClientService,
+    UserRoleClientRepository,
     UserService,
     UserRepository,
   ],
@@ -73,4 +80,5 @@ seeder({
   RoleGroupRoleSeeder,
   UserGroupSeeder,
   UserGroupUserSeeder,
+  UserRoleClientSeeder,
 ]);

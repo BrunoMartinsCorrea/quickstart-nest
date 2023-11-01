@@ -25,6 +25,10 @@ import { RoleGroupRoleRepository } from '@/authorization/persistence/repository/
 import { RoleGroupRoleService } from '@/authorization/domain/service/role-group-role.service';
 import { RoleGroupRoleEntity } from '@/authorization/persistence/entity/role-group-role.entity';
 import { RoleGroupRoleController } from '@/authorization/http-server/controller/role-group-role.controller';
+import { UserRoleClientController } from '@/authorization/http-server/controller/user-role-client.controller';
+import { UserRoleClientRepository } from '@/authorization/persistence/repository/user-role-client-repository';
+import { UserRoleClientService } from '@/authorization/domain/service/user-role-client.service';
+import { UserRoleClientEntity } from '@/authorization/persistence/entity/user-role-client.entity';
 
 @Module({
   controllers: [
@@ -34,6 +38,7 @@ import { RoleGroupRoleController } from '@/authorization/http-server/controller/
     RoleGroupRoleController,
     UserGroupController,
     UserGroupUserController,
+    UserRoleClientController,
   ],
   providers: [
     ClientRepository,
@@ -48,6 +53,8 @@ import { RoleGroupRoleController } from '@/authorization/http-server/controller/
     UserGroupService,
     UserGroupUserRepository,
     UserGroupUserService,
+    UserRoleClientRepository,
+    UserRoleClientService,
   ],
   imports: [
     TypeOrmModule.forFeature([
@@ -57,9 +64,18 @@ import { RoleGroupRoleController } from '@/authorization/http-server/controller/
       RoleGroupRoleEntity,
       UserGroupEntity,
       UserGroupUserEntity,
+      UserRoleClientEntity,
     ]),
   ],
-  exports: [ClientService, RoleService, RoleGroupService, RoleGroupRoleService, UserGroupService, UserGroupUserService],
+  exports: [
+    ClientService,
+    RoleService,
+    RoleGroupService,
+    RoleGroupRoleService,
+    UserGroupService,
+    UserGroupUserService,
+    UserRoleClientService,
+  ],
 })
 export class AuthorizationModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

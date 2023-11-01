@@ -8,7 +8,7 @@ import { Client } from '@/authorization/domain/model/client';
 
 @Injectable()
 export class ClientSeeder implements Seeder {
-  public readonly CLIENTS = [
+  public static readonly CLIENTS = [
     { id: '00000000-0000-0000-0000-000000000000', name: 'BACKOFFICE', description: 'Backoffice app client' },
   ] as Client[];
 
@@ -20,7 +20,7 @@ export class ClientSeeder implements Seeder {
   async seed(): Promise<void> {
     Logger.log(`Seeding ${this.constructor.name}`);
 
-    for (const value of this.CLIENTS) {
+    for (const value of ClientSeeder.CLIENTS) {
       await this.service.create(value as Client);
     }
   }
@@ -28,7 +28,7 @@ export class ClientSeeder implements Seeder {
   async drop(): Promise<void> {
     Logger.log(`Dropping ${this.constructor.name}`);
 
-    for (const value of this.CLIENTS) {
+    for (const value of ClientSeeder.CLIENTS) {
       await this.repository.delete({ name: value.name });
     }
   }
