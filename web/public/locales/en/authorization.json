@@ -6,5 +6,44 @@
   },
   "roleGroups": {
     "title": "Role Groups"
+  },
+  "clients": {
+    "title": "Clients",
+    "schema": {
+      "name": "Name",
+      "description": "Description",
+      "createdAt": "Created at",
+      "updatedAt": "Updated at"
+    },
+    "form": {
+      "title": {
+        "new": "New client",
+        "edit": "Edit client"
+      },
+      "description": {
+        "new": "Fill in the fields below to create a new client",
+        "edit": "Edit the fields below to change the client information"
+      },
+      "fields": {
+        "name": {
+          "label": "Name",
+          "required": "Name is required"
+        },
+        "description": {
+          "label": "Description",
+          "required": "Description is required"
+        }
+      },
+      "action": {
+        "new": "Create",
+        "edit": "Change"
+      },
+      "result": {
+        "success": {
+          "title": "Client created",
+          "description": "This client can be used now"
+        }
+      }
+    }
   }
 }

@@ -1,5 +1,5 @@
 import { httpClient } from '@/adapters/httpClient';
-import { PaginatedResponseDto, PaginationDto } from '@/domain/common';
+import { PaginatedResponse, PaginationDto } from '@/domain/common';
 import { CreateUserDto, User, UserDto } from '.';
 
 export class UserService {
@@ -7,8 +7,8 @@ export class UserService {
     await httpClient.post('/user', payload);
   }
 
-  static async listAll({ page, limit }: PaginationDto): Promise<PaginatedResponseDto<User>> {
-    const response = await httpClient.get<PaginatedResponseDto<UserDto>>('/user', {
+  static async listAll({ page, limit }: PaginationDto): Promise<PaginatedResponse<User>> {
+    const response = await httpClient.get<PaginatedResponse<UserDto>>('/user', {
       params: {
         page,
         limit,
@@ -23,6 +23,6 @@ export class UserService {
         updatedAt: new Date(user.updatedAt),
         deletedAt: user.deletedAt ? new Date(user.deletedAt) : null,
       })),
-    } as PaginatedResponseDto<User>;
+    } as PaginatedResponse<User>;
   }
 }
