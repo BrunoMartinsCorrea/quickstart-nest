@@ -6,5 +6,44 @@
   },
   "roleGroups": {
     "title": "Grupos de Permissão"
+  },
+  "clients": {
+    "title": "Clientes",
+    "schema": {
+      "name": "Nome",
+      "description": "Descrição",
+      "createdAt": "Data criação",
+      "updatedAt": "Data atualização"
+    },
+    "form": {
+      "title": {
+        "new": "Novo cliente",
+        "edit": "Editar cliente"
+      },
+      "description": {
+        "new": "Preencha os campos abaixo para criar um novo cliente",
+        "edit": "Edite os campos abaixo para alterar as informações do cliente"
+      },
+      "fields": {
+        "name": {
+          "label": "Nome",
+          "required": "Nome é obrigatório"
+        },
+        "description": {
+          "label": "Descrição",
+          "required": "Descrição é obrigatório"
+        }
+      },
+      "action": {
+        "new": "Criar",
+        "edit": "Alterar"
+      },
+      "result": {
+        "success": {
+          "title": "Cliente criado",
+          "description": "Este cliente pode ser utilizado agora"
+        }
+      }
+    }
   }
 }
