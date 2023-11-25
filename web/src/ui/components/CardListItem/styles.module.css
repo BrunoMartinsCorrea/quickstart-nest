@@ -1,0 +1,9 @@
+.listCardContentContainer {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.overflowAnywhere {
+  overflow-wrap: anywhere;
+}

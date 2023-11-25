@@ -37,7 +37,9 @@
     "pagination": "Página {{page}} de {{totalPages}}",
     "rowsPerPage": "Linhas por página",
     "sortBy": "Ordenar por",
-    "toggleVisibility": "Alternar visibilidade"
+    "toggleVisibility": "Alternar visibilidade",
+    "active": "Ativo",
+    "inactive": "Inativo"
   },
   "fields": {
     "email": {

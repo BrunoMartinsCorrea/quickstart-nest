@@ -1,12 +1,12 @@
 import { TextFieldWithLabel } from '~/components/TextFieldWithLabel';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Flex, Button, Text } from '@radix-ui/themes';
-import { ReactElement, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import * as z from 'zod';
 import * as Drawer from '~/components/Drawer';
-import { useCreateClient } from '../../hooks';
+import { useCreateClient, useUpdateClient } from '../../hooks/clients';
 import { useToast } from '~/hooks/useToast';
 import { ResponseError } from '~/types/ResponseError';
 import { TextAreaWithLabel } from '~/components/TextAreaWithLabel';
@@ -20,25 +20,28 @@ const clientSchema = z.object({
 type ClientFormData = z.infer<typeof clientSchema>;
 
 interface ClientDrawerProps {
-  children: ReactElement;
-  isNew?: boolean;
   client?: Client;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
 }
 
-export function ClientDrawer({ isNew = true, client, children }: ClientDrawerProps) {
+export function ClientDrawer({ client, open, onOpenChange }: ClientDrawerProps) {
   const { toast } = useToast();
   const { t, i18n } = useTranslation('authorization', { keyPrefix: 'clients' });
-  const [open, setOpen] = useState(false);
   const { register, handleSubmit, formState, reset } = useForm<ClientFormData>({
     resolver: zodResolver(clientSchema),
-    defaultValues: {
-      name: client?.name,
-      description: client?.description,
-    },
   });
   const { errors, isDirty } = formState;
 
-  const { mutate, isSuccess, isLoading, error, isError: isMutateError } = useCreateClient();
+  const createMutation = useCreateClient();
+  const updateMutation = useUpdateClient();
+
+  const isSuccess = createMutation.isSuccess || updateMutation.isSuccess;
+  const isLoading = createMutation.isLoading || updateMutation.isLoading;
+  const isMutateError = createMutation.isError || updateMutation.isError;
+  const error = createMutation.error || updateMutation.error;
+
+  const isNew = !client;
   const translationKey = isNew ? 'new' : 'edit';
 
   const dateFormatter = useMemo(
@@ -52,21 +55,32 @@ export function ClientDrawer({ isNew = true, client, children }: ClientDrawerPro
 
   const isActionsDisabled = isLoading || !isDirty;
 
-  function onDrawerOpenChange(open: boolean) {
-    setOpen(open);
-    open && reset();
-  }
+  async function handleSave(data: ClientFormData) {
+    if (isNew) {
+      createMutation.mutate(data);
+    } else {
+      updateMutation.mutate({
+        id: client!.id,
+        data,
+      })
+    }
 
-  async function handleCreate(data: ClientFormData) {
-    mutate(data);
+    onOpenChange(false);
   }
 
   useEffect(() => {
+    reset({
+      name: client?.name,
+      description: client?.description,
+    });
+  }, [open]);
+
+  useEffect(() => {
     if (isSuccess) {
-      setOpen(false);
+      onOpenChange(false);
       toast({
-        title: t('form.result.success.title'),
-        description: t('form.result.success.description'),
+        title: t(`form.result.${translationKey}.success.title`),
+        description: t(`form.result.${translationKey}.success.description`),
       });
     } else if (isMutateError) {
       toast({
@@ -76,8 +90,8 @@ export function ClientDrawer({ isNew = true, client, children }: ClientDrawerPro
   }, [isSuccess, error, isMutateError]);
 
   return (
-    <Drawer.Root trigger={children} open={open} onOpenChange={onDrawerOpenChange}>
-      <form onSubmit={handleSubmit(handleCreate)}>
+    <Drawer.Root open={open} onOpenChange={onOpenChange}>
+      <form onSubmit={handleSubmit(handleSave)}>
         <Flex direction="column">
           <Drawer.Header
             title={t(`form.title.${translationKey}`)}

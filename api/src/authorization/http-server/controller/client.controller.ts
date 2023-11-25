@@ -7,6 +7,7 @@ import {
   HttpStatus,
   Param,
   ParseUUIDPipe,
+  Patch,
   Post,
   Put,
   Query,
@@ -20,6 +21,7 @@ import { Client } from '@/authorization/domain/model/client';
 import { PaginatedResponseDto } from '@/common/dto/paginated-response.dto';
 import { Response as ExpressResponse } from 'express';
 import { PaginatedQueryDto } from '@/common/dto/paginated-query.dto';
+import { ClientPartialDto } from '../dto/client-partial.dto';
 
 @ApiTags('Client')
 @Controller('client')
@@ -59,6 +61,16 @@ export class ClientController {
   @HttpCode(HttpStatus.OK)
   @ApiUnauthorizedResponse({ type: ErrorResponseDto })
   async update(@Param('id', ParseUUIDPipe) id: string, @Body() clientDto: ClientDto) {
+    return (await this.service.update({
+      id,
+      ...clientDto,
+    } as Client)) as ClientDto;
+  }
+
+  @Patch(':id')
+  @HttpCode(HttpStatus.OK)
+  @ApiUnauthorizedResponse({ type: ErrorResponseDto })
+  async patch(@Param('id', ParseUUIDPipe) id: string, @Body() clientDto: ClientPartialDto) {
     return (await this.service.update({
       id,
       ...clientDto,

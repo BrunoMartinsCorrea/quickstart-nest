@@ -37,7 +37,9 @@
     "pagination": "Page {{page}} of {{totalPages}}",
     "rowsPerPage": "Rows per page",
     "sortBy": "Sort by",
-    "toggleVisibility": "Toggle visibility"
+    "toggleVisibility": "Toggle visibility",
+    "active": "Active",
+    "inactive": "Inactive"
   },
   "fields": {
     "email": {

@@ -10,11 +10,16 @@ interface Resources {
     },
     "clients": {
       "title": "Clients",
+      "description": "Clients define which platforms can access the system",
       "schema": {
         "name": "Name",
         "description": "Description",
         "createdAt": "Created at",
         "updatedAt": "Updated at"
+      },
+      "deleteDialog": {
+        "title": "Delete Client",
+        "description": "Are you sure you want to delete this client? This action is permanent and cannot be undone."
       },
       "form": {
         "title": {
@@ -40,9 +45,23 @@ interface Resources {
           "edit": "Change"
         },
         "result": {
-          "success": {
-            "title": "Client created",
-            "description": "This client can be used now"
+          "new": {
+            "success": {
+              "title": "Cliente criado",
+              "description": "Este cliente pode ser utilizado agora"
+            }
+          },
+          "edit": {
+            "success": {
+              "title": "Cliente alterado",
+              "description": "Cliente alterado com sucesso"
+            }
+          },
+          "delete": {
+            "success": {
+              "title": "Cliente deletado",
+              "description": "Cliente deletado com sucesso"
+            }
           }
         }
       }
@@ -87,7 +106,9 @@ interface Resources {
       "pagination": "Page {{page}} of {{totalPages}}",
       "rowsPerPage": "Rows per page",
       "sortBy": "Sort by",
-      "toggleVisibility": "Toggle visibility"
+      "toggleVisibility": "Toggle visibility",
+      "active": "Active",
+      "inactive": "Inactive"
     },
     "fields": {
       "email": {

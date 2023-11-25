@@ -9,11 +9,16 @@
   },
   "clients": {
     "title": "Clientes",
+    "description": "Clientes definem quais são as plataformas que podem acessar o sistema",
     "schema": {
       "name": "Nome",
       "description": "Descrição",
       "createdAt": "Data criação",
       "updatedAt": "Data atualização"
+    },
+    "deleteDialog": {
+      "title": "Deletar Cliente",
+      "description": "Você tem certeza que quer deletar este cliente? Esta ação é permanente e não pode ser desfeita."
     },
     "form": {
       "title": {
@@ -39,9 +44,23 @@
         "edit": "Alterar"
       },
       "result": {
-        "success": {
-          "title": "Cliente criado",
-          "description": "Este cliente pode ser utilizado agora"
+        "new": {
+          "success": {
+            "title": "Cliente criado",
+            "description": "Este cliente pode ser utilizado agora"
+          }
+        },
+        "edit": {
+          "success": {
+            "title": "Cliente alterado",
+            "description": "Cliente alterado com sucesso"
+          }
+        },
+        "delete": {
+          "success": {
+            "title": "Cliente deletado",
+            "description": "Cliente deletado com sucesso"
+          }
         }
       }
     }

@@ -37,7 +37,7 @@ interface ContentProps {
 const Content = (props: ContentProps) => <Box mb="9" {...props} />;
 
 interface RootProps extends Dialog.DialogProps {
-  trigger: ReactElement;
+  trigger?: ReactElement;
   children: ReactNode;
 }
 
@@ -46,7 +46,7 @@ function Root({ trigger, children, ...props }: RootProps) {
 
   return (
     <Dialog.Root {...props}>
-      <Dialog.Trigger asChild>{trigger}</Dialog.Trigger>
+      {trigger && <Dialog.Trigger asChild>{trigger}</Dialog.Trigger>}
       <Dialog.Portal container={container}>
         <Dialog.Overlay className={styles.overlay} />
         <Dialog.Content className={styles.content}>
