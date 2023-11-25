@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Flex, Heading, IconButton, Popover, Separator, Text } from '@radix-ui/themes';
+import { Button, DropdownMenu, Flex, Heading, IconButton, Popover, Separator, Text } from '@radix-ui/themes';
 import { useTranslation } from 'react-i18next';
 import { Pagination } from '~/components/Pagination';
 import { useClients, useDeleteClient } from '../../hooks/clients';
@@ -8,7 +8,7 @@ import { ClientDrawer } from './ClientDrawer';
 import { ClientItem } from './ClientItem';
 import { useSearchParams } from 'react-router-dom';
 import { Hide } from '~/components/Hide';
-import { InfoCircledIcon, Pencil1Icon, TrashIcon } from '@radix-ui/react-icons';
+import { DotsVerticalIcon, InfoCircledIcon } from '@radix-ui/react-icons';
 import { Client } from '@/domain/authorization';
 import { DeleteDialog } from '~/components/DeleteDialog';
 import { useToast } from '~/hooks/useToast';
@@ -132,17 +132,8 @@ export function Clients() {
                   ]}>
                     <CardListItem.Header>
                       <Flex justify="between" align="center">
-                        <Flex gap="2">
-                          <IconButton variant="soft" onClick={() => onEdit(client)} >
-                            <Pencil1Icon width={16} />
-                          </IconButton>
-                          <IconButton variant="soft"  onClick={() => handleOpenDeleteDialog(client)}>
-                            <TrashIcon />
-                          </IconButton>
-                        </Flex>
                           <ClientStatusSwitch client={client}/>
-
-                          {/* <DropdownMenu.Root>
+                          <DropdownMenu.Root>
                             <DropdownMenu.Trigger>
                               <IconButton variant="ghost">
                                 <DotsVerticalIcon />
@@ -157,7 +148,7 @@ export function Clients() {
                                 {t('actions.delete', { ns: 'translation' })}
                               </DropdownMenu.Item>
                             </DropdownMenu.Content>
-                          </DropdownMenu.Root> */}
+                          </DropdownMenu.Root>
                         </Flex>
                     </CardListItem.Header>
                   </CardListItem.Root>
