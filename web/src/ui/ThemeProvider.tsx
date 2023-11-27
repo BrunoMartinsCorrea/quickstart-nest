@@ -12,7 +12,7 @@ export function ThemeProvider(props: ThemeProviderProps) {
   const changeTheme = useGlobalStore((state) => state.changeTheme);
 
   useEffect(() => {
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (_) => {
       const theme = useGlobalStore.getState().theme;
       if (theme.followSystem) {
         changeTheme(

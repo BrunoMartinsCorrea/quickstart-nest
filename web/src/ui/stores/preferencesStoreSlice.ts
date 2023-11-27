@@ -22,9 +22,8 @@ export const createPreferencesSlice = (set: SetState<GlobalStoreState>, get: Get
     followSystem: true,
   } as Theme,
   changeTheme: (theme: Theme) => {
-    const current = get().theme;
     const html = document.querySelector('html');
-    html?.classList.remove(current.appearance);
+    html?.classList.remove('dark', 'light');
     html?.classList.add(theme.followSystem ? getPreferredTheme() : theme.appearance);
     set({ theme });
   },
