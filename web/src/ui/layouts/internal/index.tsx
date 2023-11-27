@@ -6,9 +6,9 @@ import { Avatar, Box, Container, DropdownMenu, Flex, Grid, Heading, IconButton }
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Outlet, useNavigate } from 'react-router-dom';
-import styles from './styles.module.css';
 import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 import { Hide } from '~/components/Hide';
+import styles from './styles.module.css';
 
 export function InternalLayout() {
   const navigate = useNavigate();
@@ -22,14 +22,18 @@ export function InternalLayout() {
     if (!access) navigate('/sign-in');
   }, [access]);
 
+  function onMenuItemClick() {
+    setMenuVisible(false);
+  }
+
   return (
     <Grid ref={mainLayout}>
       <Box className={`${styles.menuContainer} ${menuVisible ? styles.toggleVisibility : ''}`}>
         <Menu>
           <Flex gap="1" direction="column">
-            <MenuItem to="/">{t('menu.home')}</MenuItem>
-            <MenuItem to="/users">{t('menu.users')}</MenuItem>
-            <MenuItem to="/authorization">{t('menu.authorization')}</MenuItem>
+            <MenuItem to="/" onClick={onMenuItemClick}>{t('menu.home')}</MenuItem>
+            <MenuItem to="/users" onClick={onMenuItemClick}>{t('menu.users')}</MenuItem>
+            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
           </Flex>
         </Menu>
       </Box>
@@ -41,7 +45,6 @@ export function InternalLayout() {
               <Avatar
                 fallback="BC"
                 src="https://github.com/brunomartinscorrea.png"
-                radius="full"
                 size="1"
                 style={{ cursor: 'pointer' }}
               />
