@@ -1,14 +1,15 @@
 {
-  "$schema": "https://turborepo.org/schema.json",
-  "globalDependencies": [
-    "**/.env.*local"
-  ],
-  "pipeline": {
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
     "dev": {
       "cache": false,
       "persistent": true
     },
     "build": {
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env*"
+      ],
       "dependsOn": [
         "^build"
       ],
@@ -22,7 +23,10 @@
         "^start"
       ]
     },
-    "lint": {},
-    "format": {}
+    "lint": {
+      "dependsOn": [
+        "^lint"
+      ]
+    }
   }
 }

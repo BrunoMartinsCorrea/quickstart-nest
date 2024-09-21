@@ -18,9 +18,9 @@
     "start": "turbo run start"
   },
   "devDependencies": {
-    "@turbo/gen": "~1.10.12",
+    "@turbo/gen": "~2.1.2",
     "eslint-config-turbo": "~1.10.12",
-    "turbo": "~1.10.12"
+    "turbo": "^2.1.2"
   },
   "workspaces": [
     "api",
