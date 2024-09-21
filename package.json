@@ -23,9 +23,7 @@
     "turbo": "^2.1.2"
   },
   "workspaces": [
-    "api",
-    "config",
-    "eslint-config-custom",
-    "web"
+    "apps/*",
+    "packages/*"
   ]
 }
