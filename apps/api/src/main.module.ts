@@ -10,6 +10,7 @@ import ormConnection from '@/config/orm.connection';
 import { ConfigModule } from '@nestjs/config';
 import { AuthorizationModule } from './authorization/authorization.module';
 import { RouterModule } from '@nestjs/core';
+import { EventModule as EventModule } from '@/event/event.module';
 
 @Module({
   imports: [
@@ -21,10 +22,11 @@ import { RouterModule } from '@nestjs/core';
       rootPath: join(__dirname, '..', '..', 'web', 'dist'),
     }),
     TypeOrmModule.forRoot(ormConnection()),
-    CommonModule,
     AuthenticationModule,
-    UserModule,
     AuthorizationModule,
+    EventModule,
+    CommonModule,
+    UserModule,
     RouterModule.register([
       {
         path: 'authorization',

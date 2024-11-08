@@ -35,6 +35,11 @@ import { UserRoleClientEntity } from '@/authorization/persistence/entity/user-ro
 import { UserRoleClientService } from '@/authorization/domain/service/user-role-client.service';
 import { UserRoleClientRepository } from '@/authorization/persistence/repository/user-role-client-repository';
 import { UserRoleClientSeeder } from '@/authorization/persistence/seed/user-role-client.seed';
+import { EventService } from './event/domain/service/event.service';
+import { EventRepository } from './event/persistence/repository/event-repository';
+import { EventSeeder } from './event/persistence/seeder/event.seed';
+import { EventModule } from './event/event.module';
+import { EventEntity } from './event/persistence/entity/event.entity';
 
 seeder({
   imports: [
@@ -51,9 +56,11 @@ seeder({
       UserGroupUserEntity,
       UserRoleClientEntity,
       UserEntity,
+      EventEntity,
     ]),
     UserModule,
     AuthenticationModule,
+    EventModule,
   ],
   providers: [
     ClientService,
@@ -71,6 +78,8 @@ seeder({
     UserRoleClientRepository,
     UserService,
     UserRepository,
+    EventService,
+    EventRepository,
   ],
 }).run([
   ClientSeeder,
@@ -81,4 +90,5 @@ seeder({
   UserGroupSeeder,
   UserGroupUserSeeder,
   UserRoleClientSeeder,
+  EventSeeder,
 ]);
