@@ -4,6 +4,7 @@ import { join } from 'path';
 import { LoggerMiddleware } from '@/common/middleware/logger.middleware';
 import { AuthenticationModule } from '@/authentication/authentication.module';
 import { UserModule } from '@/user/user.module';
+import { PersonModule } from '@/person/person.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CommonModule } from '@/common/common.module';
 import ormConnection from '@/config/orm.connection';
@@ -27,6 +28,7 @@ import { EventModule as EventModule } from '@/event/event.module';
     EventModule,
     CommonModule,
     UserModule,
+    PersonModule,
     RouterModule.register([
       {
         path: 'authorization',

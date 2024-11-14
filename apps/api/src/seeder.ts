@@ -3,6 +3,7 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { UserEntity } from '@/user/persistence/entity/user.entity';
 import { UserSeeder } from '@/user/persistence/seed/user.seed';
 import { UserModule } from '@/user/user.module';
+import { PersonModule } from '@/person/person.module';
 import { UserService } from '@/user/domain/service/user.service';
 import { UserRepository } from '@/user/persistence/repository/user-repository';
 import ormConnection from '@/config/orm.connection';
@@ -40,6 +41,9 @@ import { EventRepository } from './event/persistence/repository/event-repository
 import { EventSeeder } from './event/persistence/seeder/event.seed';
 import { EventModule } from './event/event.module';
 import { EventEntity } from './event/persistence/entity/event.entity';
+import { PersonEntity } from './person/persistence/entity/person.entity';
+import { PersonRepository } from './person/persistence/repository/person-repository';
+import { PersonSeeder } from './person/persistence/seeder/person.seed';
 
 seeder({
   imports: [
@@ -57,10 +61,12 @@ seeder({
       UserRoleClientEntity,
       UserEntity,
       EventEntity,
+      PersonEntity,
     ]),
     UserModule,
     AuthenticationModule,
     EventModule,
+    PersonModule,
   ],
   providers: [
     ClientService,
@@ -80,6 +86,7 @@ seeder({
     UserRepository,
     EventService,
     EventRepository,
+    PersonRepository,
   ],
 }).run([
   ClientSeeder,
@@ -91,4 +98,5 @@ seeder({
   UserGroupUserSeeder,
   UserRoleClientSeeder,
   EventSeeder,
+  PersonSeeder,
 ]);
