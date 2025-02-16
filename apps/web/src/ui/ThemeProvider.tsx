@@ -30,6 +30,7 @@ export function ThemeProvider(props: ThemeProviderProps) {
       appearance={theme.appearance}
       accentColor={theme.accentColor}
       radius={theme.radius}
+      scaling={theme.scaling}
       panelBackground="solid"
       id="main-theme"
       {...props}

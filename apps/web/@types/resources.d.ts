@@ -147,6 +147,7 @@ interface Resources {
       }
     },
     "appearance": {
+      "scaling": "Scaling",
       "title": "Appearance",
       "description": "Change the platform appearance the way you want",
       "theme": "Theme",

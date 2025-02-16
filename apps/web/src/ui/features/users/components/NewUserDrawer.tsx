@@ -100,13 +100,12 @@ export function NewUserDrawer({ isNew = true, children }: NewUserDrawerProps) {
                 htmlFor={passwordId}
                 errorText={t((errors.password?.message ?? '') as 'form.fields.email.label', { length: 6 })}
               >
-                <TextField.Root>
-                  <TextField.Input
-                    id={passwordId}
-                    placeholder={t('form.fields.password.label')}
-                    type={visiblePassword ? 'text' : 'password'}
-                    {...register('password')}
-                  />
+                <TextField.Root
+                  id={passwordId}
+                  placeholder={t('form.fields.password.label')}
+                  type={visiblePassword ? 'text' : 'password'}
+                  {...register('password')}
+                >
                   <TextField.Slot>
                     <IconButton type="button" variant="ghost" onClick={togglePasswordVisibility}>
                       {visiblePassword ? <EyeOpenIcon /> : <EyeClosedIcon />}
@@ -119,13 +118,12 @@ export function NewUserDrawer({ isNew = true, children }: NewUserDrawerProps) {
                 htmlFor={confirmPasswordId}
                 errorText={t((errors.confirmPassword?.message ?? '') as 'form.fields.email.label')}
               >
-                <TextField.Root>
-                  <TextField.Input
-                    id={confirmPasswordId}
-                    placeholder={t('form.fields.confirmPassword.label')}
-                    type={visiblePassword ? 'text' : 'password'}
-                    {...register('confirmPassword')}
-                  />
+                <TextField.Root
+                  id={confirmPasswordId}
+                  placeholder={t('form.fields.confirmPassword.label')}
+                  type={visiblePassword ? 'text' : 'password'}
+                  {...register('confirmPassword')}
+                >
                   <TextField.Slot>
                     <IconButton type="button" variant="ghost" onClick={togglePasswordVisibility}>
                       {visiblePassword ? <EyeOpenIcon /> : <EyeClosedIcon />}
