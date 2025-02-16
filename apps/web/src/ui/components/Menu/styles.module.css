@@ -1,12 +1,16 @@
 .container {
-  width: 100%;
+  width: 230px;
+  flex-shrink: 0;
+}
+
+.aside {
+  width: inherit;
   position: fixed;
-  top: 57px;
-  bottom: 0;
+  top: 40px;
   left: 0;
-  box-shadow: var(--shadow-2);
-  background-color: var(--color-page-background);
-  z-index: 50;
+  bottom: 0;
+  z-index: 1;
+  background-color: var(--color-background);
 }
 
 .button {
@@ -29,4 +33,14 @@
 .buttonActive {
   color: var(--accent-a11);
   background-color: var(--accent-a4);
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 0;
+  }
+
+  .visible.container {
+    width: 100%;
+  }
 }

@@ -61,13 +61,12 @@ export function SignInForm() {
             htmlFor={passwordId}
             errorText={t((errors.password?.message ?? '') as 'fields.email.label')}
           >
-            <TextField.Root>
-              <TextField.Input
-                id={passwordId}
-                placeholder={t('fields.password.label')}
-                type={visiblePassword ? 'text' : 'password'}
-                {...register('password')}
-              />
+            <TextField.Root
+              id={passwordId}
+              placeholder={t('fields.password.label')}
+              type={visiblePassword ? 'text' : 'password'}
+              {...register('password')}
+            >
               <TextField.Slot>
                 <IconButton type="button" variant="ghost" onClick={togglePasswordVisibility}>
                   {visiblePassword ? <EyeOpenIcon /> : <EyeClosedIcon />}

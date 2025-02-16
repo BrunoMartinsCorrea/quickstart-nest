@@ -1,12 +1,11 @@
 import { AlertDialog, Button, Flex, Table } from '@radix-ui/themes';
-import { AlertDialogRootProps } from '@radix-ui/themes/dist/cjs/components/alert-dialog';
 import { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
 import _ from 'underscore';
 
 type Item<T> = T & { id: string };
 
-interface RootProps<T> extends AlertDialogRootProps {
+interface RootProps<T> extends AlertDialog.RootProps {
   title: string;
   description: string;
   headers: string[];
