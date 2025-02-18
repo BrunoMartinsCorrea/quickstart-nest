@@ -5,7 +5,6 @@ import { Pagination } from '~/components/Pagination';
 import { ColumnHeaderCell, ColumnsVisibilityDropdown, TableRoot, TableRow } from '~/components/Table';
 import { Box, Button, Checkbox, Flex, Grid, Heading, Table, Text } from '@radix-ui/themes';
 import {
-  PaginationState,
   createColumnHelper,
   flexRender,
   getCoreRowModel,
@@ -15,7 +14,6 @@ import {
   getSortedRowModel,
 } from '@tanstack/react-table';
 import { useDeleteDialog, useUsers } from '../../hooks';
-import { produce } from 'immer';
 import { Spinner } from '~/components/Spinner';
 import { Hide } from '~/components/Hide';
 import styles from './styles.module.css';
@@ -27,20 +25,16 @@ import { OptionsDropdown } from '../../components/OptionsDropdown';
 import { DeleteDialog } from '../../components/DeleteDialog';
 import React from 'react';
 import { NewUserDrawer } from '../../components/NewUserDrawer';
+import { usePagination } from '~/hooks/usePagination';
 
 const column = createColumnHelper<User>();
-
-const defaultPagination: PaginationState = {
-  pageIndex: 0,
-  pageSize: 1,
-};
 
 export function UsersList() {
   const { t, i18n } = useTranslation('users');
   const deleteDialog = useDeleteDialog();
-  const [pagination, setPagination] = useState<PaginationState>(() => defaultPagination);
   const [rowSelection, setRowSelection] = useState({});
   const [sorting, setSorting] = useState<SortingState>([]);
+  const { page, pageSize, setPageSize, setPagination } = usePagination();
 
   const dateFormatter = useMemo(() => new Intl.DateTimeFormat(i18n.language), [i18n.language]);
 
@@ -52,7 +46,7 @@ export function UsersList() {
     });
   }
 
-  const { data, isFetching, refetch } = useUsers({ ...pagination });
+  const { data, isFetching } = useUsers({ pageIndex: page - 1, pageSize });
 
   const pageCount = useMemo(() => {
     const calc = data?.limit ? Math.ceil(data.totalCount / data.limit) : 1;
@@ -125,7 +119,10 @@ export function UsersList() {
     onSortingChange: setSorting,
     pageCount,
     state: {
-      pagination,
+      pagination: {
+        pageIndex: page - 1,
+        pageSize
+      },
       rowSelection,
       sorting,
     },
@@ -133,7 +130,7 @@ export function UsersList() {
       columnVisibility: {
         username: false,
         updatedAt: false,
-        id: false,
+        id: false
       },
     },
     enableRowSelection: true,
@@ -142,15 +139,6 @@ export function UsersList() {
     getFilteredRowModel: getFilteredRowModel(),
     getSortedRowModel: getSortedRowModel(),
   });
-
-  function handlePageSizeChange(size: string) {
-    setPagination(
-      produce((draft) => {
-        draft.pageSize = Number(size);
-      })
-    );
-    refetch();
-  }
 
   function handleDeleteUser(user: User) {
     deleteDialog([user]);
@@ -304,10 +292,10 @@ export function UsersList() {
             onLastPage={() => table.setPageIndex(table.getPageCount() - 1)}
             hasPreviousPage={table.getCanPreviousPage()}
             hasNextPage={table.getCanNextPage()}
-            onPageSizeChange={handlePageSizeChange}
+            onPageSizeChange={(size) => setPageSize(Number(size))}
             currentPage={table.getState().pagination.pageIndex + 1}
             totalPages={table.getPageCount()}
-            defaultSize={defaultPagination.pageSize.toString()}
+            defaultSize={pageSize.toString()}
           />
         </Flex>
       </Flex>

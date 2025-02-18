@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, DropdownMenu, Flex, Heading, IconButton, Popover, Separator, Text } from '@radix-ui/themes';
 import { useTranslation } from 'react-i18next';
 import { Pagination } from '~/components/Pagination';
@@ -6,7 +6,6 @@ import { useClients, useDeleteClient } from '../../hooks/clients';
 import { Spinner } from '~/components/Spinner';
 import { ClientDrawer } from './ClientDrawer';
 import { ClientItem } from './ClientItem';
-import { useSearchParams } from 'react-router-dom';
 import { Hide } from '~/components/Hide';
 import { DotsVerticalIcon, InfoCircledIcon } from '@radix-ui/react-icons';
 import { Client } from '@/domain/authorization';
@@ -16,19 +15,13 @@ import { ResponseError } from '~/types/ResponseError';
 import { ClientStatusSwitch } from './ClientStatusSwitch';
 import { CardListItem } from '~/components/CardListItem';
 import _ from 'underscore';
+import { usePagination } from '~/hooks/usePagination';
 
 export function Clients() {
   const { toast } = useToast();
   const { t } = useTranslation('authorization');
-  const [queryParams, setQueryParams] = useSearchParams(
-    new URLSearchParams({
-      page: '1',
-      size: '10',
-    })
-  );
+  const { page, pageSize, setPage, setPageSize } = usePagination({ key: 'clients' });
 
-  const [page, setPage] = useState(() => Number(queryParams.get('page')!));
-  const [pageSize, setPageSize] = useState(() => Number(queryParams.get('size')!));
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [currentClient, setCurrentClient] = useState<Client | undefined>();
@@ -37,17 +30,6 @@ export function Clients() {
 
   const deleteMutation = useDeleteClient();
   const error = deleteMutation.error;
-
-  useEffect(() => {
-    setQueryParams(prev => {
-      prev.delete('page');
-      prev.delete('size');
-      prev.append('page', `${page}`);
-      prev.append('size', `${pageSize}`);
-      prev.sort();
-      return prev;
-    })
-  }, [page, pageSize]);
 
   function onEdit(client: Client) {
     setCurrentClient(client);

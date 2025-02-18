@@ -1,5 +1,3 @@
-import { TextFieldWithLabel } from '~/components/TextFieldWithLabel';
-// import { useStore } from '@/stores/useGlobalStore';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
 import { Flex, TextField, IconButton, Button } from '@radix-ui/themes';
@@ -11,6 +9,7 @@ import * as Drawer from '~/components/Drawer';
 import { useCreateUser } from '../hooks';
 import { useToast } from '~/hooks/useToast';
 import { ResponseError } from '~/types/ResponseError';
+import { FormGroup } from '~/components/FormGroup';
 
 const signUpFormSchema = z
   .object({
@@ -83,23 +82,32 @@ export function NewUserDrawer({ isNew = true, children }: NewUserDrawerProps) {
           />
           <Drawer.Content>
             <Flex direction="column" gap="4" justify="center">
-              <TextFieldWithLabel
-                label={t('form.fields.fullName.label')}
-                placeholder={t('form.fields.fullName.label')}
-                errorText={t((errors.fullName?.message ?? '') as 'form.fields.email.label')}
-                {...register('fullName')}
-              />
-              <TextFieldWithLabel
-                label={t('form.fields.email.label')}
-                placeholder={t('form.fields.email.label')}
-                errorText={t((errors.email?.message ?? '') as 'form.fields.email.label')}
-                {...register('email')}
-              />
-              <TextFieldWithLabel
-                label={t('form.fields.password.label')}
-                htmlFor={passwordId}
-                errorText={t((errors.password?.message ?? '') as 'form.fields.email.label', { length: 6 })}
-              >
+              <FormGroup.Root>
+                <FormGroup.Label>{t('form.fields.fullName.label')}</FormGroup.Label>
+                <TextField.Root
+                  placeholder={t('form.fields.fullName.label')}
+                  {...register('fullName')}
+                />
+                {errors.fullName?.message && (
+                  <FormGroup.ErrorText>
+                    {t(errors.fullName?.message as 'form.fields.email.label')}
+                  </FormGroup.ErrorText>
+                )}
+              </FormGroup.Root>
+              <FormGroup.Root>
+                <FormGroup.Label>{t('form.fields.email.label')}</FormGroup.Label>
+                <TextField.Root
+                  placeholder={t('form.fields.email.label')}
+                  {...register('email')}
+                />
+                {errors.email?.message && (
+                  <FormGroup.ErrorText>
+                    {t(errors.email?.message as 'form.fields.email.label')}
+                  </FormGroup.ErrorText>
+                )}
+              </FormGroup.Root>
+              <FormGroup.Root>
+                <FormGroup.Label>{t('form.fields.password.label')}</FormGroup.Label>
                 <TextField.Root
                   id={passwordId}
                   placeholder={t('form.fields.password.label')}
@@ -112,12 +120,14 @@ export function NewUserDrawer({ isNew = true, children }: NewUserDrawerProps) {
                     </IconButton>
                   </TextField.Slot>
                 </TextField.Root>
-              </TextFieldWithLabel>
-              <TextFieldWithLabel
-                label={t('form.fields.confirmPassword.label')}
-                htmlFor={confirmPasswordId}
-                errorText={t((errors.confirmPassword?.message ?? '') as 'form.fields.email.label')}
-              >
+                {errors.password?.message && (
+                  <FormGroup.ErrorText>
+                    {t(errors.password?.message as 'form.fields.email.label', { length: 6 })}
+                  </FormGroup.ErrorText>
+                )}
+              </FormGroup.Root>
+              <FormGroup.Root>
+                <FormGroup.Label>{t('form.fields.confirmPassword.label')}</FormGroup.Label>
                 <TextField.Root
                   id={confirmPasswordId}
                   placeholder={t('form.fields.confirmPassword.label')}
@@ -130,7 +140,12 @@ export function NewUserDrawer({ isNew = true, children }: NewUserDrawerProps) {
                     </IconButton>
                   </TextField.Slot>
                 </TextField.Root>
-              </TextFieldWithLabel>
+                {errors.confirmPassword?.message && (
+                  <FormGroup.ErrorText>
+                    {t(errors.confirmPassword?.message as 'form.fields.email.label')}
+                  </FormGroup.ErrorText>
+                )}
+              </FormGroup.Root>
             </Flex>
           </Drawer.Content>
         </Flex>

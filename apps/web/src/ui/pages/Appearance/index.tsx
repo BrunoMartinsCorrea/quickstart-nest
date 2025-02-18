@@ -186,7 +186,6 @@ export function Appearance() {
                         draft.followSystem = appearance === 'inherit';
                         draft.appearance = appearance;
                       });
-                      console.log('newTheme', newTheme);
                       changeTheme(newTheme);
                     }}
                   />

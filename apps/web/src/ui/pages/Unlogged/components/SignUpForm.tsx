@@ -1,4 +1,3 @@
-import { TextFieldWithLabel } from '~/components/TextFieldWithLabel';
 // import { useStore } from '@/stores/useGlobalStore';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
@@ -7,6 +6,7 @@ import { useId, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import * as z from 'zod';
+import { FormGroup } from '~/components/FormGroup';
 
 const signUpFormSchema = z
   .object({
@@ -52,23 +52,32 @@ export function SignUpForm() {
       <Flex direction="column" gap="4" justify="center" p="1" asChild>
         <form onSubmit={handleSubmit(handleSignUp)}>
           <Text size="2">{t('unlogged.signUp.welcome')}</Text>
-          <TextFieldWithLabel
-            label={t('fields.email.label')}
-            placeholder={t('fields.email.label')}
-            errorText={t((errors.email?.message ?? '') as 'fields.email.label')}
-            {...register('email')}
-          />
-          <TextFieldWithLabel
-            label={t('fields.fullName.label')}
-            placeholder={t('fields.fullName.label')}
-            errorText={t((errors.fullName?.message ?? '') as 'fields.email.label')}
-            {...register('fullName')}
-          />
-          <TextFieldWithLabel
-            label={t('fields.password.label')}
-            htmlFor={passwordId}
-            errorText={t((errors.password?.message ?? '') as 'fields.email.label', { length: 6 })}
-          >
+          <FormGroup.Root>
+            <FormGroup.Label>{t('fields.email.label')}</FormGroup.Label>
+            <TextField.Root
+              placeholder={t('fields.email.label')}
+              {...register('email')}
+            />
+            {errors.email && (
+              <FormGroup.ErrorText>
+                {t(errors.email.message as 'fields.email.label')}
+              </FormGroup.ErrorText>
+            )}
+          </FormGroup.Root>
+          <FormGroup.Root>
+            <FormGroup.Label>{t('fields.fullName.label')}</FormGroup.Label>
+            <TextField.Root
+              placeholder={t('fields.fullName.label')}
+              {...register('fullName')}
+            />
+            {errors.fullName && (
+              <FormGroup.ErrorText>
+                {t(errors.fullName.message as 'fields.email.label')}
+              </FormGroup.ErrorText>
+            )}
+          </FormGroup.Root>
+          <FormGroup.Root>
+            <FormGroup.Label>{t('fields.password.label')}</FormGroup.Label>
             <TextField.Root
               id={passwordId}
               placeholder={t('fields.password.label')}
@@ -81,12 +90,14 @@ export function SignUpForm() {
                 </IconButton>
               </TextField.Slot>
             </TextField.Root>
-          </TextFieldWithLabel>
-          <TextFieldWithLabel
-            label={t('fields.confirmPassword.label')}
-            htmlFor={confirmPasswordId}
-            errorText={t((errors.confirmPassword?.message ?? '') as 'fields.email.label')}
-          >
+            {errors.password && (
+              <FormGroup.ErrorText>
+                {t(errors.password.message as 'fields.email.label', { length: 6 })}
+              </FormGroup.ErrorText>
+            )}
+          </FormGroup.Root>
+          <FormGroup.Root>
+            <FormGroup.Label>{t('fields.confirmPassword.label')}</FormGroup.Label>
             <TextField.Root
               id={confirmPasswordId}
               placeholder={t('fields.confirmPassword.label')}
@@ -99,7 +110,12 @@ export function SignUpForm() {
                 </IconButton>
               </TextField.Slot>
             </TextField.Root>
-          </TextFieldWithLabel>
+            {errors.confirmPassword && (
+              <FormGroup.ErrorText>
+                {t(errors.confirmPassword.message as 'fields.email.label')}
+              </FormGroup.ErrorText>
+            )}
+          </FormGroup.Root>
           <Flex>
             <Button type="submit" disabled={isLoading}>
               {t('unlogged.signUp.signUp')}

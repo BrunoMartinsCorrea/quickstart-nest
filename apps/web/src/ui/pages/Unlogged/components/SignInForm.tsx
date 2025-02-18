@@ -1,4 +1,3 @@
-import { TextFieldWithLabel } from '~/components/TextFieldWithLabel';
 import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
 import { Card, Flex, Text, TextField, IconButton, Button, Link } from '@radix-ui/themes';
 import { useId, useState } from 'react';
@@ -9,6 +8,7 @@ import { useGlobalStore } from '~/stores/useGlobalStore';
 import { useTranslation } from 'react-i18next';
 import { useToast } from '~/hooks/useToast';
 import { ResponseError } from '~/types/ResponseError';
+import { FormGroup } from '~/components/FormGroup';
 
 const signInSchema = z.object({
   username: z.string().nonempty('fields.email.required'),
@@ -50,17 +50,20 @@ export function SignInForm() {
       <Flex direction="column" gap="4" justify="center" p="1" asChild>
         <form onSubmit={handleSubmit(handleSignIn)}>
           <Text size="2">{t('unlogged.signIn.welcome')}</Text>
-          <TextFieldWithLabel
-            label={t('fields.email.label')}
-            placeholder={t('fields.email.label')}
-            errorText={t((errors.username?.message ?? '') as 'fields.email.label')}
-            {...register('username')}
-          />
-          <TextFieldWithLabel
-            label={t('fields.password.label')}
-            htmlFor={passwordId}
-            errorText={t((errors.password?.message ?? '') as 'fields.email.label')}
-          >
+          <FormGroup.Root>
+            <FormGroup.Label>{t('fields.email.label')}</FormGroup.Label>
+            <TextField.Root
+              placeholder={t('fields.email.label')}
+              {...register('username')}
+            />
+            {errors.username && (
+              <FormGroup.ErrorText>
+                {t(errors.username.message as 'fields.email.label')}
+              </FormGroup.ErrorText>
+            )}
+          </FormGroup.Root>
+          <FormGroup.Root>
+            <FormGroup.Label>{t('fields.password.label')}</FormGroup.Label>
             <TextField.Root
               id={passwordId}
               placeholder={t('fields.password.label')}
@@ -73,7 +76,12 @@ export function SignInForm() {
                 </IconButton>
               </TextField.Slot>
             </TextField.Root>
-          </TextFieldWithLabel>
+            {errors.password && (
+              <FormGroup.ErrorText>
+                {t(errors.password.message as 'fields.email.label')}
+              </FormGroup.ErrorText>
+            )}
+          </FormGroup.Root>
           <Flex justify="between" align="center">
             <Button type="submit" disabled={isLoading}>
               {t('unlogged.signIn.signIn')}

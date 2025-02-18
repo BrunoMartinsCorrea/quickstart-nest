@@ -1,6 +1,5 @@
-import { TextFieldWithLabel } from '~/components/TextFieldWithLabel';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Flex, Button, Text } from '@radix-ui/themes';
+import { Flex, Button, Text, TextField, TextArea } from '@radix-ui/themes';
 import { useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -9,8 +8,8 @@ import * as Drawer from '~/components/Drawer';
 import { useCreateClient, useUpdateClient } from '../../hooks/clients';
 import { useToast } from '~/hooks/useToast';
 import { ResponseError } from '~/types/ResponseError';
-import { TextAreaWithLabel } from '~/components/TextAreaWithLabel';
 import { Client } from '@/domain/authorization';
+import { FormGroup } from '~/components/FormGroup';
 
 const clientSchema = z.object({
   name: z.string().nonempty('form.fields.name.required'),
@@ -99,20 +98,26 @@ export function ClientDrawer({ client, open, onOpenChange }: ClientDrawerProps) 
           />
           <Drawer.Content>
             <Flex direction="column" gap="4" justify="center">
-              <TextFieldWithLabel
-                label={t('form.fields.name.label')}
-                placeholder={t('form.fields.name.label')}
-                errorText={errors.name?.message ? t(errors.name?.message as 'form.fields.name.label') : ''}
-                {...register('name')}
-              />
-              <TextAreaWithLabel
-                label={t('form.fields.description.label')}
-                placeholder={t('form.fields.description.label')}
-                errorText={
-                  errors.description?.message ? t(errors.description?.message as 'form.fields.name.label') : ''
-                }
-                {...register('description')}
-              />
+              <FormGroup.Root>
+                <FormGroup.Label>{t('form.fields.name.label')}</FormGroup.Label>
+                <TextField.Root
+                  placeholder={t('form.fields.name.label')}
+                  {...register('name')}
+                />
+                <FormGroup.ErrorText>
+                  {errors.name?.message ? t(errors.name?.message as 'form.fields.name.label') : ''}
+                </FormGroup.ErrorText>
+              </FormGroup.Root>
+              <FormGroup.Root>
+                <FormGroup.Label>{t('form.fields.description.label')}</FormGroup.Label>
+                <TextArea
+                  placeholder={t('form.fields.description.label')}
+                  {...register('description')}
+                />
+                {errors.description?.message && (
+                  <FormGroup.ErrorText>{t(errors.description?.message as 'form.fields.name.label')}</FormGroup.ErrorText>
+                )}
+              </FormGroup.Root>
               {client && (
                 <>
                   <Flex direction="column" gap="4">

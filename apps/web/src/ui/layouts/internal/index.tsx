@@ -63,22 +63,6 @@ export function InternalLayout() {
             <MenuItem to="/" onClick={onMenuItemClick}>{t('menu.home')}</MenuItem>
             <MenuItem to="/users" onClick={onMenuItemClick}>{t('menu.users')}</MenuItem>
             <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
-            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
-            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
-            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
-            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
-            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
-            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
-            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
-            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
-            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
-            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
-            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
-            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
-            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
-            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
-            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
-            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
           </Flex>
         </Menu>
         <Box px="4" flexGrow="1" className={cn({ [styles.hidden]: menuVisible })}>

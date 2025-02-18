@@ -3,27 +3,25 @@ import { useTranslation } from 'react-i18next';
 import { RoleGroups } from '../components/RoleGroups';
 import { Clients } from '../components/Clients';
 import { useSearchParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useCallback } from 'react';
 
 export function AuthorizationPage() {
+  const key = 'tab'
   const { t } = useTranslation('authorization');
-
   const [queryParams, setQueryParams] = useSearchParams(
     new URLSearchParams({
       tab: 'user-groups',
     })
   );
 
-  const [currentTab, setCurrentTab] = useState(() => queryParams.get('tab')!);
+  const currentTab = queryParams.get(key)!;
 
-  useEffect(() => {
-    setQueryParams(prev => {
-      prev.delete('tab');
-      prev.append('tab', currentTab);
-      prev.sort();
-      return prev;
-    })
-  }, [currentTab]);
+  const setCurrentTab = useCallback((tab: string) => setQueryParams(prev => {
+    prev.delete(key);
+    prev.append(key, tab);
+    prev.sort();
+    return prev;
+  }), [key]);
 
   return (
     <Flex direction="column" gap="3">
