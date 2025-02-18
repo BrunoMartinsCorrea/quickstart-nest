@@ -94,8 +94,8 @@ export function Clients() {
                     </IconButton>
                   </Popover.Trigger>
                   <Popover.Content>
-                    <Flex wrap="wrap" style={{maxWidth: '200px'}}>
-                      <Text style={{textOverflow: 'ellipsis'}} color='gray' size="2">
+                    <Flex wrap="wrap" style={{ maxWidth: '200px' }}>
+                      <Text style={{ textOverflow: 'ellipsis' }} color='gray' size="2">
                         {t('clients.description')}
                       </Text>
                     </Flex>
@@ -115,7 +115,7 @@ export function Clients() {
                   <React.Fragment key={client.id}>
                     <ClientItem
                       client={client}
-                      onEdit={onEdit} onDelete={handleOpenDeleteDialog}/>
+                      onEdit={onEdit} onDelete={handleOpenDeleteDialog} />
                     {i !== data.results.length - 1 && <Separator size="4" />}
                   </React.Fragment>
                 );
@@ -132,24 +132,24 @@ export function Clients() {
                   ]}>
                     <CardListItem.Header>
                       <Flex justify="between" align="center">
-                          <ClientStatusSwitch client={client}/>
-                          <DropdownMenu.Root>
-                            <DropdownMenu.Trigger>
-                              <IconButton variant="ghost">
-                                <DotsVerticalIcon />
-                              </IconButton>
-                            </DropdownMenu.Trigger>
-                            <DropdownMenu.Content variant="soft">
-                              <DropdownMenu.Item onClick={() => onEdit(client)}>
-                                  {t('actions.edit', { ns: 'translation' })}
-                              </DropdownMenu.Item>
-                              <DropdownMenu.Separator />
-                              <DropdownMenu.Item color="red" onClick={() => handleOpenDeleteDialog(client)}>
-                                {t('actions.delete', { ns: 'translation' })}
-                              </DropdownMenu.Item>
-                            </DropdownMenu.Content>
-                          </DropdownMenu.Root>
-                        </Flex>
+                        <ClientStatusSwitch client={client} />
+                        <DropdownMenu.Root>
+                          <DropdownMenu.Trigger>
+                            <IconButton variant="ghost">
+                              <DotsVerticalIcon />
+                            </IconButton>
+                          </DropdownMenu.Trigger>
+                          <DropdownMenu.Content variant="soft">
+                            <DropdownMenu.Item onClick={() => onEdit(client)}>
+                              {t('actions.edit', { ns: 'translation' })}
+                            </DropdownMenu.Item>
+                            <DropdownMenu.Separator />
+                            <DropdownMenu.Item color="red" onClick={() => handleOpenDeleteDialog(client)}>
+                              {t('actions.delete', { ns: 'translation' })}
+                            </DropdownMenu.Item>
+                          </DropdownMenu.Content>
+                        </DropdownMenu.Root>
+                      </Flex>
                     </CardListItem.Header>
                   </CardListItem.Root>
                 )
@@ -164,7 +164,7 @@ export function Clients() {
               hasNextPage={data.totalCount > page * pageSize}
               hasPreviousPage={page > 1}
               defaultSize={pageSize.toString()}
-              totalPages={Math.ceil(data.totalCount/pageSize)}
+              totalPages={Math.ceil(data.totalCount / pageSize)}
               onNext={() => setPage(value => value + 1)}
               onPrevious={() => setPage(value => value - 1)}
               onFirstPage={() => setPage(1)}

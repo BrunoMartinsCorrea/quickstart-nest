@@ -1,8 +1,8 @@
 import React, { useId } from 'react';
-import { Flex, PropsWithoutRefOrColor, Text, TextArea } from '@radix-ui/themes';
+import { Flex, Text, TextArea, TextAreaProps } from '@radix-ui/themes';
 import { Label } from '~/components/Label';
 
-type TextAreaInputProps = Omit<PropsWithoutRefOrColor<'textarea'>, 'size'>;
+type TextAreaInputProps = Omit<TextAreaProps, 'size'>;
 
 type TextAreaWithLabelProps = TextAreaInputProps & {
   label: string;

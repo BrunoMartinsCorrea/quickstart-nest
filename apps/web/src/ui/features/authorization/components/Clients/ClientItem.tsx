@@ -25,7 +25,7 @@ export function ClientItem({ client, onEdit, onDelete }: ClientItemProps) {
             {client.name}
           </Text>
         </Flex>
-        <Flex gap="1" direction="column" grow="1" width="100%">
+        <Flex gap="1" direction="column" flexGrow="1" width="100%">
           <Text as="span" weight="bold" size="2">
             {t('schema.description')}
           </Text>

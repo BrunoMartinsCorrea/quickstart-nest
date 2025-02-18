@@ -2,13 +2,15 @@ import { Header } from '~/components/Header';
 import { LocaleDropdown } from '~/components/LocaleDropdown';
 import { Menu, MenuItem } from '~/components/Menu';
 import { useGlobalStore } from '~/stores/useGlobalStore';
-import { Avatar, Box, Container, DropdownMenu, Flex, Grid, Heading, IconButton } from '@radix-ui/themes';
+import { Avatar, Box, Container, DropdownMenu, Flex, Heading, IconButton } from '@radix-ui/themes';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 import { Hide } from '~/components/Hide';
-import styles from './styles.module.css';
+import cn from 'classnames';
+import styles from './styles.module.css'
+import '~/styles/global.css';
 
 export function InternalLayout() {
   const navigate = useNavigate();
@@ -27,26 +29,18 @@ export function InternalLayout() {
   }
 
   return (
-    <Grid ref={mainLayout}>
-      <Box className={`${styles.menuContainer} ${menuVisible ? styles.toggleVisibility : ''}`}>
-        <Menu>
-          <Flex gap="1" direction="column">
-            <MenuItem to="/" onClick={onMenuItemClick}>{t('menu.home')}</MenuItem>
-            <MenuItem to="/users" onClick={onMenuItemClick}>{t('menu.users')}</MenuItem>
-            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
-          </Flex>
-        </Menu>
-      </Box>
+    <>
       <Header title={<Heading size="2">Backoffice</Heading>}>
         <Flex gap="4" align="center">
           <LocaleDropdown />
           <DropdownMenu.Root>
             <DropdownMenu.Trigger>
               <Avatar
+                style={{ cursor: 'pointer' }}
+                role='button'
                 fallback="BC"
                 src="https://github.com/brunomartinscorrea.png"
                 size="1"
-                style={{ cursor: 'pointer' }}
               />
             </DropdownMenu.Trigger>
             <DropdownMenu.Content variant="soft">
@@ -63,11 +57,36 @@ export function InternalLayout() {
           </Hide>
         </Flex>
       </Header>
-      <Box className={styles.mainContainer}>
-        <Container px="4">
-          <Outlet />
-        </Container>
-      </Box>
-    </Grid>
+      <Flex ref={mainLayout} >
+        <Menu visible={menuVisible}>
+          <Flex gap="1" direction="column">
+            <MenuItem to="/" onClick={onMenuItemClick}>{t('menu.home')}</MenuItem>
+            <MenuItem to="/users" onClick={onMenuItemClick}>{t('menu.users')}</MenuItem>
+            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
+            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
+            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
+            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
+            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
+            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
+            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
+            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
+            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
+            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
+            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
+            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
+            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
+            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
+            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
+            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
+            <MenuItem to="/authorization" onClick={onMenuItemClick}>{t('menu.authorization')}</MenuItem>
+          </Flex>
+        </Menu>
+        <Box px="4" flexGrow="1" className={cn({ [styles.hidden]: menuVisible })}>
+          <Container>
+            <Outlet />
+          </Container>
+        </Box>
+      </Flex>
+    </>
   );
 }

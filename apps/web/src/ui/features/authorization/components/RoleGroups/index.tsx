@@ -32,7 +32,7 @@ export function RoleGroups() {
                       User Management
                     </Text>
                   </Flex>
-                  <Flex gap="1" direction="column" grow="1" width="100%">
+                  <Flex gap="1" direction="column" flexGrow="1" width="100%">
                     <Text as="span" weight="bold" size="2">
                       Description
                     </Text>
@@ -68,11 +68,11 @@ export function RoleGroups() {
           hasNextPage={true}
           hasPreviousPage={false}
           totalPages={2}
-          onNext={() => {}}
-          onPrevious={() => {}}
-          onFirstPage={() => {}}
-          onLastPage={() => {}}
-          onPageSizeChange={() => {}}
+          onNext={() => { }}
+          onPrevious={() => { }}
+          onFirstPage={() => { }}
+          onLastPage={() => { }}
+          onPageSizeChange={() => { }}
         />
       </Flex>
     </Flex>

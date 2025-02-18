@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Text, Theme, themeAccentColorsOrdered, themePropDefs } from '@radix-ui/themes';
+import { Box, Flex, Heading, Text, Theme } from '@radix-ui/themes';
 import { useId } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './styles.module.css';
@@ -9,8 +9,13 @@ import { ThemeExample } from './components/ThemeExample';
 import { produce } from 'immer';
 import * as z from 'zod';
 
+const themeAccentColorsOrdered = ["gray", "gold", "bronze", "brown", "yellow", "amber", "orange", "tomato", "red", "ruby", "crimson", "pink", "plum", "purple", "violet", "iris", "indigo", "blue", "cyan", "teal", "jade", "green", "grass", "lime", "mint", "sky"] as const
+const themeRadiusOrdered = ["none", "small", "medium", "large", "full"] as const
+const themeScaling = ["90%", "95%", "100%", "105%", "110%"] as const
+
 const themeFormSchema = z.object({
   accentColor: z.string(),
+  scaling: z.string(),
   radius: z.string(),
   appearance: z.string(),
 });
@@ -27,6 +32,7 @@ export function Appearance() {
       accentColor: theme.accentColor,
       radius: theme.radius,
       appearance: theme.appearance,
+      scaling: theme.scaling,
     },
   });
 
@@ -89,7 +95,7 @@ export function Appearance() {
             {t('appearance.roundedBorders.title')}
           </Heading>
           <Flex gap="2" role="group" aria-labelledby={themeColorId} width="100%" wrap="wrap">
-            {themePropDefs.radius.values.map((value) => (
+            {themeRadiusOrdered.map((value) => (
               <Flex key={value} direction="column" align="center">
                 <label className={styles.card}>
                   <input
@@ -108,11 +114,12 @@ export function Appearance() {
                   <Theme asChild radius={value}>
                     <Box
                       m="3"
-                      width="8"
-                      height="8"
+                      width="32px"
+                      height="32px"
                       style={{
                         borderTopLeftRadius: value === 'full' ? '80%' : 'var(--radius-5)',
-                        backgroundImage: 'linear-gradient(to bottom right, var(--accent-3), var(--accent-4))',
+                        backgroundImage:
+                          'linear-gradient(to bottom right, var(--accent-3), var(--accent-4))',
                         borderTop: '2px solid var(--accent-a8)',
                         borderLeft: '2px solid var(--accent-a8)',
                       }}
@@ -127,6 +134,37 @@ export function Appearance() {
                   </Text>
                 </Box>
               </Flex>
+            ))}
+          </Flex>
+          <Heading as="h2" size="5" id={themeColorId} mt="4">
+            {t('appearance.scaling')}
+          </Heading>
+          <Flex gap="2">
+            {themeScaling.map((value) => (
+              <label key={value} className="rt-ThemePanelRadioCard">
+                <input
+                  className="rt-ThemePanelRadioCardInput"
+                  type="radio"
+                  value={value}
+                  {...register('scaling')}
+                  onChange={(e) => {
+                    changeTheme({
+                      ...theme,
+                      scaling: e.target.value as typeof theme.scaling,
+                    });
+                  }}
+                />
+
+                <Flex align="center" justify="center" height="32px">
+                  <Theme asChild scaling={value}>
+                    <Flex align="center" justify="center" p="3">
+                      <Text size="1" weight="medium">
+                        {value}
+                      </Text>
+                    </Flex>
+                  </Theme>
+                </Flex>
+              </label>
             ))}
           </Flex>
           <Heading as="h2" size="5" id={themeColorId} mt="4">

@@ -12,7 +12,7 @@ import {
   Slider,
   Switch,
   Text,
-  TextFieldInput,
+  TextField,
 } from '@radix-ui/themes';
 import { useTranslation } from 'react-i18next';
 import { Label } from '~/components/Label';
@@ -112,8 +112,8 @@ export function ThemeExample() {
             <Text size="2" color="gray">
               Lorem ipsum dolor sit amet consectetur
             </Text>
-            <TextFieldInput mt="4" placeholder="Email" />
-            <TextFieldInput mt="1" placeholder="Password" />
+            <TextField.Root mt="4" placeholder="Email" />
+            <TextField.Root mt="1" placeholder="Password" />
             <Slider mt="4" defaultValue={[50]} />
             <Flex justify="between" align="center" mt="4">
               <IconButton variant="soft">

@@ -78,6 +78,7 @@
     }
   },
   "appearance": {
+    "scaling": "Escala",
     "title": "Aparência",
     "description": "Mude a aparência da plataforma do jeito que preferir",
     "theme": "Tema",
